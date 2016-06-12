@@ -1,15 +1,18 @@
-package model;
+package armas;
 
 import java.util.*;
+
+import projeteis.Projetil;
 
 public abstract class Arma {
 	
 	protected String nome;
-	protected Projetil proj;
-	protected Nave origem;
-	protected double cooldown;
 	
-	public abstract List<Projetil> disparar();
+	public Arma(String nome){
+		this.nome = nome;
+	}
+	
+	public abstract List<Projetil> disparar(double x, double y);
 	
 	public String getNome(){
 		return nome;
