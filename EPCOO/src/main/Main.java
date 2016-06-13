@@ -1,9 +1,14 @@
 package main;
 import java.awt.Color;
+import java.util.List;
 
+import armas.Arma;
+import armas.Default;
 import model.Estado;
+import model.Nave;
 import model.Player;
 import pacote.GameLib;
+import projeteis.Projetil;
 
 public class Main {
 	
@@ -40,33 +45,19 @@ public class Main {
 				GameLib.WIDTH / 2, 		//x
 				GameLib.HEIGHT * 0.90, 	//y
 				1,						//layer 1 - assumindo HUD no 0
-				12.0,					//raio
 				0.25,					// velocidade no eixo x
 				0.25,					// velocidade no eixo y
 				Estado.ACTIVE,
-				timer
+				timer,
+				12.0					//raio
 				);
+		Arma a = new Default("gun",100,timer);
+		player.addArma(a);
+		player.selecionaArma(a);
 		
-		player.addArma();
-		
-		int player_state = ACTIVE;								// estado
-		double player_X = GameLib.WIDTH / 2;					// coordenada x
-		double player_Y = GameLib.HEIGHT * 0.90;				// coordenada y
-		double player_VX = 0.25;								// velocidade no eixo x
-		double player_VY = 0.25;								// velocidade no eixo y
-		double player_radius = 12.0;							// raio (tamanho aproximado do player)
-		double player_explosion_start = 0;						// instante do início da explosão
-		double player_explosion_end = 0;						// instante do final da explosão
-		long player_nextShot = timer.getCurrentTime();						// instante a partir do qual pode haver um próximo tiro
-
-		/* variáveis dos projéteis disparados pelo player */
-		
-		int [] projectile_states = new int[10];					// estados
-		double [] projectile_X = new double[10];				// coordenadas x
-		double [] projectile_Y = new double[10];				// coordenadas y
-		double [] projectile_VX = new double[10];				// velocidades no eixo x
-		double [] projectile_VY = new double[10];				// velocidades no eixo y
-
+		List<Nave> inimigos;
+		List<Projetil> tirosPlayer;
+		List<Projetil> tirosInimigos;
 		/* variáveis dos inimigos tipo 1 */
 		
 		int [] enemy1_states = new int[10];						// estados
@@ -77,6 +68,8 @@ public class Main {
 		double [] enemy1_RV = new double[10];					// velocidades de rotação
 		double [] enemy1_explosion_start = new double[10];		// instantes dos inícios das explosões
 		double [] enemy1_explosion_end = new double[10];		// instantes dos finais da explosões
+		
+		//varaveis controlador
 		long [] enemy1_nextShoot = new long[10];				// instantes do próximo tiro
 		double enemy1_radius = 9.0;								// raio (tamanho do inimigo 1)
 		long nextEnemy1 = timer.getCurrentTime() + 2000;					// instante em que um novo inimigo 1 deve aparecer
@@ -91,6 +84,8 @@ public class Main {
 		double [] enemy2_RV = new double[10];					// velocidades de rotação
 		double [] enemy2_explosion_start = new double[10];		// instantes dos inícios das explosões
 		double [] enemy2_explosion_end = new double[10];		// instantes dos finais das explosões
+		
+		//variaveis controlador
 		double enemy2_spawnX = GameLib.WIDTH * 0.20;			// coordenada x do próximo inimigo tipo 2 a aparecer
 		int enemy2_count = 0;									// contagem de inimigos tipo 2 (usada na "formação de voo")
 		double enemy2_radius = 12.0;							// raio (tamanho aproximado do inimigo 2)

@@ -1,7 +1,7 @@
 package model;
 
 import java.awt.Color;
-import java.util.List;
+import java.util.*;
 
 import main.Timer;
 import pacote.GameLib;
@@ -10,10 +10,10 @@ import projeteis.Projetil;
 public class Player extends Nave {
 
 	double velocidadeX, velocidadeY;
-	long explosionStart, explosionEnd;
+	double explosionStart, explosionEnd;
 	
-	public Player(double x, double y, int layer, double raio, double vX, double vY, Estado estado, Timer timer){
-		super(x,y,layer,raio,estado,timer);
+	public Player(double x, double y, int layer, double vX, double vY, Estado estado, Timer timer, double raio){
+		super(x,y,layer,estado,timer,raio);
 		
 		this.velocidadeX = vX;
 		this.velocidadeY = vY;
@@ -21,6 +21,7 @@ public class Player extends Nave {
 	
 	@Override
 	public void mover() {
+		Estado estado = this.getEstado();
 		if(estado == Estado.ACTIVE){
 			long delta = timer.getDelta();
 			if(GameLib.iskeyPressed(GameLib.KEY_UP)) y -= delta * velocidadeY;
@@ -29,15 +30,16 @@ public class Player extends Nave {
 			if(GameLib.iskeyPressed(GameLib.KEY_RIGHT)) x += delta * velocidadeX;
 		} else if(estado == Estado.EXPLODING){
 			if(timer.getCurrentTime() > explosionEnd){
-				estado = Estado.ACTIVE;
+				this.setEstado(Estado.ACTIVE);
 			}
 		}
 	}
 
 	@Override
-	public void explodir() {
+	protected void explodir() {
+		Estado estado = this.getEstado();
 		if(estado == Estado.ACTIVE){
-			estado = Estado.EXPLODING;
+			this.setEstado(Estado.EXPLODING);
 			explosionStart = timer.getCurrentTime();
 			explosionEnd = explosionStart + 2000;
 		}
@@ -46,6 +48,7 @@ public class Player extends Nave {
 	@Override
 	public List<Projetil> atirar() {
 		List<Projetil> resp = null;
+		Estado estado = this.getEstado();
 		if(estado == Estado.ACTIVE){
 			if(GameLib.iskeyPressed(GameLib.KEY_CONTROL)) {
 				resp = atual.disparar(x,y-2*raio);
@@ -56,6 +59,7 @@ public class Player extends Nave {
 
 	@Override
 	public void draw() {
+		Estado estado = this.getEstado();
 		if(estado == Estado.EXPLODING){
 			
 			double alpha = (timer.getCurrentTime() - explosionStart) / (explosionEnd - explosionStart);
@@ -66,6 +70,12 @@ public class Player extends Nave {
 			GameLib.setColor(Color.BLUE);
 			GameLib.drawPlayer(x, y, raio);
 		}
+	}
+
+	@Override
+	public void hit() {//TODO dá pra implementar vida com isso
+		if(this.getEstado() == Estado.ACTIVE)
+			explodir();
 	}
 
 }
