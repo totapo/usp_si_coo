@@ -25,7 +25,7 @@ public class Inimigo1 extends Inimigo{
 		List<Projetil> resp = null;
 		Estado estado = this.getEstado();
 		if(estado == Estado.ACTIVE){
-			resp = atual.disparar(x,y-2*raio);
+			resp = this.getArma().disparar(x,y,angulo);
 		}
 		return resp;
 	}
@@ -58,7 +58,7 @@ public class Inimigo1 extends Inimigo{
 	}
 
 	@Override
-	protected void explodir() {
+	public void explodir() {
 		Estado estado = this.getEstado();
 		if(estado == Estado.ACTIVE){
 			this.setEstado(Estado.EXPLODING);
@@ -86,7 +86,7 @@ public class Inimigo1 extends Inimigo{
 	@Override
 	public void hit() {
 		if(this.getEstado() == Estado.ACTIVE)
-			this.setEstado(Estado.EXPLODING);
+			explodir();
 	}
 	
 }

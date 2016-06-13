@@ -18,7 +18,7 @@ public class Default extends Arma {
 	}
 	
 	@Override
-	public List<Projetil> disparar(double x, double y) {
+	public List<Projetil> disparar(double x, double y,double angulo) {
 		List<Projetil> resp = null;
 		if(timer.getCurrentTime()-lastShot > cooldown){
 			resp = new LinkedList<Projetil>();

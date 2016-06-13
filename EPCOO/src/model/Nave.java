@@ -11,7 +11,7 @@ import projeteis.Projetil;
 public abstract class Nave extends ElementoMutavel implements Destrutivel{
 	private Map<String,Arma> armas;
 	protected double raio;
-	protected Arma atual;
+	private Arma atual;
 	protected Timer timer;
 	
 	public Nave(double x, double y, int layer, Estado estado,Timer timer, double raio){
@@ -25,6 +25,10 @@ public abstract class Nave extends ElementoMutavel implements Destrutivel{
 		armas.put(arma.getNome(),arma);
 	}
 	
+	protected Arma getArma(){
+		return atual;
+	}
+	
 	public void removeArma(String nome){
 		armas.remove(nome);
 	}
@@ -34,13 +38,13 @@ public abstract class Nave extends ElementoMutavel implements Destrutivel{
 	}
 	
 	public void selecionaArma(Arma arma){
-		if(armas.containsKey(arma.getNome()))
-			this.atual = armas.get(arma);
+		if(armas.get(arma.getNome()) != null)
+			this.atual = armas.get(arma.getNome());
 	}
 	
 	public abstract List<Projetil> atirar();
 	public abstract void mover();
-	protected abstract void explodir();
+	public abstract void explodir();
 
 	@Override
 	public double getRaioColisao() {

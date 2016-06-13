@@ -12,12 +12,12 @@ public abstract class Arma {
 		this.nome = nome;
 	}
 	
-	public abstract List<Projetil> disparar(double x, double y);
+	public abstract List<Projetil> disparar(double x, double y, double angle);
 	
 	public String getNome(){
 		return nome;
 	}
-
+/*
 	@Override
 	public int hashCode() { //baseado no nome
 		final int prime = 31;
@@ -42,6 +42,6 @@ public abstract class Arma {
 			return false;
 		return true;
 	}
-	
+	*/
 
 }

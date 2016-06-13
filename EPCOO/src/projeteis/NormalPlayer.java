@@ -35,14 +35,16 @@ public class NormalPlayer extends Normal {
 			while(it.hasNext()){
 				obj = it.next();
 				aux = (Destrutivel)obj;
-				dx = x - aux.getX();
-				dy = y - aux.getY();
-				dist = Math.sqrt(dx * dx + dy * dy);
-				
-				if(dist < aux.getRaioColisao()){
-					aux.hit();
-					this.setEstado(Estado.INACTIVE);
-					break;
+				if(aux.getEstado() == Estado.ACTIVE){
+					dx = x - aux.getX();
+					dy = y - aux.getY();
+					dist = Math.sqrt(dx * dx + dy * dy);
+					
+					if(dist < aux.getRaioColisao()){
+						aux.hit();
+						this.setEstado(Estado.INACTIVE);
+						break;
+					}
 				}
 			}
 		}

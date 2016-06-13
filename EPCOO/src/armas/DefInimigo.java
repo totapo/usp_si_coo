@@ -15,17 +15,18 @@ public class DefInimigo extends Arma {
 		super(nome);
 		this.cooldown = cooldown;
 		this.timer = timer;
+		this.lastShot = timer.getCurrentTime();
 	}
 
 	@Override
-	public List<Projetil> disparar(double x, double y) {
+	public List<Projetil> disparar(double x, double y, double angulo) {
 		List<Projetil> resp = null;
 		if(timer.getCurrentTime()-lastShot > cooldown){
 			resp = new LinkedList<Projetil>();
 			resp.add(new NormalInimigo(
 					x,y,
-					0.0, //vx
-					-1.0, //vy
+					Math.cos(angulo) * 0.45, //vx
+					Math.sin(angulo) * 0.45 * (-1.0), //vy
 					2.0, //raio
 					1,
 					Estado.ACTIVE,

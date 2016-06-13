@@ -28,6 +28,12 @@ public class Player extends Nave {
 			if(GameLib.iskeyPressed(GameLib.KEY_DOWN)) y += delta * velocidadeY;
 			if(GameLib.iskeyPressed(GameLib.KEY_LEFT)) x -= delta * velocidadeX;
 			if(GameLib.iskeyPressed(GameLib.KEY_RIGHT)) x += delta * velocidadeX;
+			
+
+			if(x < 0.0) y = 0.0;
+			if(x >= GameLib.WIDTH) x = GameLib.WIDTH - 1;
+			if(y < 25.0) y = 25.0;
+			if(y >= GameLib.HEIGHT) y = GameLib.HEIGHT - 1;
 		} else if(estado == Estado.EXPLODING){
 			if(timer.getCurrentTime() > explosionEnd){
 				this.setEstado(Estado.ACTIVE);
@@ -36,7 +42,7 @@ public class Player extends Nave {
 	}
 
 	@Override
-	protected void explodir() {
+	public void explodir() {
 		Estado estado = this.getEstado();
 		if(estado == Estado.ACTIVE){
 			this.setEstado(Estado.EXPLODING);
@@ -51,7 +57,7 @@ public class Player extends Nave {
 		Estado estado = this.getEstado();
 		if(estado == Estado.ACTIVE){
 			if(GameLib.iskeyPressed(GameLib.KEY_CONTROL)) {
-				resp = atual.disparar(x,y-2*raio);
+				resp = this.getArma().disparar(x,y-2*raio,0);
 			}
 		}
 		return resp;
