@@ -30,7 +30,7 @@ public class Player extends Nave {
 			if(GameLib.iskeyPressed(GameLib.KEY_RIGHT)) x += delta * velocidadeX;
 			
 
-			if(x < 0.0) y = 0.0;
+			if(x < 0.0) x = 0.0;
 			if(x >= GameLib.WIDTH) x = GameLib.WIDTH - 1;
 			if(y < 25.0) y = 25.0;
 			if(y >= GameLib.HEIGHT) y = GameLib.HEIGHT - 1;

@@ -4,7 +4,7 @@ import inimigos.Inimigo;
 import inimigos.Inimigo2;
 import pacote.GameLib;
 import armas.Arma;
-import armas.DefInimigo2;
+import armas.ArmaDefInimigo2;
 import main.Timer;
 import model.Estado;
 
@@ -41,7 +41,7 @@ public class ControladorInimigoDois extends Controlador{
 					0.42, //velocidade
 					0.0 //velocidadeRotacao
 					);	
-			Arma arma = new DefInimigo2("Def",timer);
+			Arma arma = new ArmaDefInimigo2("Def",timer);
 			aux.addArma(arma);
 			aux.selecionaArma(arma);
 			aux.addObserver(this);

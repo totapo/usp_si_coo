@@ -9,7 +9,7 @@ import controladores.ControladorInimigoDois;
 import controladores.ControladorInimigoUm;
 import controladores.ControladorPlayer;
 import armas.Arma;
-import armas.Default;
+import armas.ArmaDefault;
 import model.Estado;
 import model.Player;
 import pacote.GameLib;
@@ -55,7 +55,7 @@ public class Main {
 				timer,
 				12.0					//raio
 				);
-		Arma a = new Default("gun",100,timer);
+		Arma a = new ArmaDefault("gun",100,timer);
 		player.addArma(a);
 		player.selecionaArma(a);
 		

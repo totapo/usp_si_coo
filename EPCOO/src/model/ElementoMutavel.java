@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public abstract class ElementoMutavel extends Elemento {
-
 	List<Observer> observers;
 	public ElementoMutavel(double x, double y, int layer, Estado estado) {
 		super(x, y, layer);

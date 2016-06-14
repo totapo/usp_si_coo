@@ -1,7 +1,7 @@
 package controladores;
 
 import armas.Arma;
-import armas.DefInimigo;
+import armas.ArmaDefInimigo;
 import inimigos.Inimigo;
 import inimigos.Inimigo1;
 import main.Timer;
@@ -35,7 +35,7 @@ public class ControladorInimigoUm extends Controlador {
 					0.20 + Math.random() * 0.15, //velocidade
 					0.0 //velocidadeRotacao
 					);	
-			Arma arma = new DefInimigo("Def",500,timer);
+			Arma arma = new ArmaDefInimigo("Def",500,timer);
 			aux.addArma(arma);
 			aux.selecionaArma(arma);
 			aux.addObserver(this);

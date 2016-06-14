@@ -38,8 +38,9 @@ public abstract class Nave extends ElementoMutavel implements Destrutivel{
 	}
 	
 	public void selecionaArma(Arma arma){
-		if(armas.get(arma.getNome()) != null)
-			this.atual = armas.get(arma.getNome());
+		Arma aux = armas.get(arma.getNome());
+		if(aux != null)
+			this.atual = aux;
 	}
 	
 	public abstract List<Projetil> atirar();

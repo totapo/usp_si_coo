@@ -10,19 +10,18 @@ import pacote.GameLib;
 import main.Timer;
 import model.Estado;
 
-public class NormalPlayer extends Normal {
-
-	public NormalPlayer(double x, double y, double vX, double vY, int layer,
+public class ProjetilNormalInimigo extends ProjetilNormal {
+	private double raio;
+	public ProjetilNormalInimigo(double x, double y, double vX, double vY, double raio, int layer,
 			Estado estado, Timer timer) {
 		super(x, y, vX, vY, layer, estado, timer);
+		this.raio = raio;
 	}
 
 	@Override
 	public void draw() {
-		GameLib.setColor(Color.GREEN);
-		GameLib.drawLine(x, y - 5, x, y + 5);
-		GameLib.drawLine(x - 1, y - 3, x - 1, y + 3);
-		GameLib.drawLine(x + 1, y - 3, x + 1, y + 3);
+		GameLib.setColor(Color.RED);
+		GameLib.drawCircle(x, y, raio);
 	}
 
 	@Override
@@ -35,16 +34,14 @@ public class NormalPlayer extends Normal {
 			while(it.hasNext()){
 				obj = it.next();
 				aux = (Destrutivel)obj;
-				if(aux.getEstado() == Estado.ACTIVE){
-					dx = x - aux.getX();
-					dy = y - aux.getY();
-					dist = Math.sqrt(dx * dx + dy * dy);
-					
-					if(dist < aux.getRaioColisao()){
-						aux.hit();
-						this.setEstado(Estado.INACTIVE);
-						break;
-					}
+				dx = x - aux.getX();
+				dy = y - aux.getY();
+				dist = Math.sqrt(dx * dx + dy * dy);
+				
+				if(dist < (aux.getRaioColisao() + raio) * 0.8){
+					aux.hit();
+					this.setEstado(Estado.INACTIVE);
+					break;
 				}
 			}
 		}

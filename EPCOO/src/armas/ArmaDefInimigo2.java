@@ -5,13 +5,13 @@ import java.util.List;
 
 import main.Timer;
 import model.Estado;
-import projeteis.NormalInimigo;
+import projeteis.ProjetilNormalInimigo;
 import projeteis.Projetil;
 
-public class DefInimigo2 extends Arma{
+public class ArmaDefInimigo2 extends Arma{
 	private Timer timer;
 	
-	public DefInimigo2(String nome, Timer timer) {
+	public ArmaDefInimigo2(String nome, Timer timer) {
 		super(nome);
 		this.timer = timer;
 	}
@@ -26,7 +26,7 @@ public class DefInimigo2 extends Arma{
 			double a = d + Math.random() * Math.PI/6 - Math.PI/12;
 			double vx = Math.cos(a);
 			double vy = Math.sin(a);
-			aux = new NormalInimigo(x,y,vx*0.30,vy*0.30,2.0,1,Estado.ACTIVE,timer);
+			aux = new ProjetilNormalInimigo(x,y,vx*0.30,vy*0.30,2.0,1,Estado.ACTIVE,timer);
 			resp.add(aux);
 		}
 			

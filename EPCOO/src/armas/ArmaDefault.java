@@ -1,34 +1,30 @@
 package armas;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import main.Timer;
 import model.Estado;
-import projeteis.*;
+import projeteis.ProjetilNormalPlayer;
+import projeteis.Projetil;
 
-public class DefInimigo extends Arma {
+public class ArmaDefault extends Arma {
 	private double cooldown,lastShot;
 	private Timer timer;
 	
-	public DefInimigo(String nome, double cooldown, Timer timer) {
+	public ArmaDefault(String nome,double cooldown, Timer timer){
 		super(nome);
 		this.cooldown = cooldown;
 		this.timer = timer;
-		this.lastShot = timer.getCurrentTime();
 	}
-
+	
 	@Override
-	public List<Projetil> disparar(double x, double y, double angulo) {
+	public List<Projetil> disparar(double x, double y,double angulo) {
 		List<Projetil> resp = null;
 		if(timer.getCurrentTime()-lastShot > cooldown){
 			resp = new LinkedList<Projetil>();
-			resp.add(new NormalInimigo(
+			resp.add(new ProjetilNormalPlayer(
 					x,y,
-					Math.cos(angulo) * 0.45, //vx
-					Math.sin(angulo) * 0.45 * (-1.0), //vy
-					2.0, //raio
-					1,
+					0.0,-1.0,1,
 					Estado.ACTIVE,
 					timer
 					));
@@ -39,3 +35,4 @@ public class DefInimigo extends Arma {
 	}
 
 }
+

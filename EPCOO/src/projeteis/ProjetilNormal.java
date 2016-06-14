@@ -4,10 +4,10 @@ import pacote.GameLib;
 import main.Timer;
 import model.Estado;
 
-public abstract class Normal extends Projetil{
+public abstract class ProjetilNormal extends Projetil{
 	private double velocidadeY, velocidadeX;
 	
-	public Normal(double x, double y, double vX, double vY, int layer, Estado estado, Timer timer) {
+	public ProjetilNormal(double x, double y, double vX, double vY, int layer, Estado estado, Timer timer) {
 		super(x, y, layer, estado, timer);
 		this.velocidadeX = vX;
 		this.velocidadeY = vY;
