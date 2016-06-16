@@ -8,10 +8,6 @@ import controladores.Controlador;
 import controladores.ControladorInimigoDois;
 import controladores.ControladorInimigoUm;
 import controladores.ControladorPlayer;
-import armas.Arma;
-import armas.ArmaDefault;
-import model.Estado;
-import model.Player;
 import pacote.GameLib;
 
 public class Main {
@@ -45,19 +41,7 @@ public class Main {
 		timer.updateCurrentTime();
 		/* variáveis do player */
 		
-		Player player = new Player(
-				GameLib.WIDTH / 2, 		//x
-				GameLib.HEIGHT * 0.90, 	//y
-				1,						//layer 1 - assumindo HUD no 0
-				0.25,					// velocidade no eixo x
-				0.25,					// velocidade no eixo y
-				Estado.ACTIVE,
-				timer,
-				12.0					//raio
-				);
-		Arma a = new ArmaDefault("gun",100,timer);
-		player.addArma(a);
-		player.selecionaArma(a);
+		
 		
 		List<Controlador> controladoresInimigos = new LinkedList<Controlador>();
 		controladoresInimigos.add(new ControladorInimigoUm(
@@ -67,7 +51,7 @@ public class Main {
 				timer,GameLib.WIDTH * 0.20,7000,10
 				));
 		
-		ControladorPlayer ctrl = new ControladorPlayer(timer, player);
+		ControladorPlayer ctrl = new ControladorPlayer(timer);
 		
 		/* estrelas que formam o fundo de primeiro plano */
 		

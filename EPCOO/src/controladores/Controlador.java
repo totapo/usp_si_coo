@@ -6,7 +6,6 @@ import projeteis.Projetil;
 import main.Timer;
 import model.Estado;
 import model.Nave;
-import inimigos.Inimigo;
 import interfaces.Destrutivel;
 import interfaces.Observer;
 import interfaces.Subject;
@@ -75,8 +74,8 @@ public abstract class Controlador implements Observer {
 
 	@Override
 	public void notify(Subject s) {
-		if(s instanceof Inimigo){
-			Inimigo aux = (Inimigo)s;
+		if(s instanceof Nave){
+			Nave aux = (Nave)s;
 			if(aux.getEstado() == Estado.INACTIVE){
 				this.remover.add(aux);
 			}
