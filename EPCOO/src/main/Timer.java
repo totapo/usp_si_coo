@@ -4,6 +4,7 @@ public class Timer {
 	
 	private long currentTime;
 	private long delta;
+	
 	public Timer(){
 		this.currentTime = System.currentTimeMillis();
 	}

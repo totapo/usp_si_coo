@@ -41,7 +41,21 @@ public class Main {
 		timer.updateCurrentTime();
 		/* variÃ¡veis do player */
 		
-		
+		//TODO
+		/*
+		 * Guilherme e Antonio - entender o código hahahah
+		 * 
+		 * - Facade - classe game Marcos
+		 * - Singleton - classe Timer Matheus
+		 * 
+		 * - Observer - feito nas classes Controlador e ElementoMutavel
+		 * 
+		 * 
+		 * - Colocar background em classes extendendo a classe Elemento Matheus
+		 * - Repensar a estrutura de armas e projeteis (ta feia pra kralho) Bruno
+		 * - Mudar o nome das classes Bruno
+		 * 
+		 * */
 		
 		List<Controlador> controladoresInimigos = new LinkedList<Controlador>();
 		controladoresInimigos.add(new ControladorInimigoUm(

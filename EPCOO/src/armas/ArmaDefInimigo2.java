@@ -15,7 +15,7 @@ public class ArmaDefInimigo2 extends Arma{
 		super(nome);
 		this.timer = timer;
 	}
-
+	//Tiro spread
 	@Override
 	public List<Projetil> disparar(double x, double y,double angulo) {
 		List<Projetil> resp = new ArrayList<Projetil>();
