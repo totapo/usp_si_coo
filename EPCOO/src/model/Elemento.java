@@ -1,8 +1,7 @@
 package model;
 
-import interfaces.Subject;
 
-public abstract class Elemento implements Subject{
+public abstract class Elemento {
 	protected double x, y;
 	protected int layer;
 	

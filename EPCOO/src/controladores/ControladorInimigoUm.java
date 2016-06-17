@@ -8,12 +8,12 @@ import main.Timer;
 import model.Estado;
 import pacote.GameLib;
 
-public class ControladorInimigoUm extends Controlador {
+public class ControladorInimigoUm extends ControladorNave {
 	private long nextEnemy,cooldown;
-	public ControladorInimigoUm(Timer timer, long spawnCooldown) {
+	public ControladorInimigoUm(Timer timer, long spawnCooldown, long firstSpawn) {
 		super(timer);
 		this.cooldown = spawnCooldown;
-		this.nextEnemy = timer.getCurrentTime()+spawnCooldown;
+		this.nextEnemy = timer.getCurrentTime()+firstSpawn;
 	}
 	
 	public void setCooldown(long cooldown){

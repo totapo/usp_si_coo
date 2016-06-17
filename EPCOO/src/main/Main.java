@@ -5,8 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import controladores.Controlador;
+import controladores.ControladorBackground;
 import controladores.ControladorInimigoDois;
 import controladores.ControladorInimigoUm;
+import controladores.ControladorNave;
 import controladores.ControladorPlayer;
 import pacote.GameLib;
 
@@ -37,18 +39,18 @@ public class Main {
 
 		/* variáveis usadas no controle de tempo efetuado no main loop */
 		
-		Timer timer = new Timer();
+		Timer timer = Timer.getInstance();
 		timer.updateCurrentTime();
 		/* variáveis do player */
 		
 		//TODO
 		/*
-		 * Guilherme e Antonio - entender o c�digo hahahah
+		 * Guilherme e Antonio - entender o c�digo hahahah
 		 * 
 		 * - Facade - classe game Marcos
-		 * - Singleton - classe Timer Matheus
+		 * - Singleton - classe Timer Matheus - DONE
 		 * 
-		 * - Observer - feito nas classes Controlador e ElementoMutavel
+		 * - Observer - DONE nas classes Controlador e ElementoMutavel
 		 * 
 		 * 
 		 * - Colocar background em classes extendendo a classe Elemento Matheus
@@ -57,43 +59,16 @@ public class Main {
 		 * 
 		 * */
 		
-		List<Controlador> controladoresInimigos = new LinkedList<Controlador>();
-		controladoresInimigos.add(new ControladorInimigoUm(
-				timer,
+		List<ControladorNave> controladores = new LinkedList<ControladorNave>();
+		controladores.add(new ControladorInimigoUm(
+				timer,500,
 				2000));
-		controladoresInimigos.add(new ControladorInimigoDois(
+		controladores.add(new ControladorInimigoDois(
 				timer,GameLib.WIDTH * 0.20,7000,10
 				));
 		
 		ControladorPlayer ctrl = new ControladorPlayer(timer);
-		
-		/* estrelas que formam o fundo de primeiro plano */
-		
-		double [] background1_X = new double[20];
-		double [] background1_Y = new double[20];
-		double background1_speed = 0.070;
-		double background1_count = 0.0;
-		
-		/* estrelas que formam o fundo de segundo plano */
-		
-		double [] background2_X = new double[50];
-		double [] background2_Y = new double[50];
-		double background2_speed = 0.045;
-		double background2_count = 0.0;
-		
-		/* inicializações */
-		
-		for(int i = 0; i < background1_X.length; i++){
-			
-			background1_X[i] = Math.random() * GameLib.WIDTH;
-			background1_Y[i] = Math.random() * GameLib.HEIGHT;
-		}
-		
-		for(int i = 0; i < background2_X.length; i++){
-			
-			background2_X[i] = Math.random() * GameLib.WIDTH;
-			background2_Y[i] = Math.random() * GameLib.HEIGHT;
-		}
+		ControladorBackground bg = new ControladorBackground(timer,10,50);
 						
 		/* iniciado interface gráfica */
 		
@@ -134,19 +109,19 @@ public class Main {
 			/***************************/
 			
 			/* colisões player - projeteis (inimigo) */
-			Iterator<Controlador> it = controladoresInimigos.iterator();
+			Iterator<ControladorNave> it = controladores.iterator();
 			while(it.hasNext()){
 				it.next().checarProjeteis(ctrl.getNaves());
 			}
 			
 			/* colisões player - inimigos */
-			it = controladoresInimigos.iterator();
+			it = controladores.iterator();
 			while(it.hasNext()){
 				ctrl.checarColisoes(it.next().getNaves());
 			}
 			
 			/* colisões projeteis (player) - inimigos */
-			it = controladoresInimigos.iterator();
+			it = controladores.iterator();
 			while(it.hasNext()){
 				ctrl.checarProjeteis(it.next().getNaves());
 			}
@@ -154,12 +129,13 @@ public class Main {
 			/***************************/
 			/* Atualizações de estados */
 			/***************************/
-			it = controladoresInimigos.iterator();
+			it = controladores.iterator();
 			while(it.hasNext()){
 				it.next().execute();
 			}
 			
 			ctrl.execute();
+			bg.execute();
 			
 			if(GameLib.iskeyPressed(GameLib.KEY_ESCAPE)) running = false;
 
@@ -167,34 +143,17 @@ public class Main {
 			/* Desenho da cena */
 			/*******************/
 			
-			/* desenhando plano fundo distante */
-			
-			GameLib.setColor(Color.DARK_GRAY);
-			background2_count += background2_speed * delta;
-			
-			for(int i = 0; i < background2_X.length; i++){
-				
-				GameLib.fillRect(background2_X[i], (background2_Y[i] + background2_count) % GameLib.HEIGHT, 2, 2);
-			}
-			
-			/* desenhando plano de fundo próximo */
-			
-			GameLib.setColor(Color.GRAY);
-			background1_count += background1_speed * delta;
-			
-			for(int i = 0; i < background1_X.length; i++){
-				
-				GameLib.fillRect(background1_X[i], (background1_Y[i] + background1_count) % GameLib.HEIGHT, 3, 3);
-			}
+			/* desenhando plano fundo */
+			bg.desenharObjetos();
 						
-			it = controladoresInimigos.iterator();
+			it = controladores.iterator();
 			while(it.hasNext()){
 				it.next().desenharObjetos();
 			}
 			
 			ctrl.desenharObjetos();
 			
-			/* chamama a display() da classe GameLib atualiza o desenho exibido pela interface do jogo. */
+			/* chamada a display() da classe GameLib atualiza o desenho exibido pela interface do jogo. */
 			
 			GameLib.display();
 			

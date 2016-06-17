@@ -11,7 +11,7 @@ import main.Timer;
 import model.*;
 import pacote.GameLib;
 
-public class ControladorPlayer extends Controlador{
+public class ControladorPlayer extends ControladorNave{
 
 	public ControladorPlayer(Timer timer) {
 		super(timer);

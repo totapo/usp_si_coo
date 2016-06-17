@@ -1,12 +1,13 @@
 package model;
 
 import interfaces.Observer;
+import interfaces.Subject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class ElementoMutavel extends Elemento {
+public abstract class ElementoMutavel extends Elemento implements Subject {
 	List<Observer> observers;
 	public ElementoMutavel(double x, double y, int layer, Estado estado) {
 		super(x, y, layer);

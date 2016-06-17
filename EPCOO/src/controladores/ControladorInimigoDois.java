@@ -8,15 +8,15 @@ import armas.ArmaDefInimigo2;
 import main.Timer;
 import model.Estado;
 
-public class ControladorInimigoDois extends Controlador{
+public class ControladorInimigoDois extends ControladorNave{
 	private double spawnX;
 	private long nextEnemy;
 	private int enemyCount, packSize;
 	
-	public ControladorInimigoDois(Timer timer, double spawnX, long spawnCooldown, int packSize) {
+	public ControladorInimigoDois(Timer timer, double spawnX, long firstSpawn, int packSize) {
 		super(timer);
 		this.spawnX = spawnX;
-		this.nextEnemy = this.timer.getCurrentTime()+spawnCooldown;
+		this.nextEnemy = this.timer.getCurrentTime()+firstSpawn;
 		this.packSize = packSize;
 		enemyCount = 0;
 	}
@@ -34,7 +34,7 @@ public class ControladorInimigoDois extends Controlador{
 					spawnX, //x
 					-10.0, //y
 					1, //layer
-					9.0, //raio
+					12.0, //raio
 					Estado.ACTIVE, //estado
 					timer, //timer
 					(3 * Math.PI) / 2, //angulo
