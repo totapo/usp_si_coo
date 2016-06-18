@@ -1,5 +1,7 @@
 package model;
 
+import interfaces.TemHp;
+
 import java.awt.Color;
 import java.util.*;
 
@@ -7,16 +9,18 @@ import main.Timer;
 import pacote.GameLib;
 import projeteis.Projetil;
 
-public class Player extends Nave {
+public class Player extends Nave implements TemHp {
 
 	double velocidadeX, velocidadeY;
 	double explosionStart, explosionEnd;
+	private int hp,hpMax;
 	
-	public Player(double x, double y, int layer, double vX, double vY, Estado estado, Timer timer, double raio){
+	public Player(double x, double y, int layer, double vX, double vY, Estado estado, Timer timer, double raio, int hp){
 		super(x,y,layer,estado,timer,raio);
 		
 		this.velocidadeX = vX;
 		this.velocidadeY = vY;
+		this.hp = this.hpMax = hp;
 	}
 	
 	@Override
@@ -36,7 +40,7 @@ public class Player extends Nave {
 			if(y >= GameLib.HEIGHT) y = GameLib.HEIGHT - 1;
 		} else if(estado == Estado.EXPLODING){
 			if(timer.getCurrentTime() > explosionEnd){
-				this.setEstado(Estado.ACTIVE);
+				this.setEstado(Estado.INACTIVE);
 			}
 		}
 	}
@@ -44,7 +48,7 @@ public class Player extends Nave {
 	@Override
 	public void explodir() {
 		Estado estado = this.getEstado();
-		if(estado == Estado.ACTIVE){
+		if(estado == Estado.ACTIVE || estado == Estado.FLASHING){
 			this.setEstado(Estado.EXPLODING);
 			explosionStart = timer.getCurrentTime();
 			explosionEnd = explosionStart + 2000;
@@ -57,7 +61,7 @@ public class Player extends Nave {
 		Estado estado = this.getEstado();
 		if(estado == Estado.ACTIVE){
 			if(GameLib.iskeyPressed(GameLib.KEY_CONTROL)) {
-				resp = this.getArma().disparar(x,y-2*raio,0);
+				resp = this.getArma().disparar(x,y-1*raio,0);
 			}
 		}
 		return resp;
@@ -79,9 +83,33 @@ public class Player extends Nave {
 	}
 
 	@Override
-	public void hit() {//TODO dá pra implementar vida com isso
-		if(this.getEstado() == Estado.ACTIVE)
-			explodir();
+	public void hit() {
+		if(this.getEstado() == Estado.ACTIVE){ //|| this.getEstado() == Estado.FLASHING){
+			hp-=1;
+			notifyObservers(); // TODO não é muito bom mas é melhor do que ficar recalculando o hp no lifebar
+			//TODO setar o flashing
+			//this.setEstado(Estado.FLASHING);
+			
+			if(hp==0)
+				explodir();
+			
+		}
+			
+	}
+
+	@Override
+	public int getTotalHp() {
+		return hpMax;
+	}
+
+	@Override
+	public int getHpAtual() {
+		return hp;
+	}
+
+	@Override
+	public void setHp(int hp) {
+		this.hp = hp;
 	}
 
 }

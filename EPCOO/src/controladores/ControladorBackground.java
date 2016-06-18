@@ -4,8 +4,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import elementos.Estrela;
 import pacote.GameLib;
-import background.Estrela;
 import main.Timer;
 
 public class ControladorBackground extends Controlador {
@@ -29,8 +29,7 @@ public class ControladorBackground extends Controlador {
 						Math.random() * GameLib.WIDTH,
 						Math.random() * GameLib.HEIGHT,
 						3,
-						0.045,
-						timer,
+						//0.045,
 						2
 						));
 			}
@@ -39,8 +38,7 @@ public class ControladorBackground extends Controlador {
 						Math.random() * GameLib.WIDTH,
 						Math.random() * GameLib.HEIGHT,
 						2,
-						0.070,
-						timer,
+						//0.070,
 						3
 						));
 			}
@@ -49,9 +47,15 @@ public class ControladorBackground extends Controlador {
 
 	@Override
 	public void desenharObjetos() {
+		Estrela.count(0.070, 0.045, timer.getDelta());
 		Iterator<Estrela> it = estrelas.iterator();
 		while(it.hasNext()){
 			it.next().draw();
 		}
+	}
+
+	@Override
+	public void limparMemoria() {
+		this.estrelas.clear();
 	}
 }

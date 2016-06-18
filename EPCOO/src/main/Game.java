@@ -1,22 +1,27 @@
 package main;
 
-import java.util.LinkedList;
+import interfaces.Observer;
+import interfaces.Subject;
+
 import java.util.List;
 
+import arquivo.Fase;
+import arquivo.LeitorConfiguracoes;
 import pacote.GameLib;
 import controladores.ControladorBackground;
-import controladores.ControladorInimigoDois;
-import controladores.ControladorInimigoUm;
-import controladores.ControladorNave;
+import controladores.ControladorInimigo;
 import controladores.ControladorPlayer;
 
-public class Game implements Runnable {
+public class Game implements Runnable, Observer {
 
 	private Timer timer;
-	private List<ControladorNave> controladoresInimigos;
+	private ControladorInimigo controladoresInimigos;
 	private ControladorPlayer controladorPlayer;
 	private ControladorBackground controladorBg;
 	private boolean running;
+	private List<Fase> fases;
+	private Fase faseAtual;
+	private LeitorConfiguracoes leitor;
 
 	private static void busyWait(long time) {
 
@@ -27,27 +32,50 @@ public class Game implements Runnable {
 	private void prepareResources() {
 		/* Indica que o jogo está em execução */
 		running = true;
-
+		
+		//cria o leitor de fases, e já lê todos os arquivos
+		leitor = new LeitorConfiguracoes("./fases/config.txt");
+		
+		//pega a lista de fases
+		fases = leitor.getFases();
+		
 		/* variáveis usadas no controle de tempo efetuado no main loop */
 
 		timer = Timer.getInstance();
 		updateTimer();
-
-		initiateControllers();
+		
+		proximaFase();
 
 		/* iniciado interface gráfica */
 
 		GameLib.initGraphics();
 	}
 	
-	private void initiateControllers(){
-		controladoresInimigos = new LinkedList<ControladorNave>();
-		controladoresInimigos.add(new ControladorInimigoUm(timer, 500, 2000));
-		controladoresInimigos.add(new ControladorInimigoDois(timer,
-				GameLib.WIDTH * 0.20, 7000, 10));
-
-		controladorPlayer = new ControladorPlayer(timer);
-		controladorBg = new ControladorBackground(timer, 10, 50);
+	private void proximaFase(){
+		if(fases.size()>0){
+			faseAtual = fases.remove(0); //TODO isso é meio feio mas por enquanto...
+			timer.marcarIniFase();
+			setControllers();
+		}
+	}
+	
+	private void setControllers(){
+		if(controladoresInimigos==null){
+			controladoresInimigos = new ControladorInimigo(timer, faseAtual.getEnemies());
+			controladoresInimigos.addObserver(this);
+		} else {
+			controladoresInimigos.limparMemoria();
+			controladoresInimigos.setEnemies(faseAtual.getEnemies());
+		}
+		
+		if(controladorPlayer==null){
+			controladorPlayer = new ControladorPlayer(timer, faseAtual.getPlayerHp());
+			controladorPlayer.addObserver(this);
+		}else 
+			controladorPlayer.resetLife();
+		
+		if(controladorBg==null)
+			controladorBg = new ControladorBackground(timer, 10, 50);
 	}
 
 	private void updateTimer() {
@@ -62,27 +90,21 @@ public class Game implements Runnable {
 
 	private void verifyCollisions() {
 		/* colisões player - projeteis (inimigo) */
-		for (ControladorNave controlador : controladoresInimigos) {
-			controlador.checarProjeteis(controladorPlayer.getNaves());
-		}
+		controladoresInimigos.checarProjeteis(controladorPlayer.getNaves());
+		
 
 		/* colisões player - inimigos */
-		for (ControladorNave controlador : controladoresInimigos) {
-			controladorPlayer.checarColisoes(controlador.getNaves());
-		}
+		controladorPlayer.checarColisoes(controladoresInimigos.getNaves());
+		
 
 		/* colisões projeteis (player) - inimigos */
-		for (ControladorNave controlador : controladoresInimigos) {
-			controladorPlayer.checarProjeteis(controlador.getNaves());
-		}
+		controladorPlayer.checarProjeteis(controladoresInimigos.getNaves());
+		
 	}
 
 	private void updateStates() {
 
-		for (ControladorNave controlador : controladoresInimigos) {
-			controlador.execute();
-		}
-
+		controladoresInimigos.execute();
 		controladorPlayer.execute();
 		controladorBg.execute();
 
@@ -94,11 +116,13 @@ public class Game implements Runnable {
 		/* desenhando plano fundo */
 		controladorBg.desenharObjetos();
 
-		for (ControladorNave controlador : controladoresInimigos) {
-			controlador.desenharObjetos();
-		}
-
+		controladoresInimigos.desenharObjetos();
+		
 		controladorPlayer.desenharObjetos();
+		
+		//desenhando HUD
+		controladoresInimigos.drawHud();
+		controladorPlayer.drawHud();
 
 		/*
 		 * chamada a display() da classe GameLib atualiza o desenho exibido pela
@@ -182,5 +206,15 @@ public class Game implements Runnable {
 		}
 
 		System.exit(0);
+	}
+
+	@Override
+	public void notify(Subject s) {
+		if(s instanceof ControladorInimigo){
+			proximaFase();
+		} else if(s instanceof ControladorPlayer){//TODO
+			System.out.println("Game over, se fodeu");
+			System.exit(0);
+		}
 	}
 }

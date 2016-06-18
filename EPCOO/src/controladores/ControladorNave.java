@@ -10,10 +10,13 @@ import interfaces.Destrutivel;
 import interfaces.Observer;
 import interfaces.Subject;
 
-public abstract class ControladorNave extends Controlador implements Observer {
+public abstract class ControladorNave extends Controlador implements Observer,Subject {
 	private List<Nave> naves;
 	private Set<Projetil> disparos;
 	protected Timer timer;
+
+	
+	private List<Observer> obs;
 	
 	private List<Nave> remover;
 	private Set<Projetil> removerP;
@@ -24,6 +27,7 @@ public abstract class ControladorNave extends Controlador implements Observer {
 		this.remover = new ArrayList<Nave>();
 		this.removerP = new HashSet<Projetil>();
 		this.timer = timer;
+		obs = new LinkedList<Observer>();
 	}
 	
 	public List<Nave> getNaves(){
@@ -101,6 +105,24 @@ public abstract class ControladorNave extends Controlador implements Observer {
 		while(it.hasNext()){
 			p = it.next();
 			p.checarColisoes(col);
+		}
+	}
+
+	@Override
+	public void limparMemoria() {
+		this.disparos.clear();
+		this.naves.clear();
+	}
+
+	@Override
+	public void addObserver(Observer o) {
+		obs.add(o);
+	}
+
+	@Override
+	public void notifyObservers() {
+		for(Observer o : obs){
+			o.notify(this);
 		}
 	}
 

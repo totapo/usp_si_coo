@@ -5,7 +5,7 @@ package main;
 public class MainGame {
 
 	public static void main(String[] args) {
-		Thread game = new Thread(new Game());
+		Thread game = new Thread( new Game());
 		game.start();
 	}
 

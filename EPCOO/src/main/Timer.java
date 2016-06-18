@@ -12,6 +12,7 @@ public class Timer {
 	
 	private long currentTime;
 	private long delta;
+	private long initFase;
 	
 	private Timer(){
 		this.currentTime = System.currentTimeMillis();
@@ -29,6 +30,10 @@ public class Timer {
 		return delta;
 	}
 	
+	public long getIniFase(){
+		return initFase;
+	}
+	
 	//TODO
 	//O update currentTime e o calcDelta são protegidos para que nem todas as classes que possuírem
 	//referências a Timer possam recalcular esses valores, a única que pode fazer isso é a classe Main (por enquanto,
@@ -39,6 +44,10 @@ public class Timer {
 	
 	protected void calcDelta(){
 		this.delta = System.currentTimeMillis() - currentTime;
+	}
+	
+	protected void marcarIniFase(){
+		this.initFase = System.currentTimeMillis();
 	}
 	
 }
