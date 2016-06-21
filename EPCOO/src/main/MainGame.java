@@ -6,7 +6,7 @@ public class MainGame {
 
 	public static void main(String[] args) {
 		Thread game = new Thread( new Game());
-		game.start();
+		game.run();
 	}
 
 }

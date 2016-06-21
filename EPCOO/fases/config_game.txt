@@ -1,0 +1,5 @@
+5
+3
+./fases/configfase3.txt
+./fases/configfase4.txt
+./fases/configfase5.txt

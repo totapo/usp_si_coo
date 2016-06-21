@@ -32,8 +32,9 @@ public class ControladorInimigo extends ControladorNave implements Subject {
 	@Override
 	protected void spawnNave() {
 		long init = timer.getIniFase();
+		long current = timer.getCurrentTime();
 		if(enemies!=null){
-			while(enemies.peek()!=null && timer.getCurrentTime() > init+enemies.peek().getSpawnTime()){
+			while(enemies.peek()!=null && current > init+enemies.peek().getSpawnTime()){
 				Nave aux;
 				aux = Factory.instanciarInimigo(enemies.poll(), timer);
 				aux.addObserver(this);

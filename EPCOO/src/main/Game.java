@@ -34,17 +34,14 @@ public class Game implements Runnable, Observer {
 		running = true;
 		
 		//cria o leitor de fases, e já lê todos os arquivos
-		leitor = new LeitorConfiguracoes("./fases/config.txt");
+		leitor = new LeitorConfiguracoes("./fases/config_game.txt");
 		
 		//pega a lista de fases
 		fases = leitor.getFases();
 		
 		/* variáveis usadas no controle de tempo efetuado no main loop */
 
-		timer = Timer.getInstance();
-		updateTimer();
 		
-		proximaFase();
 
 		/* iniciado interface gráfica */
 
@@ -62,6 +59,7 @@ public class Game implements Runnable, Observer {
 	private void setControllers(){
 		if(controladoresInimigos==null){
 			controladoresInimigos = new ControladorInimigo(timer, faseAtual.getEnemies());
+			System.out.println(faseAtual.getEnemies().size());
 			controladoresInimigos.addObserver(this);
 		} else {
 			controladoresInimigos.limparMemoria();
@@ -106,7 +104,7 @@ public class Game implements Runnable, Observer {
 
 		controladoresInimigos.execute();
 		controladorPlayer.execute();
-		controladorBg.execute();
+		//controladorBg.execute();
 
 		if (GameLib.iskeyPressed(GameLib.KEY_ESCAPE))
 			running = false;
@@ -114,15 +112,24 @@ public class Game implements Runnable, Observer {
 
 	private void drawScene() {
 		/* desenhando plano fundo */
+		System.out.println("1 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
+		
 		controladorBg.desenharObjetos();
-
+		System.out.println("2 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
+		
 		controladoresInimigos.desenharObjetos();
+		System.out.println("3 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
 		
 		controladorPlayer.desenharObjetos();
+		System.out.println("4 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
 		
 		//desenhando HUD
 		controladoresInimigos.drawHud();
+		System.out.println("5 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
+		
 		controladorPlayer.drawHud();
+		System.out.println("6 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
+		
 
 		/*
 		 * chamada a display() da classe GameLib atualiza o desenho exibido pela
@@ -130,6 +137,8 @@ public class Game implements Runnable, Observer {
 		 */
 
 		GameLib.display();
+		System.out.println("7 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
+		
 	}
 
 	private void pause(long pauseTime) {
@@ -140,6 +149,12 @@ public class Game implements Runnable, Observer {
 	public void run() {
 
 		prepareResources();
+
+
+		timer = Timer.getInstance();
+		updateTimer();
+		
+		proximaFase();
 
 		/*************************************************************************************************/
 		/*                                                                                               */
@@ -178,11 +193,10 @@ public class Game implements Runnable, Observer {
 		while (running) {
 
 			updateTimer();
-
+			System.out.println(timer.getDelta());
 			/***************************/
 			/* Verificação de colisões */
 			/***************************/
-
 			verifyCollisions();
 
 			/***************************/
@@ -193,14 +207,12 @@ public class Game implements Runnable, Observer {
 			/*******************/
 			/* Desenho da cena */
 			/*******************/
-
 			drawScene();
 
 			/*
 			 * faz uma pausa de modo que cada execução do laço do main loop
 			 * demore aproximadamente 5 ms.
 			 */
-
 			pause(5);
 
 		}
