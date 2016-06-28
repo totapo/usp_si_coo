@@ -1,14 +1,16 @@
 package arquivo;
 
-public class TimerInimigo implements Comparable<TimerInimigo>{
+public class TimerElemento implements Comparable<TimerElemento>{
 	private int spawn;
+	private boolean isEnemy;
 	private boolean isBoss;
 	private int tipo,hp;
 	private double x,y;
 	
-	public TimerInimigo(int spawn, boolean isBoss, int tipo, double x, double y, int hp){
+	public TimerElemento(int spawn, boolean isEnemy, boolean isBoss, int tipo, double x, double y, int hp){
 		this.spawn = spawn;
 		this.isBoss = isBoss;
+		this.isEnemy = isEnemy;
 		this.tipo = tipo;
 		this.x = x;
 		this.y = y;
@@ -20,6 +22,9 @@ public class TimerInimigo implements Comparable<TimerInimigo>{
 	}
 	public boolean isBoss() {
 		return isBoss;
+	}
+	public boolean isEnemy() {
+		return isEnemy;
 	}
 	public int getTipo() {
 		return tipo;
@@ -35,7 +40,7 @@ public class TimerInimigo implements Comparable<TimerInimigo>{
 	}
 	
 	@Override
-	public int compareTo(TimerInimigo o) {
+	public int compareTo(TimerElemento o) {
 		return  (this.spawn - o.getSpawnTime());
 	}
 	

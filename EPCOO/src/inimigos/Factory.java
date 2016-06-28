@@ -3,14 +3,14 @@ package inimigos;
 import armas.Arma;
 import armas.ArmaDefInimigo;
 import armas.ArmaDefInimigo2;
-import arquivo.TimerInimigo;
+import arquivo.TimerElemento;
 import main.Timer;
 import model.Estado;
 import model.Nave;
 
 public class Factory {
 
-	public static Nave instanciarInimigo(TimerInimigo t, Timer timer){
+	public static Nave instanciarInimigo(TimerElemento t, Timer timer){
 		Nave n = null;
 		if(t.isBoss()){
 			if(t.getTipo()==1){

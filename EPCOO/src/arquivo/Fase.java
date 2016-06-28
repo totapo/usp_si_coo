@@ -3,17 +3,17 @@ package arquivo;
 import java.util.PriorityQueue;
 
 public class Fase {
-	private PriorityQueue<TimerInimigo> timers;
+	private PriorityQueue<TimerElemento> timers;
 	private int id;
 	private int playerHp;
 	
 	public Fase(int id, int playerHp){
-		timers = new PriorityQueue<TimerInimigo>(1000); //chutei um numero decente de inimigos por fase...
+		timers = new PriorityQueue<TimerElemento>(1000); //chutei um numero decente de inimigos por fase...
 		this.id = id;
 		this.playerHp = playerHp;
 	}
 	
-	public void addEnemy(TimerInimigo t){
+	public void addElemento(TimerElemento t){
 		this.timers.add(t);
 	}
 	
@@ -25,7 +25,7 @@ public class Fase {
 		return id;
 	}
 	
-	public PriorityQueue<TimerInimigo> getEnemies(){
+	public PriorityQueue<TimerElemento> getEnemies(){
 		return timers;
 	}
 }

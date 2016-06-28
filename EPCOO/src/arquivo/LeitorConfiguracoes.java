@@ -28,7 +28,7 @@ public class LeitorConfiguracoes {
 		String[] params;
 		int playerHp, nFases;
 		Fase f;
-		TimerInimigo t;
+		TimerElemento t;
 		try {
 			in = new BufferedReader(new FileReader(src));
 			//A primeira linha deve conter o hp do player
@@ -57,27 +57,39 @@ public class LeitorConfiguracoes {
 					
 					//cria o timer
 					if(params[0].equals("INIMIGO")){
-						t = new TimerInimigo(
+						t = new TimerElemento(
 								Integer.parseInt(params[2]), 	//spawn time
+								true,							//isEnemy
 								false, 							//isBoss
 								Integer.parseInt(params[1]),	//tipo
 								Double.parseDouble(params[3]),	//x
 								Double.parseDouble(params[4]),	//y
 								0								//hp - 0 pq eles n tem hahahah
 								);
-					} else {
-						t = new TimerInimigo(
+					} else if(params[0].equals("CHEFE")){
+						t = new TimerElemento(
 								Integer.parseInt(params[3]), 	//spawn time
+								true,							//isEnemy
 								true, 							//isBoss
 								Integer.parseInt(params[1]),	//tipo
 								Double.parseDouble(params[4]),	//x
 								Double.parseDouble(params[5]),	//y
 								Integer.parseInt(params[2])		//hp 
 								);
+					} else {
+						t = new TimerElemento(
+								Integer.parseInt(params[2]), 	//spawn time
+								false,							//isEnemy
+								false, 							//isBoss
+								Integer.parseInt(params[1]),	//tipo
+								Double.parseDouble(params[3]),	//x
+								Double.parseDouble(params[4]),	//y
+								0								//hp - 0 pq eles n tem hahahah
+								);
 					}
 					
 					//adiciona na lista de inimigos da fase
-					f.addEnemy(t);
+					f.addElemento(t);
 					
 				}
 				
