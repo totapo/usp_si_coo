@@ -4,7 +4,7 @@ import java.util.*;
 
 import main.Timer;
 import model.Estado;
-import projeteis.ProjetilNormalPlayer;
+import projeteis.ProjetilPlayer;
 import projeteis.Projetil;
 
 public class ArmaDefault extends Arma {
@@ -22,7 +22,7 @@ public class ArmaDefault extends Arma {
 		List<Projetil> resp = null;
 		if(timer.getCurrentTime()-lastShot > cooldown){
 			resp = new LinkedList<Projetil>();
-			resp.add(new ProjetilNormalPlayer(
+			resp.add(new ProjetilPlayer(
 					x,y,
 					0.0,-1.0,1,
 					Estado.ACTIVE,
