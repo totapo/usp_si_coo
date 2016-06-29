@@ -22,18 +22,18 @@ public class ControladorBackground extends Controlador {
 			estrelas.add(new Estrela(
 					Math.random() * GameLib.WIDTH,
 					Math.random() * GameLib.HEIGHT,
+					0.045,
 					3,
-					//0.045,
-					2, Color.DARK_GRAY
+					2, Color.DARK_GRAY,this.timer
 					));
 		}
 		for(i=0; i<qtdEstrelas1; i++){
 			estrelas.add(new Estrela(
 					Math.random() * GameLib.WIDTH,
 					Math.random() * GameLib.HEIGHT,
+					0.070,
 					2,
-					//0.070,
-					3, Color.gray
+					3, Color.gray,this.timer
 					));
 		}
 		
@@ -41,11 +41,13 @@ public class ControladorBackground extends Controlador {
 
 	@Override
 	public void execute() {
+		for(Estrela e:estrelas){
+			e.mover();
+		}
 	}
 
 	@Override
 	public void desenharObjetos() {
-		Estrela.count(0.070, 0.045, timer.getDelta());
 		Iterator<Estrela> it = estrelas.iterator();
 		while(it.hasNext()){
 			it.next().draw();

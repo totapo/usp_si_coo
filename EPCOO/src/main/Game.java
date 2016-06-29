@@ -118,7 +118,7 @@ public class Game implements Runnable, Observer {
 		controladorSpawnElementos.execute();
 		controladoresInimigos.execute();
 		controladorPlayer.execute();
-		//controladorBg.execute();
+		controladorBg.execute();
 
 		if (GameLib.iskeyPressed(GameLib.KEY_ESCAPE))
 			running = false;
