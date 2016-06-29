@@ -2,29 +2,38 @@ package elementos;
 
 import java.awt.Color;
 
+import main.Timer;
 import pacote.GameLib;
-import model.Elemento;
+import model.ElementoMutavel;
+import model.Estado;
 
-public class Estrela extends Elemento{
-	private static long contador, contador2;
+public class Estrela extends ElementoMutavel{
 	private double size;
 	private Color cor;
+	private double vel;
+	private Timer t;
 	
-	public static void count(double vel, double vel2, long delta){
-		contador += vel * delta;
-		contador2+=vel2*delta;
-	}
-	
-	public Estrela(double x, double y, int layer, double size, Color cor) {
-		super(x, y, layer);
+	public Estrela(double vel, int layer, double size, Color cor, Timer t) {
+		super(0, 0, layer,Estado.ACTIVE);
+		x = Math.random() * GameLib.WIDTH;
+		y = Math.random() * GameLib.HEIGHT;
 		this.size = size;
 		this.cor = cor;
+		this.vel = vel;
+		this.t = t;
 	}
 
 	@Override
 	public void draw() {
 		GameLib.setColor(cor);
-		GameLib.fillRect(x, (Math.abs(y + ((layer==2)?contador:contador2))) % GameLib.HEIGHT, size, size);
+		GameLib.fillRect(x, y, size, size);
+	}
+
+	@Override
+	public void mover() {
+		y += vel*t.getDelta(); 
+		if(y > GameLib.HEIGHT) x = Math.random() * GameLib.WIDTH;
+		y = y%GameLib.HEIGHT;
 	}
 
 }

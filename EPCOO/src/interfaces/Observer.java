@@ -1,5 +1,5 @@
 package interfaces;
 
 public interface Observer {
-	public void notify(Subject s);
+	public void notify(Object s);
 }

@@ -1,7 +1,6 @@
 package main;
 
 import interfaces.Observer;
-import interfaces.Subject;
 
 import java.util.List;
 
@@ -11,6 +10,7 @@ import pacote.GameLib;
 import controladores.ControladorBackground;
 import controladores.ControladorInimigo;
 import controladores.ControladorPlayer;
+import controladores.ControladorSpawnElementos;
 
 public class Game implements Runnable, Observer {
 
@@ -22,6 +22,7 @@ public class Game implements Runnable, Observer {
 	private List<Fase> fases;
 	private Fase faseAtual;
 	private LeitorConfiguracoes leitor;
+	private ControladorSpawnElementos controladorSpawnElementos;
 
 	private static void busyWait(long time) {
 
@@ -58,12 +59,10 @@ public class Game implements Runnable, Observer {
 	
 	private void setControllers(){
 		if(controladoresInimigos==null){
-			controladoresInimigos = new ControladorInimigo(timer, faseAtual.getEnemies());
-			System.out.println(faseAtual.getEnemies().size());
+			controladoresInimigos = new ControladorInimigo(timer);
 			controladoresInimigos.addObserver(this);
 		} else {
 			controladoresInimigos.limparMemoria();
-			controladoresInimigos.setEnemies(faseAtual.getEnemies());
 		}
 		
 		if(controladorPlayer==null){
@@ -71,6 +70,18 @@ public class Game implements Runnable, Observer {
 			controladorPlayer.addObserver(this);
 		}else 
 			controladorPlayer.resetLife();
+		
+		
+		if(controladorSpawnElementos==null){
+			controladorSpawnElementos = new ControladorSpawnElementos(timer, faseAtual.getEnemies());
+			controladorSpawnElementos.addObserver(controladorPlayer);
+			controladorSpawnElementos.addObserver(controladoresInimigos);
+		} else {
+			controladorSpawnElementos.limparMemoria();
+			controladorSpawnElementos.setEnemies(faseAtual.getEnemies());
+		}
+		
+		
 		
 		if(controladorBg==null)
 			controladorBg = new ControladorBackground(timer, 10, 50);
@@ -88,11 +99,14 @@ public class Game implements Runnable, Observer {
 
 	private void verifyCollisions() {
 		/* colisões player - projeteis (inimigo) */
+		controladoresInimigos.checarProjeteis(controladorPlayer.getPowerUpsAtivos());
 		controladoresInimigos.checarProjeteis(controladorPlayer.getNaves());
 		
 
 		/* colisões player - inimigos */
-		controladorPlayer.checarColisoes(controladoresInimigos.getNaves());
+		controladorPlayer.checarColisoes(controladoresInimigos.getNaves(),true);
+		controladorPlayer.checarColisoes(controladorPlayer.getPowerUps(),false);
+		
 		
 
 		/* colisões projeteis (player) - inimigos */
@@ -101,10 +115,10 @@ public class Game implements Runnable, Observer {
 	}
 
 	private void updateStates() {
-
+		controladorSpawnElementos.execute();
 		controladoresInimigos.execute();
 		controladorPlayer.execute();
-		//controladorBg.execute();
+		controladorBg.execute();
 
 		if (GameLib.iskeyPressed(GameLib.KEY_ESCAPE))
 			running = false;
@@ -112,23 +126,23 @@ public class Game implements Runnable, Observer {
 
 	private void drawScene() {
 		/* desenhando plano fundo */
-		System.out.println("1 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
+		//System.out.println("1 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
 		
 		controladorBg.desenharObjetos();
-		System.out.println("2 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
+		//System.out.println("2 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
 		
 		controladoresInimigos.desenharObjetos();
-		System.out.println("3 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
+		//System.out.println("3 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
 		
 		controladorPlayer.desenharObjetos();
-		System.out.println("4 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
+		//System.out.println("4 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
 		
 		//desenhando HUD
 		controladoresInimigos.drawHud();
-		System.out.println("5 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
+		//System.out.println("5 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
 		
 		controladorPlayer.drawHud();
-		System.out.println("6 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
+		//System.out.println("6 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
 		
 
 		/*
@@ -137,7 +151,7 @@ public class Game implements Runnable, Observer {
 		 */
 
 		GameLib.display();
-		System.out.println("7 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
+		//System.out.println("7 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
 		
 	}
 
@@ -193,7 +207,6 @@ public class Game implements Runnable, Observer {
 		while (running) {
 
 			updateTimer();
-			System.out.println(timer.getDelta());
 			/***************************/
 			/* Verificação de colisões */
 			/***************************/
@@ -221,7 +234,7 @@ public class Game implements Runnable, Observer {
 	}
 
 	@Override
-	public void notify(Subject s) {
+	public void notify(Object s) {
 		if(s instanceof ControladorInimigo){
 			proximaFase();
 		} else if(s instanceof ControladorPlayer){//TODO

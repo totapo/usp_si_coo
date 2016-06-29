@@ -12,7 +12,6 @@ import projeteis.Projetil;
 public class Player extends Nave implements TemHp {
 
 	double velocidadeX, velocidadeY;
-	double explosionStart, explosionEnd;
 	private int hp,hpMax;
 	
 	public Player(double x, double y, int layer, double vX, double vY, Estado estado, Timer timer, double raio, int hp){

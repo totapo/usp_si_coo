@@ -17,6 +17,8 @@ public abstract class ElementoMutavel extends Elemento implements Subject {
 	
 	private Estado estado;
 	
+	public abstract void mover();
+	
 	public Estado getEstado(){
 		return estado;
 	}
