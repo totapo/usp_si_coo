@@ -1,10 +1,6 @@
 package projeteis;
 
-import interfaces.Destrutivel;
-
 import java.awt.Color;
-import java.util.Collection;
-import java.util.Iterator;
 
 import pacote.GameLib;
 import main.Timer;

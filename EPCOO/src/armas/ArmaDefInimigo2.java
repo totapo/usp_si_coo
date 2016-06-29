@@ -7,7 +7,6 @@ import main.Timer;
 import model.Estado;
 import projeteis.ProjetilInimigo;
 import projeteis.Projetil;
-import projeteis.Projetil;
 
 public class ArmaDefInimigo2 extends Arma{
 	private Timer timer;
