@@ -13,8 +13,10 @@ public class Estrela extends ElementoMutavel{
 	private double vel;
 	private Timer t;
 	
-	public Estrela(double x, double y, double vel, int layer, double size, Color cor, Timer t) {
-		super(x, y, layer,Estado.ACTIVE);
+	public Estrela(double vel, int layer, double size, Color cor, Timer t) {
+		super(0, 0, layer,Estado.ACTIVE);
+		x = Math.random() * GameLib.WIDTH;
+		y = Math.random() * GameLib.HEIGHT;
 		this.size = size;
 		this.cor = cor;
 		this.vel = vel;
@@ -30,6 +32,7 @@ public class Estrela extends ElementoMutavel{
 	@Override
 	public void mover() {
 		y += vel*t.getDelta(); 
+		if(y > GameLib.HEIGHT) x = Math.random() * GameLib.WIDTH;
 		y = y%GameLib.HEIGHT;
 	}
 

@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import elementos.Estrela;
-import pacote.GameLib;
 import main.Timer;
 
 public class ControladorBackground extends Controlador {
@@ -20,8 +19,6 @@ public class ControladorBackground extends Controlador {
 		int i;
 		for(i=0; i<qtdEstrelas2; i++){
 			estrelas.add(new Estrela(
-					Math.random() * GameLib.WIDTH,
-					Math.random() * GameLib.HEIGHT,
 					0.045,
 					3,
 					2, Color.DARK_GRAY,this.timer
@@ -29,8 +26,6 @@ public class ControladorBackground extends Controlador {
 		}
 		for(i=0; i<qtdEstrelas1; i++){
 			estrelas.add(new Estrela(
-					Math.random() * GameLib.WIDTH,
-					Math.random() * GameLib.HEIGHT,
 					0.070,
 					2,
 					3, Color.gray,this.timer
