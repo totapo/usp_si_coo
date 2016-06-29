@@ -10,7 +10,6 @@ import model.Estado;
 
 public class Inimigo2 extends Inimigo{
 
-	double explosionStart, explosionEnd;
 	double angulo, velocidade, velocidadeRotacao;
 	boolean shootNow;
 	

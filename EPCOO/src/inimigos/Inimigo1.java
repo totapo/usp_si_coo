@@ -9,8 +9,8 @@ import main.Timer;
 import model.Estado;
 
 public class Inimigo1 extends Inimigo{
-	private double velocidadeRotacao, velocidade, angulo,explosionStart, explosionEnd;
 	
+	private double velocidadeRotacao, velocidade, angulo;
 	
 	public Inimigo1(double x, double y, int layer, double raio, Estado estado,
 			Timer timer, double angulo,double velocidade, double velocidadeRotacao) {
