@@ -12,11 +12,11 @@ import interfaces.Subject;
 
 public abstract class ControladorNave extends Controlador implements Observer,Subject {
 	private List<Nave> naves;
-	private Set<Projetil> disparos;
+	protected Set<Projetil> disparos;
 	protected Timer timer;
 
 	
-	private List<Observer> obs;
+	protected List<Observer> obs;
 	
 	private List<Nave> remover;
 	private Set<Projetil> removerP;
@@ -53,7 +53,6 @@ public abstract class ControladorNave extends Controlador implements Observer,Su
 				}
 			}
 		}
-		spawnNave();
 		
 		Iterator<Projetil> tp = this.disparos.iterator();
 		while(tp.hasNext()){
@@ -63,17 +62,15 @@ public abstract class ControladorNave extends Controlador implements Observer,Su
 		limpar();
 	} 
 	
-	private void limpar() {
+	protected void limpar() {
 		this.naves.removeAll(remover);
 		this.disparos.removeAll(removerP);
 		remover.clear();
 		removerP.clear();
 	}
 
-	protected abstract void spawnNave();
-
 	@Override
-	public void notify(Subject s) {
+	public void notify(Object s) {
 		if(s instanceof Nave){
 			Nave aux = (Nave)s;
 			if(aux.getEstado() == Estado.INACTIVE){
@@ -106,12 +103,6 @@ public abstract class ControladorNave extends Controlador implements Observer,Su
 			p = it.next();
 			p.checarColisoes(col);
 		}
-	}
-
-	@Override
-	public void limparMemoria() {
-		this.disparos.clear();
-		this.naves.clear();
 	}
 
 	@Override

@@ -11,7 +11,7 @@ public class ArmaDefInimigo extends Arma {
 	private double cooldown,lastShot;
 	private Timer timer;
 	
-	public ArmaDefInimigo(String nome, double cooldoqwn, Timer timer) {
+	public ArmaDefInimigo(String nome, double cooldown, Timer timer) {
 		super(nome);
 		this.cooldown = cooldown;
 		this.timer = timer;
