@@ -3,6 +3,7 @@ package armas;
 import java.util.*;
 
 import projeteis.Projetil;
+import projeteis.Projetil;
 
 public abstract class Arma {
 	

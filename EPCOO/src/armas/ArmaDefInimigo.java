@@ -23,7 +23,7 @@ public class ArmaDefInimigo extends Arma {
 		List<Projetil> resp = null;
 		if(timer.getCurrentTime()-lastShot > cooldown){
 			resp = new LinkedList<Projetil>();
-			resp.add(new ProjetilNormalInimigo(
+			resp.add(new ProjetilInimigo(
 					x,y,
 					Math.cos(angulo) * 0.45, //vx
 					Math.sin(angulo) * 0.45 * (-1.0), //vy
