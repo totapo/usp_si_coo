@@ -7,11 +7,11 @@ import main.Timer;
 import model.Estado;
 import projeteis.*;
 
-public class ArmaDefInimigo extends Arma {
+public class ArmaInimigo extends Arma {
 	private double cooldown,lastShot;
 	private Timer timer;
 	
-	public ArmaDefInimigo(String nome, double cooldown, Timer timer) {
+	public ArmaInimigo(String nome, double cooldown, Timer timer) {
 		super(nome);
 		this.cooldown = cooldown;
 		this.timer = timer;

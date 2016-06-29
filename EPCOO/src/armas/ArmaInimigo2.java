@@ -8,14 +8,14 @@ import model.Estado;
 import projeteis.ProjetilInimigo;
 import projeteis.Projetil;
 
-public class ArmaDefInimigo2 extends Arma{
+public class ArmaInimigo2 extends Arma{
 	private Timer timer;
 	
-	public ArmaDefInimigo2(String nome, Timer timer) {
+	public ArmaInimigo2(String nome, Timer timer) {
 		super(nome);
 		this.timer = timer;
 	}
-	//Tiro spread
+	//Tiro spread - Inimigo "losango"
 	@Override
 	public List<Projetil> disparar(double x, double y,double angulo) {
 		List<Projetil> resp = new ArrayList<Projetil>();

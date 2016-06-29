@@ -13,7 +13,7 @@ import elementos.BolinhaOp;
 import elementos.LifeBar;
 import elementos.Shield;
 import armas.Arma;
-import armas.ArmaDefault;
+import armas.ArmaPlayer;
 import arquivo.TimerElemento;
 import main.Timer;
 import model.*;
@@ -47,7 +47,7 @@ public class ControladorPlayer extends ControladorNave{
 				timer,
 				12.0,					//raio
 				hp);
-		Arma a = new ArmaDefault("gun",100,timer);
+		Arma a = new ArmaPlayer("gun",100,timer);
 		player.addArma(a);
 		player.selecionaArma(a);
 		player.addObserver(this);

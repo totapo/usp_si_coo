@@ -1,8 +1,8 @@
 package inimigos;
 
 import armas.Arma;
-import armas.ArmaDefInimigo;
-import armas.ArmaDefInimigo2;
+import armas.ArmaInimigo;
+import armas.ArmaInimigo2;
 import arquivo.TimerElemento;
 import main.Timer;
 import model.Estado;
@@ -31,7 +31,7 @@ public class Factory {
 						0.20 + Math.random() * 0.15, //velocidade
 						0.0 //velocidadeRotacao
 						);	
-				Arma arma = new ArmaDefInimigo("Def",500,timer);
+				Arma arma = new ArmaInimigo("Def",500,timer);
 				n.addArma(arma);
 				n.selecionaArma(arma);
 			} else if(t.getTipo()==2){
@@ -46,7 +46,7 @@ public class Factory {
 						0.42, //velocidade
 						0.0 //velocidadeRotacao
 						);	
-				Arma arma = new ArmaDefInimigo2("Def",timer);
+				Arma arma = new ArmaInimigo2("Def",timer);
 				n.addArma(arma);
 				n.selecionaArma(arma);
 			}

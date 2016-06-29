@@ -7,11 +7,11 @@ import model.Estado;
 import projeteis.ProjetilPlayer;
 import projeteis.Projetil;
 
-public class ArmaDefault extends Arma {
+public class ArmaPlayer extends Arma {
 	private double cooldown,lastShot;
 	private Timer timer;
 	
-	public ArmaDefault(String nome,double cooldown, Timer timer){
+	public ArmaPlayer(String nome,double cooldown, Timer timer){
 		super(nome);
 		this.cooldown = cooldown;
 		this.timer = timer;

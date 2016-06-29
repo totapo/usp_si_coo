@@ -12,6 +12,7 @@ public abstract class Arma {
 		this.nome = nome;
 	}
 	
+	//Cada "nave" deverá implementar seu próprio tipo de disparo
 	public abstract List<Projetil> disparar(double x, double y, double angle);
 	
 	public String getNome(){
