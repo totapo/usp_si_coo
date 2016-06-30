@@ -121,6 +121,8 @@ public class ControladorPlayer extends ControladorNave{
 			//this.removerPowerUpsAtivos.addAll(this.powerUpsAtivos); Não ha perdao na rua
 			if(p.getEstado() == Estado.INACTIVE){
 				notifyObservers();
+			} else if(p.getEstado() == Estado.FLASHING){
+				this.removerPowerUpsAtivos.addAll(this.getPowerUpsAtivos());
 			}
 		} if(s instanceof TimerElemento){
 			TimerElemento a = (TimerElemento) s;
@@ -213,7 +215,7 @@ public class ControladorPlayer extends ControladorNave{
 						i= it.next();
 						
 						if(i instanceof Nave){
-							if(((Nave) i).getEstado()!=Estado.ACTIVE ||((Nave) i).getEstado()!=Estado.FLASHING) continue;
+							if(((Nave) i).getEstado()!=Estado.ACTIVE && ((Nave) i).getEstado()!=Estado.FLASHING) continue;
 						}
 						
 						double dx = i.getX() - a.getX();

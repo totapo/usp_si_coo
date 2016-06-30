@@ -68,7 +68,7 @@ public class ControladorInimigo extends ControladorNave implements Subject{
 							0,
 							b,
 							GameLib.WIDTH*0.8,
-							GameLib.HEIGHT*0.05,
+							GameLib.HEIGHT*0.01,
 							Color.RED, 
 							Color.DARK_GRAY)
 							);

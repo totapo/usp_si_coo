@@ -25,10 +25,10 @@ public class Factory {
 						t.getHp(),		//HP
 						500,			//FlashTime
 						50,				//FlashCoolDownTime
-						0.1,
+						0.1,			
 						10,
 						50);			//velocidade
-				Arma arma = new ArmaBoss1("Avenger", 3000, timer);
+				Arma arma = new ArmaBoss1("Avenger", 1000, timer);
 				n.addArma(arma);
 				n.selecionaArma(arma);
 			} else if(t.getTipo()==2){

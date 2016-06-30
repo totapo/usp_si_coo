@@ -52,7 +52,7 @@ public abstract class Projetil extends ElementoMutavel{
 			while(it.hasNext()){
 				obj = it.next();
 				aux = (Destrutivel)obj;
-				if(aux.getEstado() == Estado.ACTIVE){
+				if(aux.getEstado() == Estado.ACTIVE || aux.getEstado() == Estado.FLASHING){
 					dx = x - aux.getX();
 					dy = y - aux.getY();
 					dist = Math.sqrt(dx * dx + dy * dy);

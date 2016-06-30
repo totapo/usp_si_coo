@@ -61,8 +61,6 @@ public class Game implements Runnable, Observer {
 		if(controladoresInimigos==null){
 			controladoresInimigos = new ControladorInimigo(timer);
 			controladoresInimigos.addObserver(this);
-		} else {
-			controladoresInimigos.limparMemoria();
 		}
 		
 		if(controladorPlayer==null){
@@ -237,8 +235,8 @@ public class Game implements Runnable, Observer {
 	public void notify(Object s) {
 		if(s instanceof ControladorInimigo){
 			proximaFase();
-		} else if(s instanceof ControladorPlayer){//TODO
-			System.out.println("Game over, se fodeu");
+		} else if(s instanceof ControladorPlayer){
+			System.out.println("Game over");
 			System.exit(0);
 		}
 	}

@@ -111,8 +111,7 @@ public class Boss1 extends Boss implements TemHp {
 		Estado estado = this.getEstado();
 		if (estado == Estado.EXPLODING) {
 
-			double alpha = (timer.getCurrentTime() - explosionStart)
-					/ (explosionEnd - explosionStart);
+			double alpha = (timer.getCurrentTime() - explosionStart) / (explosionEnd - explosionStart);
 			GameLib.drawExplosion(x, y, alpha);
 		}
 
@@ -131,7 +130,7 @@ public class Boss1 extends Boss implements TemHp {
 					flashLastChange = timer.getCurrentTime();
 				}
 				if (!flash)
-					GameLib.setColor(Color.GREEN);
+					GameLib.setColor(Color.GRAY);
 				else
 					GameLib.setColor(Color.WHITE);
 				GameLib.drawDiamond(x, y, raio);

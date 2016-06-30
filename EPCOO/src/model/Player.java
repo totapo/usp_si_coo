@@ -13,6 +13,12 @@ public class Player extends Nave implements TemHp {
 
 	double velocidadeX, velocidadeY;
 	private int hp,hpMax;
+	private long flashStart;
+	private long flashEnd;
+	private long flashTime;
+	private long flashLastChange;
+	private boolean flash;
+	private long flashCoolDown;
 	
 	public Player(double x, double y, int layer, double vX, double vY, Estado estado, Timer timer, double raio, int hp){
 		super(x,y,layer,estado,timer,raio);
@@ -20,12 +26,14 @@ public class Player extends Nave implements TemHp {
 		this.velocidadeX = vX;
 		this.velocidadeY = vY;
 		this.hp = this.hpMax = hp;
+		flashCoolDown = 50;
+		flashTime = 500;
 	}
 	
 	@Override
 	public void mover() {
 		Estado estado = this.getEstado();
-		if(estado == Estado.ACTIVE){
+		if(estado == Estado.ACTIVE || estado == Estado.FLASHING){
 			long delta = timer.getDelta();
 			if(GameLib.iskeyPressed(GameLib.KEY_UP)) y -= delta * velocidadeY;
 			if(GameLib.iskeyPressed(GameLib.KEY_DOWN)) y += delta * velocidadeY;
@@ -58,7 +66,7 @@ public class Player extends Nave implements TemHp {
 	public List<Projetil> atirar() {
 		List<Projetil> resp = null;
 		Estado estado = this.getEstado();
-		if(estado == Estado.ACTIVE){
+		if(estado == Estado.ACTIVE || estado == Estado.FLASHING){
 			if(GameLib.iskeyPressed(GameLib.KEY_CONTROL)) {
 				resp = this.getArma().disparar(x,y-1*raio,0);
 			}
@@ -73,11 +81,25 @@ public class Player extends Nave implements TemHp {
 			
 			double alpha = (timer.getCurrentTime() - explosionStart) / (explosionEnd - explosionStart);
 			GameLib.drawExplosion(x, y, alpha);
-		}
-		else{
+		} else if(estado == Estado.ACTIVE){
 			
 			GameLib.setColor(Color.BLUE);
 			GameLib.drawPlayer(x, y, raio);
+		} else {
+			if (timer.getCurrentTime() > flashEnd)
+				this.setEstado(Estado.ACTIVE);
+			else {
+				if (timer.getCurrentTime() - flashLastChange > this.flashCoolDown) {
+					flash = !flash;
+					flashLastChange = timer.getCurrentTime();
+				}
+				if (!flash)
+					GameLib.setColor(Color.GRAY);
+				else
+					GameLib.setColor(Color.WHITE);
+
+				GameLib.drawPlayer(x, y, raio);
+			}
 		}
 	}
 
@@ -86,14 +108,24 @@ public class Player extends Nave implements TemHp {
 		if(this.getEstado() == Estado.ACTIVE){ //|| this.getEstado() == Estado.FLASHING){
 			hp-=1;
 			notifyObservers(); // TODO não é muito bom mas é melhor do que ficar recalculando o hp no lifebar
-			//TODO setar o flashing
-			//this.setEstado(Estado.FLASHING);
+			
+			flash();
 			
 			if(hp==0)
 				explodir();
 			
 		}
 			
+	}
+
+	private void flash() {
+		if (super.getEstado() == Estado.ACTIVE) {
+			super.setEstado(Estado.FLASHING);
+			this.flashStart = timer.getCurrentTime();
+			this.flashEnd = flashStart + flashTime;
+			this.flashLastChange = flashStart;
+			this.flash = true;
+		}
 	}
 
 	@Override
@@ -109,6 +141,7 @@ public class Player extends Nave implements TemHp {
 	@Override
 	public void setHp(int hp) {
 		this.hp = hp;
+		notifyObservers();
 	}
 
 }

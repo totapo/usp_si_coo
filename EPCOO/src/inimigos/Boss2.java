@@ -75,16 +75,19 @@ public class Boss2 extends Boss implements Observer {
 
 	@Override
 	public void mover() {
-		if (timer.getCurrentTime() - lastDrop > dropCoolDown) {
-			dropInimigos();
-			lastDrop = timer.getCurrentTime();
-		}
-		if (timer.getCurrentTime() - lastTeleport > teleportCoolDown) {
-			teleport();
-			lastTeleport = timer.getCurrentTime();
-		}
-		for (Inimigo inimigo : inimigos) {
-			inimigo.mover();
+		if(this.getEstado()==Estado.ACTIVE || this.getEstado()==Estado.FLASHING){
+
+			if (timer.getCurrentTime() - lastDrop > dropCoolDown) {
+				dropInimigos();
+				lastDrop = timer.getCurrentTime();
+			}
+			if (timer.getCurrentTime() - lastTeleport > teleportCoolDown) {
+				teleport();
+				lastTeleport = timer.getCurrentTime();
+			}
+			for (Inimigo inimigo : inimigos) {
+				inimigo.mover();
+			}
 		}
 		limpar();
 	}
@@ -97,12 +100,7 @@ public class Boss2 extends Boss implements Observer {
 	private void teleport() {
 		double x = Math.random() * (GameLib.WIDTH - 2 * xLimite + xLimite);
 		double y = Math.random() * (GameLib.HEIGHT - 2 * yLimite + yLimite) / 2;// Boss
-		// não
-		// passa
-		// do
-		// metade
-		// da
-		// tela
+		
 		this.x = x;
 		this.y = y;
 	}
@@ -127,6 +125,7 @@ public class Boss2 extends Boss implements Observer {
 	@Override
 	public void explodir() {
 		Estado estado = this.getEstado();
+		limpar();
 		if (estado == Estado.ACTIVE || estado == Estado.FLASHING) {
 			this.setEstado(Estado.EXPLODING);
 			explosionStart = timer.getCurrentTime();
@@ -138,9 +137,8 @@ public class Boss2 extends Boss implements Observer {
 	public void draw() {
 		Estado estado = this.getEstado();
 		if (estado == Estado.EXPLODING) {
-
-			double alpha = (timer.getCurrentTime() - explosionStart)
-					/ (explosionEnd - explosionStart);
+			
+			double alpha = (timer.getCurrentTime() - explosionStart) / (explosionEnd - explosionStart);
 			GameLib.drawExplosion(x, y, alpha);
 		}
 
@@ -159,7 +157,7 @@ public class Boss2 extends Boss implements Observer {
 					flashLastChange = timer.getCurrentTime();
 				}
 				if (!flash)
-					GameLib.setColor(Color.BLUE);
+					GameLib.setColor(Color.GRAY);
 				else
 					GameLib.setColor(Color.WHITE);
 				GameLib.drawCircle(x, y, raio);
