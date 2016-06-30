@@ -20,18 +20,22 @@ public class ProjetilBoss1 extends Projetil {
 	private List<ProjetilInimigo> projeteis;
 	private List<ProjetilInimigo> removerP;
 	private double raio;
+	private double velocidadeProjeteis;
 
-	public ProjetilBoss1(double x, double y, double raio, int layer,
+	public ProjetilBoss1(double x, double y, double velocidadeProjeteis, double raio, int layer, long coolDownTime,
 			Estado estado, Timer timer) {
 		super(x, y, 0, 0, layer, estado, timer);
+		this.coolDownTime = coolDownTime;
 		this.dropTime = timer.getCurrentTime();
 		this.raio = raio;
 		explodiu = false;
+		removerP = new LinkedList<ProjetilInimigo>();
+		this.velocidadeProjeteis = velocidadeProjeteis;
 	}
 
 	@Override
 	public void mover() {
-		if (dropTime + coolDownTime > timer.getCurrentTime() && !explodiu) {
+		if (timer.getCurrentTime() - dropTime > coolDownTime && !explodiu) {
 			explodiu = true;
 			projeteis = espalharProjeteis();
 		} else if (explodiu) {
@@ -45,27 +49,27 @@ public class ProjetilBoss1 extends Projetil {
 		List<ProjetilInimigo> projeteis = new LinkedList<ProjetilInimigo>();
 		double vx, vy;
 		ProjetilInimigo projetil;
-		for (vx = -1; vx < 1; vx += 1.0 / 10.0) {
+		for (vx = -1; vx < 1; vx += 1.0 / 7.0) {
 			vy = 1;
-			projetil = new ProjetilInimigo(this.x, this.y, vx, vy, 2.0, 1,
+			projetil = new ProjetilInimigo(this.x, this.y, vx*velocidadeProjeteis, vy*velocidadeProjeteis, 2.0, 1,
 					Estado.ACTIVE, timer);
 			projeteis.add(projetil);
 		}
-		for (vx = -1; vx < 1; vx += 1.0 / 10.0) {
+		for (vx = -1; vx < 1; vx += 1.0 / 7.0) {
 			vy = -1;
-			projetil = new ProjetilInimigo(this.x, this.y, vx, vy, 2.0, 1,
+			projetil = new ProjetilInimigo(this.x, this.y, vx*velocidadeProjeteis, vy*velocidadeProjeteis, 2.0, 1,
 					Estado.ACTIVE, timer);
 			projeteis.add(projetil);
 		}
-		for (vy = -1; vy < 1; vy += 1.0 / 10.0) {
+		for (vy = -1; vy < 1; vy += 1.0 / 7.0) {
 			vx = 1;
-			projetil = new ProjetilInimigo(this.x, this.y, vx, vy, 2.0, 1,
+			projetil = new ProjetilInimigo(this.x, this.y, vx*velocidadeProjeteis, vy*velocidadeProjeteis, 2.0, 1,
 					Estado.ACTIVE, timer);
 			projeteis.add(projetil);
 		}
-		for (vy = -1; vy < 1; vy += 1.0 / 10.0) {
+		for (vy = -1; vy < 1; vy += 1.0 / 7.0) {
 			vx = -1;
-			projetil = new ProjetilInimigo(this.x, this.y, vx, vy, 2.0, 1,
+			projetil = new ProjetilInimigo(this.x, this.y, vx*velocidadeProjeteis, vy*velocidadeProjeteis, 2.0, 1,
 					Estado.ACTIVE, timer);
 			projeteis.add(projetil);
 		}

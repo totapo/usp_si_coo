@@ -16,21 +16,23 @@ public class Boss1 extends Boss implements TemHp {
 
 	private int direcaoX;
 	private int direcaoY;
-	private int velocidade;
+	private double velocidade;
 	private long movingStart;
 	private long movingTime;
+	
 
 	public Boss1(double x, double y, int layer, Estado estado, Timer timer,
 			double raio, int hp, long flashTime, long flashCoolDown,
-			int velocidade) {
-		super(x, y, layer, estado, timer, raio, hp, flashTime, flashCoolDown);
+			double velocidade, int xLimite, int yLimite) {
+		super(x, y, layer, estado, timer, raio, hp, flashTime, flashCoolDown, xLimite, yLimite);
 		this.velocidade = velocidade;
 		this.movingStart = timer.getCurrentTime();// Inicio do movimento atual
 													// do boss
-		this.movingTime = 3000L;// Tempo que o boss mantém o movimento na mesma
+		this.movingTime = 2000;// Tempo que o boss mantém o movimento na mesma
 								// direção
 								// Deve ser passado por parâmetro
 		this.addArma(new ArmaBoss1("Arma Boss 1", 3000, timer));
+		geraMovimento();
 	}
 
 	@Override
@@ -79,8 +81,8 @@ public class Boss1 extends Boss implements TemHp {
 				this.setEstado(Estado.INACTIVE);
 			}
 		}
-		if (estado == Estado.ACTIVE) {
-			if (movingStart + movingTime > timer.getCurrentTime()
+		if (estado == Estado.ACTIVE || estado == Estado.FLASHING) {
+			if (timer.getCurrentTime() - movingStart > movingTime 
 					|| verificaLimites()) {
 				movingStart = timer.getCurrentTime();
 				geraMovimento();
@@ -93,16 +95,16 @@ public class Boss1 extends Boss implements TemHp {
 
 	private void geraMovimento() {// Não é um bom nome
 		Random rd = new Random();
-		if (this.x <= 0) {
+		if (this.x - xLimite <= 0) {
 			direcaoX = 1;
-		} else if (this.x >= GameLib.WIDTH) {
+		} else if (this.x + xLimite >= GameLib.WIDTH) {
 			direcaoX = -1;
 		} else {
 			direcaoX = rd.nextInt(2) - 1;
 		}
-		if (this.y <= 0) {
+		if (this.y - yLimite <= 0) {
 			direcaoY = 1;
-		} else if (this.y >= GameLib.HEIGHT) {
+		} else if (this.y + yLimite >= GameLib.HEIGHT) {
 			direcaoY = -1;
 		} else {
 			direcaoY = rd.nextInt(2) - 1;

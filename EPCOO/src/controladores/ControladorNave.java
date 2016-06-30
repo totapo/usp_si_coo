@@ -10,18 +10,18 @@ import interfaces.Destrutivel;
 import interfaces.Observer;
 import interfaces.Subject;
 
-public abstract class ControladorNave extends Controlador implements Observer,Subject {
+public abstract class ControladorNave extends Controlador implements Observer,
+		Subject {
 	private List<Nave> naves;
 	protected Set<Projetil> disparos;
 	protected Timer timer;
 
-	
 	protected List<Observer> obs;
-	
+
 	private List<Nave> remover;
 	private Set<Projetil> removerP;
-	
-	public ControladorNave(Timer timer){
+
+	public ControladorNave(Timer timer) {
 		naves = new ArrayList<Nave>();
 		disparos = new HashSet<Projetil>();
 		this.remover = new ArrayList<Nave>();
@@ -29,39 +29,39 @@ public abstract class ControladorNave extends Controlador implements Observer,Su
 		this.timer = timer;
 		obs = new LinkedList<Observer>();
 	}
-	
-	public List<Nave> getNaves(){
+
+	public List<Nave> getNaves() {
 		return naves;
 	}
-	
-	//faz os naves se moverem, atirarem e spawna novos se for o caso
-	public void execute(){
+
+	// faz os naves se moverem, atirarem e spawna novos se for o caso
+	public void execute() {
 		Iterator<Nave> it = this.naves.iterator();
 		Nave aux;
 		Projetil p;
-		List<Projetil> lista;
-		while(it.hasNext()){
+		List<Projetil> lista = null;
+		while (it.hasNext()) {
 			aux = it.next();
-			aux.mover();
 			lista = aux.atirar();
-			if(lista!=null){
+			aux.mover();
+			if (lista != null) {
 				Iterator<Projetil> itP = lista.iterator();
-				while(itP.hasNext()){
+				while (itP.hasNext()) {
 					p = itP.next();
 					p.addObserver(this);
 					this.disparos.add(p);
 				}
 			}
 		}
-		
+
 		Iterator<Projetil> tp = this.disparos.iterator();
-		while(tp.hasNext()){
+		while (tp.hasNext()) {
 			tp.next().mover();
 		}
-		
+
 		limpar();
-	} 
-	
+	}
+
 	protected void limpar() {
 		this.naves.removeAll(remover);
 		this.disparos.removeAll(removerP);
@@ -71,35 +71,35 @@ public abstract class ControladorNave extends Controlador implements Observer,Su
 
 	@Override
 	public void notify(Object s) {
-		if(s instanceof Nave){
-			Nave aux = (Nave)s;
-			if(aux.getEstado() == Estado.INACTIVE){
+		if (s instanceof Nave) {
+			Nave aux = (Nave) s;
+			if (aux.getEstado() == Estado.INACTIVE) {
 				this.remover.add(aux);
 			}
-		} else if(s instanceof Projetil){
-			Projetil p = (Projetil)s;
-			if(p.getEstado() == Estado.INACTIVE){
+		} else if (s instanceof Projetil) {
+			Projetil p = (Projetil) s;
+			if (p.getEstado() == Estado.INACTIVE) {
 				this.removerP.add(p);
 			}
 		}
 	}
-	
-	public void desenharObjetos(){
+
+	public void desenharObjetos() {
 		Iterator<Nave> it1 = naves.iterator();
-		while(it1.hasNext()){
+		while (it1.hasNext()) {
 			it1.next().draw();
 		}
-		
+
 		Iterator<Projetil> it2 = disparos.iterator();
-		while(it2.hasNext()){
+		while (it2.hasNext()) {
 			it2.next().draw();
 		}
 	}
-	
-	public void checarProjeteis(Collection<? extends Destrutivel> col){
+
+	public void checarProjeteis(Collection<? extends Destrutivel> col) {
 		Iterator<Projetil> it = this.disparos.iterator();
 		Projetil p;
-		while(it.hasNext()){
+		while (it.hasNext()) {
 			p = it.next();
 			p.checarColisoes(col);
 		}
@@ -112,7 +112,7 @@ public abstract class ControladorNave extends Controlador implements Observer,Su
 
 	@Override
 	public void notifyObservers() {
-		for(Observer o : obs){
+		for (Observer o : obs) {
 			o.notify(this);
 		}
 	}
