@@ -10,11 +10,11 @@ public abstract class Boss extends NaveTheBest implements TemHp {
 
 	protected int hpAtual;
 	protected int hpTotal;
-	protected int xLimite;//Inidica o quanto o boss pode se aproximar da tela pelo eixo x
-	protected int yLimite;//Inidica o quanto o boss pode se aproximar da tela pelo eixo y
+	protected double xLimite;//Inidica o quanto o boss pode se aproximar da tela pelo eixo x
+	protected double yLimite;//Inidica o quanto o boss pode se aproximar da tela pelo eixo y
 	
 	public Boss(double x, double y, int layer, Estado estado, Timer timer,
-			double raio, int hpTotal, long flashTime, long flashCoolDown, int xLimite, int yLimite) {
+			double raio, int hpTotal, long flashTime, long flashCoolDown, double xLimite, double yLimite) {
 		super(x, y, layer, estado, timer, raio, flashTime, flashCoolDown);
 		this.hpTotal = hpTotal;
 		this.hpAtual = hpTotal;
@@ -27,6 +27,21 @@ public abstract class Boss extends NaveTheBest implements TemHp {
 	public boolean verificaLimites() {//Verifica se o boss atingiu os limites da tela
 		return this.x - xLimite <= 0 || this.x + xLimite >= GameLib.WIDTH 
 				|| this.y - yLimite <= 0|| this.y + yLimite >= GameLib.HEIGHT;
+	}
+	
+	@Override
+	public int getTotalHp() {
+		return hpTotal;
+	}
+
+	@Override
+	public int getHpAtual() {
+		return hpAtual;
+	}
+
+	@Override
+	public void setHp(int hp) {
+		this.hpAtual = hp;
 	}
 
 }

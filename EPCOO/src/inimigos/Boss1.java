@@ -23,7 +23,7 @@ public class Boss1 extends Boss implements TemHp {
 
 	public Boss1(double x, double y, int layer, Estado estado, Timer timer,
 			double raio, int hp, long flashTime, long flashCoolDown,
-			double velocidade, int xLimite, int yLimite) {
+			double velocidade, double xLimite, double yLimite) {
 		super(x, y, layer, estado, timer, raio, hp, flashTime, flashCoolDown, xLimite, yLimite);
 		this.velocidade = velocidade;
 		this.movingStart = timer.getCurrentTime();// Inicio do movimento atual
@@ -33,21 +33,6 @@ public class Boss1 extends Boss implements TemHp {
 								// Deve ser passado por parâmetro
 		this.addArma(new ArmaBoss1("Arma Boss 1", 3000, timer));
 		geraMovimento();
-	}
-
-	@Override
-	public int getTotalHp() {
-		return super.hpTotal;
-	}
-
-	@Override
-	public int getHpAtual() {
-		return super.hpAtual;
-	}
-
-	@Override
-	public void setHp(int hp) {
-		this.hpAtual = hp;
 	}
 
 	@Override
@@ -155,7 +140,7 @@ public class Boss1 extends Boss implements TemHp {
 		}
 
 	}
-
+	
 	private void flash() {
 		if (super.getEstado() == Estado.ACTIVE) {
 			super.setEstado(Estado.FLASHING);

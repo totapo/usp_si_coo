@@ -2,6 +2,7 @@ package inimigos;
 
 import armas.Arma;
 import armas.ArmaBoss1;
+import armas.ArmaBoss2;
 import armas.ArmaInimigo;
 import armas.ArmaInimigo2;
 import arquivo.TimerElemento;
@@ -31,7 +32,25 @@ public class Factory {
 				n.addArma(arma);
 				n.selecionaArma(arma);
 			} else if(t.getTipo()==2){
-				
+				n = new Boss2(
+						t.getX(),//x
+						t.getY(),//y
+						1,//layer
+						Estado.ACTIVE,//estado
+						timer,//timer
+						80.0,//raio
+						t.getHp(),//hp
+						500,//flashTime
+						50,//FlasCoolDown
+						45.0,//xLimite
+						50.0,//yLimite
+						4000,//teleportCoolDown
+						5000,//dropCoolDown
+						15,//maxInimigosDrop
+						10);//minInimigosDrop
+				Arma arma = new ArmaBoss2("Destroyer", 2000, timer);
+				n.addArma(arma);
+				n.selecionaArma(arma);
 			}
 		} else {
 			if(t.getTipo()==1){

@@ -8,8 +8,8 @@ import model.Estado;
 import projeteis.*;
 
 public class ArmaInimigo extends Arma {
-	private double cooldown,lastShot;
-	private Timer timer;
+	protected double cooldown,lastShot;
+	protected Timer timer;
 	
 	public ArmaInimigo(String nome, double cooldown, Timer timer) {
 		super(nome);
