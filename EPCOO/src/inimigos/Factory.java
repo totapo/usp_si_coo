@@ -25,9 +25,10 @@ public class Factory {
 						t.getHp(),		//HP
 						500,			//FlashTime
 						50,				//FlashCoolDownTime
-						0.1,			
-						10,
-						50);			//velocidade
+						0.1,			//velocidade
+						10,				//xLimite
+						50);				//yLimite
+						
 				Arma arma = new ArmaBoss1("Avenger", 1000, timer);
 				n.addArma(arma);
 				n.selecionaArma(arma);
@@ -45,9 +46,7 @@ public class Factory {
 						45.0,//xLimite
 						50.0,//yLimite
 						4000,//teleportCoolDown
-						5000,//dropCoolDown
-						15,//maxInimigosDrop
-						10);//minInimigosDrop
+						new EnemyDropper(timer, 15, 10, 2000, 80.0));
 				Arma arma = new ArmaBoss2("Destroyer", 2000, timer);
 				n.addArma(arma);
 				n.selecionaArma(arma);

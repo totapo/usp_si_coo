@@ -170,7 +170,6 @@ public class ControladorPlayer extends ControladorNave{
 		}
 	}
 	
-	
 
 	@Override
 	public void desenharObjetos() {
@@ -192,7 +191,7 @@ public class ControladorPlayer extends ControladorNave{
 				while(it.hasNext()){
 					i= it.next();
 					if(i instanceof Nave){
-						if(((Nave) i).getEstado()!=Estado.ACTIVE ||((Nave) i).getEstado()!=Estado.FLASHING) continue;
+						if(((Nave) i).getEstado()!=Estado.ACTIVE ||((Nave) i).getEstado()==Estado.FLASHING) continue;
 					}
 					double dx = i.getX() - player.getX();
 					double dy = i.getY() - player.getY();

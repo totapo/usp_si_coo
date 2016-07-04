@@ -1,8 +1,11 @@
 package inimigos;
 
+import java.util.List;
+
 import pacote.GameLib;
 import interfaces.TemHp;
 import main.Timer;
+import model.Elemento;
 import model.Estado;
 import model.NaveTheBest;
 
@@ -10,11 +13,16 @@ public abstract class Boss extends NaveTheBest implements TemHp {
 
 	protected int hpAtual;
 	protected int hpTotal;
-	protected double xLimite;//Inidica o quanto o boss pode se aproximar da tela pelo eixo x
-	protected double yLimite;//Inidica o quanto o boss pode se aproximar da tela pelo eixo y
-	
+	protected double xLimite;// Inidica o quanto o boss pode se aproximar da
+								// tela pelo eixo x
+	protected double yLimite;// Inidica o quanto o boss pode se aproximar da
+								// tela pelo eixo y
+	protected EnemyDropper eDropper = null;
+
+
 	public Boss(double x, double y, int layer, Estado estado, Timer timer,
-			double raio, int hpTotal, long flashTime, long flashCoolDown, double xLimite, double yLimite) {
+			double raio, int hpTotal, long flashTime, long flashCoolDown,
+			double xLimite, double yLimite) {
 		super(x, y, layer, estado, timer, raio, flashTime, flashCoolDown);
 		this.hpTotal = hpTotal;
 		this.hpAtual = hpTotal;
@@ -24,11 +32,12 @@ public abstract class Boss extends NaveTheBest implements TemHp {
 		this.yLimite = yLimite;
 	}
 
-	public boolean verificaLimites() {//Verifica se o boss atingiu os limites da tela
-		return this.x - xLimite <= 0 || this.x + xLimite >= GameLib.WIDTH 
-				|| this.y - yLimite <= 0|| this.y + yLimite >= GameLib.HEIGHT;
+	public boolean verificaLimites() {// Verifica se o boss atingiu os limites
+										// da tela
+		return this.x - xLimite <= 0 || this.x + xLimite >= GameLib.WIDTH
+				|| this.y - yLimite <= 0 || this.y + yLimite >= GameLib.HEIGHT;
 	}
-	
+
 	@Override
 	public int getTotalHp() {
 		return hpTotal;
@@ -42,6 +51,16 @@ public abstract class Boss extends NaveTheBest implements TemHp {
 	@Override
 	public void setHp(int hp) {
 		this.hpAtual = hp;
+	}
+	
+	public void setEnemyDropper(EnemyDropper ed){
+		this.eDropper = ed;
+	}
+	
+	public List<Elemento> dropEnemies(){
+		if(eDropper != null) 
+			return eDropper.drop(0, this.x, this.y, this.layer);
+		return null;
 	}
 
 }

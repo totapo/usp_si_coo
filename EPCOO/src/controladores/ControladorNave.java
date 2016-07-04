@@ -12,7 +12,7 @@ import interfaces.Subject;
 
 public abstract class ControladorNave extends Controlador implements Observer,
 		Subject {
-	private List<Nave> naves;
+	protected List<Nave> naves;
 	protected Set<Projetil> disparos;
 	protected Timer timer;
 

@@ -8,6 +8,7 @@ import arquivo.Fase;
 import arquivo.LeitorConfiguracoes;
 import pacote.GameLib;
 import controladores.ControladorBackground;
+import controladores.ControladorBoss;
 import controladores.ControladorInimigo;
 import controladores.ControladorPlayer;
 import controladores.ControladorSpawnElementos;
@@ -17,6 +18,7 @@ public class Game implements Runnable, Observer {
 	private Timer timer;
 	private ControladorInimigo controladoresInimigos;
 	private ControladorPlayer controladorPlayer;
+	private ControladorBoss controladorBoss;
 	private ControladorBackground controladorBg;
 	private boolean running;
 	private List<Fase> fases;
@@ -62,7 +64,10 @@ public class Game implements Runnable, Observer {
 			controladoresInimigos = new ControladorInimigo(timer);
 			controladoresInimigos.addObserver(this);
 		}
-		
+		if(controladorBoss == null){
+			controladorBoss = new ControladorBoss(timer);
+			controladorBoss.addObserver(this);
+		}
 		if(controladorPlayer==null){
 			controladorPlayer = new ControladorPlayer(timer, faseAtual.getPlayerHp());
 			controladorPlayer.addObserver(this);
@@ -74,6 +79,7 @@ public class Game implements Runnable, Observer {
 			controladorSpawnElementos = new ControladorSpawnElementos(timer, faseAtual.getEnemies());
 			controladorSpawnElementos.addObserver(controladorPlayer);
 			controladorSpawnElementos.addObserver(controladoresInimigos);
+			controladorSpawnElementos.addObserver(controladorBoss);
 		} else {
 			controladorSpawnElementos.limparMemoria();
 			controladorSpawnElementos.setEnemies(faseAtual.getEnemies());
@@ -99,16 +105,18 @@ public class Game implements Runnable, Observer {
 		/* colisões player - projeteis (inimigo) */
 		controladoresInimigos.checarProjeteis(controladorPlayer.getPowerUpsAtivos());
 		controladoresInimigos.checarProjeteis(controladorPlayer.getNaves());
-		
+		controladorBoss.checarProjeteis(controladorPlayer.getPowerUpsAtivos());
+		controladorBoss.checarProjeteis(controladorPlayer.getNaves());
 
 		/* colisões player - inimigos */
 		controladorPlayer.checarColisoes(controladoresInimigos.getNaves(),true);
+		controladorPlayer.checarColisoes(controladorBoss.getNaves(), true);
 		controladorPlayer.checarColisoes(controladorPlayer.getPowerUps(),false);
-		
 		
 
 		/* colisões projeteis (player) - inimigos */
 		controladorPlayer.checarProjeteis(controladoresInimigos.getNaves());
+		controladorPlayer.checarProjeteis(controladorBoss.getNaves());
 		
 	}
 
@@ -117,6 +125,7 @@ public class Game implements Runnable, Observer {
 		controladoresInimigos.execute();
 		controladorPlayer.execute();
 		controladorBg.execute();
+		controladorBoss.execute();
 
 		if (GameLib.iskeyPressed(GameLib.KEY_ESCAPE))
 			running = false;
@@ -135,8 +144,10 @@ public class Game implements Runnable, Observer {
 		controladorPlayer.desenharObjetos();
 		//System.out.println("4 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
 		
+		controladorBoss.desenharObjetos();
+		
 		//desenhando HUD
-		controladoresInimigos.drawHud();
+		controladorBoss.drawHud();
 		//System.out.println("5 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
 		
 		controladorPlayer.drawHud();
@@ -233,7 +244,7 @@ public class Game implements Runnable, Observer {
 
 	@Override
 	public void notify(Object s) {
-		if(s instanceof ControladorInimigo){
+		if(s instanceof ControladorBoss){
 			proximaFase();
 		} else if(s instanceof ControladorPlayer){
 			System.out.println("Game over");

@@ -4,9 +4,11 @@ import pacote.GameLib;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import interfaces.Destrutivel;
 import main.Timer;
+import model.Elemento;
 import model.ElementoMutavel;
 import model.Estado;
 
@@ -14,14 +16,25 @@ import model.Estado;
 public abstract class Projetil extends ElementoMutavel{
 	private double velocidadeY, velocidadeX;
 	protected Timer timer;
+	protected ProjetilDropper pDropper = null;
+
+
 	public Projetil(double x, double y, double vX, double vY, int layer, Estado estado, Timer timer) {
-		
 		super(x, y, layer,estado);
 		this.velocidadeX = vX;
 		this.velocidadeY = vY;
 		this.timer = timer;
 	}
+	
+	public void setpDropper(ProjetilDropper pDropper) {
+		this.pDropper = pDropper;
+	}
 
+	public List<Elemento> dropProjeteis(int n, double x, double y, int layer){
+		if(pDropper != null)
+			return pDropper.drop(n, x, y, layer);
+		return null;
+	}
 	
 	public void mover() {
 		Estado estado = this.getEstado();

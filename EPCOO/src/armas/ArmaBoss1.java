@@ -3,7 +3,8 @@ package armas;
 import main.Timer;
 import model.Estado;
 import projeteis.Projetil;
-import projeteis.ProjetilBoss1;
+import projeteis.ProjetilBoss;
+import projeteis.ProjetilDropper;
 
 import java.util.*;
 
@@ -22,11 +23,12 @@ public class ArmaBoss1 extends Arma {
 	@Override
 	public List<Projetil> disparar(double x, double y, double angle) {
 		List<Projetil> retorno = null;
-		
+
 		if (timer.getCurrentTime() - lastShot > cooldown) {
 			lastShot = timer.getCurrentTime();
 			retorno = new LinkedList<Projetil>();
-			Projetil projetil = new ProjetilBoss1(x, y, 0.2 ,2.0, 1, 2000, Estado.ACTIVE, timer);
+			Projetil projetil = new ProjetilBoss(x, y, 2.0, 1, 2000, 28,
+					Estado.ACTIVE, timer, new ProjetilDropper(0.2, timer));
 			retorno.add(projetil);
 		}
 		return retorno;
