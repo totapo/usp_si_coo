@@ -34,7 +34,7 @@ public class ControladorBoss extends ControladorNave {
 
 	@Override
 	public void execute() {
-		if (boss != null) {
+		if (boss != null && (boss.getEstado()==Estado.ACTIVE || boss.getEstado()==Estado.FLASHING)) {
 			List<Elemento> inimigos = boss.dropEnemies();
 			if (inimigos != null) {
 				for (Elemento i : inimigos) {
@@ -73,7 +73,7 @@ public class ControladorBoss extends ControladorNave {
 				aux.addObserver(this);
 				Boss b = (Boss) aux;
 				hud.add(new LifeBar(GameLib.WIDTH / 2, 30, 0, b,
-						GameLib.WIDTH * 0.8, GameLib.HEIGHT * 0.01, Color.RED,
+						GameLib.WIDTH * 0.9, GameLib.HEIGHT * 0.01, Color.RED,
 						Color.DARK_GRAY));
 				this.getNaves().add(aux);
 				this.boss = b;

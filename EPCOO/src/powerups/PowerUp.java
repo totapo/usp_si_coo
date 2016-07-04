@@ -22,7 +22,7 @@ public class PowerUp extends ElementoMutavel implements Destrutivel{
 		this.raio = raio;
 		this.tipo = tipo;
 		velocidadeX = 0;
-		velocidadeY = 0.70;
+		velocidadeY = 0.40;
 		this.timer = timer;
 	}
 	
@@ -47,8 +47,11 @@ public class PowerUp extends ElementoMutavel implements Destrutivel{
 
 	@Override
 	public void draw() {//TODO pensar num desenho pros powerups
-		GameLib.setColor((tipo==1)?Color.ORANGE:Color.WHITE);
+		GameLib.setColor((tipo==1)?new Color(180, 230, 240):new Color(70,205,255));
+		
 		GameLib.drawCircle(x, y, raio);
+		GameLib.drawCircle(x, y, raio-0.5);
+		GameLib.drawCircle(x, y, raio-0.75);
 		//GameLib.drawCircle(x, y, raio+1);
 		//GameLib.drawCircle(x, y, raio+2);
 	}

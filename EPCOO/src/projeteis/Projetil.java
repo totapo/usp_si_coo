@@ -17,13 +17,14 @@ public abstract class Projetil extends ElementoMutavel{
 	private double velocidadeY, velocidadeX;
 	protected Timer timer;
 	protected ProjetilDropper pDropper = null;
+	protected double raio;
 
-
-	public Projetil(double x, double y, double vX, double vY, int layer, Estado estado, Timer timer) {
+	public Projetil(double x, double y, double vX, double vY, int layer, Estado estado, Timer timer, double raio) {
 		super(x, y, layer,estado);
 		this.velocidadeX = vX;
 		this.velocidadeY = vY;
 		this.timer = timer;
+		this.raio = raio;
 	}
 	
 	public void setpDropper(ProjetilDropper pDropper) {
@@ -53,8 +54,8 @@ public abstract class Projetil extends ElementoMutavel{
 			}
 		}
 	}
-
-
+	
+	public abstract double criterioColisao(Destrutivel aux);
 	
 	public void checarColisoes(Collection<? extends Destrutivel> alvos) {
 		if(this.getEstado()==Estado.ACTIVE){
@@ -70,7 +71,7 @@ public abstract class Projetil extends ElementoMutavel{
 					dy = y - aux.getY();
 					dist = Math.sqrt(dx * dx + dy * dy);
 					
-					if(dist < aux.getRaioColisao()){
+					if(dist < criterioColisao(aux)){
 						aux.hit();
 						this.setEstado(Estado.INACTIVE);
 						break;

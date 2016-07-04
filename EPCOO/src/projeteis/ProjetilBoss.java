@@ -1,5 +1,7 @@
 package projeteis;
 
+import interfaces.Destrutivel;
+
 import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,16 +16,14 @@ public class ProjetilBoss extends Projetil {
 	private long dropTime;
 	private long coolDownTime;
 	private boolean explodiu;
-	private double raio;
 	private int qtdProjeteis;
 
 	public ProjetilBoss(double x, double y, double raio, int layer,
 			long coolDownTime, int qtdProjeteis, Estado estado, Timer timer,
 			ProjetilDropper pDropper) {
-		super(x, y, 0, 0, layer, estado, timer);
+		super(x, y, 0, 0, layer, estado, timer,raio);
 		this.coolDownTime = coolDownTime;
 		this.dropTime = timer.getCurrentTime();
-		this.raio = raio;
 		explodiu = false;
 		this.qtdProjeteis = qtdProjeteis;
 		this.pDropper = pDropper;
@@ -54,6 +54,11 @@ public class ProjetilBoss extends Projetil {
 			GameLib.setColor(Color.PINK);
 			GameLib.drawCircle(x, y, raio);
 		}
+	}
+
+	@Override
+	public double criterioColisao(Destrutivel aux) {
+		return (aux.getRaioColisao()+this.raio)*0.8;
 	}
 
 }

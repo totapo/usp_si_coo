@@ -55,6 +55,11 @@ public class Shield extends ElementoMutavel implements TemHp, Destrutivel{
 		if(this.getEstado()==Estado.ACTIVE){
 			GameLib.setColor(new Color(70,205,255));
 			GameLib.drawCircle(x, y, raio);
+
+			GameLib.drawCircle(x, y, raio-0.25);
+			GameLib.drawCircle(x, y, raio-0.5);
+			GameLib.drawCircle(x, y, raio-0.75);
+			GameLib.drawCircle(x, y, raio-1);
 		}
 	}
 

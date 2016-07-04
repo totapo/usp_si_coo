@@ -60,6 +60,10 @@ public class Boss2 extends Boss{
 				teleport();
 				lastTeleport = timer.getCurrentTime();
 			}
+		}else if(this.getEstado() == Estado.EXPLODING){
+			if(timer.getCurrentTime() > explosionEnd){
+				this.setEstado(Estado.INACTIVE);
+			}
 		}
 	}
 
@@ -93,7 +97,7 @@ public class Boss2 extends Boss{
 
 		if (estado == Estado.ACTIVE) {
 
-			GameLib.setColor(Color.BLUE);
+			GameLib.setColor(Color.YELLOW);
 			GameLib.drawCircle(x, y, raio);
 			GameLib.drawDiamond(x, y, raio / 2.0);
 		}

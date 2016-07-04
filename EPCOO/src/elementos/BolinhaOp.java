@@ -71,6 +71,10 @@ public class BolinhaOp extends ElementoMutavel implements Destrutivel{
 	public void draw() {
 		GameLib.setColor(new Color(180, 230, 240));
 		GameLib.drawCircle(x, y, raio);
+		GameLib.drawCircle(x, y, raio-0.25);
+		GameLib.drawCircle(x, y, raio-0.5);
+		GameLib.drawCircle(x, y, raio-0.75);
+		GameLib.drawCircle(x, y, raio-1);
 	}
 	
 }
