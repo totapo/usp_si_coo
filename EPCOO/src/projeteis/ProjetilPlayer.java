@@ -4,9 +4,9 @@ import interfaces.Destrutivel;
 
 import java.awt.Color;
 
-import pacote.GameLib;
 import main.Timer;
 import model.Estado;
+import model.GameLib;
 
 public class ProjetilPlayer extends Projetil {
 

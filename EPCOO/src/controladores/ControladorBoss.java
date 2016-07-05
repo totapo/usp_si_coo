@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import pacote.GameLib;
 import projeteis.Projetil;
 import projeteis.ProjetilBoss;
 import projeteis.ProjetilInimigo;
@@ -18,6 +17,7 @@ import inimigos.Inimigo;
 import main.Timer;
 import model.Elemento;
 import model.Estado;
+import model.GameLib;
 import model.Nave;
 
 public class ControladorBoss extends ControladorNave {

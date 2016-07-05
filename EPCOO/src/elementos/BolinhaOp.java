@@ -2,12 +2,11 @@ package elementos;
 
 import java.awt.Color;
 
-import pacote.GameLib;
 import interfaces.Destrutivel;
 import main.Timer;
 import model.ElementoMutavel;
 import model.Estado;
-import model.Player;
+import model.GameLib;
 
 public class BolinhaOp extends ElementoMutavel implements Destrutivel{
 	private double angulo,raio,distancia;

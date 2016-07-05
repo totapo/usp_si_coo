@@ -4,9 +4,9 @@ import interfaces.Destrutivel;
 
 import java.awt.Color;
 
-import pacote.GameLib;
 import main.Timer;
 import model.Estado;
+import model.GameLib;
 
 public class ProjetilInimigo extends Projetil {
 	public ProjetilInimigo(double x, double y, double vX, double vY, double raio, int layer,

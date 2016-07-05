@@ -7,7 +7,7 @@ import java.util.List;
 
 import main.Timer;
 import model.Estado;
-import pacote.GameLib;
+import model.GameLib;
 import projeteis.Projetil;
 
 public class Boss2 extends Boss{
@@ -43,10 +43,12 @@ public class Boss2 extends Boss{
 	@Override
 	public List<Projetil> atirar() {
 		List<Projetil> projeteis = new LinkedList<Projetil>();
-		List<Projetil> projeteisAux = getArma().disparar(this.x, this.y,
-				(3 * Math.PI) / 2);
-		if (projeteisAux != null) {
-			projeteis.addAll(projeteisAux);
+		if (this.getEstado() == Estado.ACTIVE) {
+			List<Projetil> projeteisAux = getArma().disparar(this.x, this.y,
+					(3 * Math.PI) / 2);
+			if (projeteisAux != null) {
+				projeteis.addAll(projeteisAux);
+			}
 		}
 		return projeteis;
 	}

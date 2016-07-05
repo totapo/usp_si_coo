@@ -1,15 +1,16 @@
-package model;
+package elementos;
 
-import interfaces.TemHp;
 
 import java.awt.Color;
 import java.util.*;
 
 import main.Timer;
-import pacote.GameLib;
+import model.Estado;
+import model.GameLib;
+import model.NaveComVida;
 import projeteis.Projetil;
 
-public class Player extends Nave implements TemHp {
+public class Player extends NaveComVida {
 
 	double velocidadeX, velocidadeY;
 	private int hp,hpMax;
@@ -21,7 +22,7 @@ public class Player extends Nave implements TemHp {
 	private long flashCoolDown;
 	
 	public Player(double x, double y, int layer, double vX, double vY, Estado estado, Timer timer, double raio, int hp){
-		super(x,y,layer,estado,timer,raio);
+		super(x,y,layer,estado,timer,raio,500,50);
 		
 		this.velocidadeX = vX;
 		this.velocidadeY = vY;

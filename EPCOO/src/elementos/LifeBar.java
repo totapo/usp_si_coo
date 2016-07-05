@@ -6,8 +6,8 @@ import interfaces.TemHp;
 
 import java.awt.Color;
 
-import pacote.GameLib;
 import model.Elemento;
+import model.GameLib;
 
 public class LifeBar extends Elemento implements Observer{
 	

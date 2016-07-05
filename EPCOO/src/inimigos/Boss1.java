@@ -9,7 +9,7 @@ import java.util.Random;
 import armas.ArmaBoss1;
 import main.Timer;
 import model.Estado;
-import pacote.GameLib;
+import model.GameLib;
 import projeteis.Projetil;
 
 public class Boss1 extends Boss implements TemHp {
@@ -85,14 +85,14 @@ public class Boss1 extends Boss implements TemHp {
 		} else if (this.x + xLimite >= GameLib.WIDTH) {
 			direcaoX = -1;
 		} else {
-			direcaoX = rd.nextInt(2) - 1;
+			direcaoX = rd.nextInt(3) - 1;
 		}
 		if (this.y - yLimite <= 0) {
 			direcaoY = 1;
 		} else if (this.y + yLimite >= GameLib.HEIGHT) {
 			direcaoY = -1;
 		} else {
-			direcaoY = rd.nextInt(2) - 1;
+			direcaoY = rd.nextInt(3) - 1;
 		}
 	}
 

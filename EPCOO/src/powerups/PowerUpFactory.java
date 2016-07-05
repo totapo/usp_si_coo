@@ -1,12 +1,12 @@
 package powerups;
 
 import elementos.BolinhaOp;
+import elementos.Player;
 import elementos.Shield;
 import interfaces.Destrutivel;
 import arquivo.TimerElemento;
 import main.Timer;
 import model.Estado;
-import model.Player;
 
 public class PowerUpFactory {
 	public static Destrutivel ativarPoder(PowerUp t, Timer timer, Player p){

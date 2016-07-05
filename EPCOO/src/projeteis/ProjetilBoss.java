@@ -6,10 +6,10 @@ import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
-import pacote.GameLib;
 import main.Timer;
 import model.Elemento;
 import model.Estado;
+import model.GameLib;
 
 public class ProjetilBoss extends Projetil {
 

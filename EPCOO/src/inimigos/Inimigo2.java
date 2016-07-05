@@ -3,10 +3,10 @@ package inimigos;
 import java.awt.Color;
 import java.util.List;
 
-import pacote.GameLib;
 import projeteis.Projetil;
 import main.Timer;
 import model.Estado;
+import model.GameLib;
 
 public class Inimigo2 extends Inimigo{
 

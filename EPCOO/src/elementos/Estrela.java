@@ -3,9 +3,9 @@ package elementos;
 import java.awt.Color;
 
 import main.Timer;
-import pacote.GameLib;
 import model.ElementoMutavel;
 import model.Estado;
+import model.GameLib;
 
 public class Estrela extends ElementoMutavel{
 	private double size;

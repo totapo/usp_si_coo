@@ -1,7 +1,5 @@
 package projeteis;
 
-import pacote.GameLib;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +9,7 @@ import main.Timer;
 import model.Elemento;
 import model.ElementoMutavel;
 import model.Estado;
+import model.GameLib;
 
 
 public abstract class Projetil extends ElementoMutavel{

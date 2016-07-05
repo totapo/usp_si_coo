@@ -11,13 +11,13 @@ import java.util.List;
 
 import elementos.BolinhaOp;
 import elementos.LifeBar;
+import elementos.Player;
 import elementos.Shield;
 import armas.Arma;
 import armas.ArmaPlayer;
 import arquivo.TimerElemento;
 import main.Timer;
 import model.*;
-import pacote.GameLib;
 import powerups.PowerUp;
 import powerups.PowerUpFactory;
 

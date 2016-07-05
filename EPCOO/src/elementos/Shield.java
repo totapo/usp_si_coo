@@ -2,12 +2,11 @@ package elementos;
 
 import java.awt.Color;
 
-import pacote.GameLib;
 import interfaces.Destrutivel;
 import interfaces.TemHp;
 import model.ElementoMutavel;
 import model.Estado;
-import model.Player;
+import model.GameLib;
 
 public class Shield extends ElementoMutavel implements TemHp, Destrutivel{
 	private Player p;

@@ -2,14 +2,13 @@ package inimigos;
 
 import java.util.List;
 
-import pacote.GameLib;
-import interfaces.TemHp;
 import main.Timer;
 import model.Elemento;
 import model.Estado;
-import model.NaveTheBest;
+import model.GameLib;
+import model.NaveComVida;
 
-public abstract class Boss extends NaveTheBest implements TemHp {
+public abstract class Boss extends NaveComVida {
 
 	protected int hpAtual;
 	protected int hpTotal;
