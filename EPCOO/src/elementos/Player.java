@@ -106,9 +106,9 @@ public class Player extends NaveComVida {
 
 	@Override
 	public void hit() {
-		if(this.getEstado() == Estado.ACTIVE){ //|| this.getEstado() == Estado.FLASHING){
+		if(this.getEstado() == Estado.ACTIVE || this.getEstado() == Estado.FLASHING){
 			hp-=1;
-			notifyObservers(); // TODO não é muito bom mas é melhor do que ficar recalculando o hp no lifebar
+			notifyObservers(); 
 			
 			flash();
 			

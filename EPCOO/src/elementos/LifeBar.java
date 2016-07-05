@@ -40,8 +40,6 @@ public class LifeBar extends Elemento implements Observer{
 	@Override
 	public void notify(Object s) {
 		if(s instanceof TemHp){
-			//total - comp
-			//atual - x
 			compAtual = (objeto.getHpAtual() * comprimento)/objeto.getTotalHp();
 		}
 	}

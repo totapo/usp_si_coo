@@ -58,9 +58,6 @@ public class BolinhaOp extends ElementoMutavel implements Destrutivel{
 	@Override
 	public void mover() {
 		double delta = timer.getDelta();
-		//(x - cx)^2 + (y - cy)^2 = r^2
-		//x = cx + r cos(t)
-		//y = cy + r sen(t)
 		angulo += delta / 360;
 		x= p.getX() + distancia * Math.cos(angulo);
 		y= p.getY() + distancia * Math.sin(angulo);

@@ -71,7 +71,7 @@ public class Shield extends ElementoMutavel implements TemHp, Destrutivel{
 	public void hit() {
 		if(this.getEstado() == Estado.ACTIVE){ 
 			hpAtual-=1;
-			notifyObservers(); // TODO não é muito bom mas é melhor do que ficar recalculando o hp no lifebar
+			notifyObservers(); 
 			
 			if(hpAtual==0)
 				this.setEstado(Estado.INACTIVE);;

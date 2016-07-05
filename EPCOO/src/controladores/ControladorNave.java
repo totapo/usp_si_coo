@@ -6,12 +6,13 @@ import projeteis.Projetil;
 import main.Timer;
 import model.Estado;
 import model.Nave;
+import interfaces.Controlador;
 import interfaces.Destrutivel;
 import interfaces.Observer;
 import interfaces.Subject;
 
-public abstract class ControladorNave extends Controlador implements Observer,
-		Subject {
+public abstract class ControladorNave implements Observer,
+		Subject,Controlador {
 	protected List<Nave> naves;
 	protected Set<Projetil> disparos;
 	protected Timer timer;
@@ -34,7 +35,6 @@ public abstract class ControladorNave extends Controlador implements Observer,
 		return naves;
 	}
 
-	// faz os naves se moverem, atirarem e spawna novos se for o caso
 	public void execute() {
 		Iterator<Nave> it = this.naves.iterator();
 		Nave aux;

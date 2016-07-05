@@ -40,8 +40,6 @@ public abstract class Projetil extends ElementoMutavel{
 		Estado estado = this.getEstado();
 		if(estado == Estado.ACTIVE){
 			
-			/* verificando se projétil saiu da tela TODO
-			 * nos outros tiros isso tem que ser diferente*/
 			if(y < 0 || y > GameLib.HEIGHT) {
 				
 				this.setEstado(Estado.INACTIVE);

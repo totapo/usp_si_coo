@@ -71,7 +71,7 @@ public class Boss2 extends Boss{
 
 	private void teleport() {
 		double x = Math.random() * (GameLib.WIDTH - 2 * xLimite + xLimite);
-		double y = Math.random() * (GameLib.HEIGHT - 2 * yLimite + yLimite) / 2;// Boss
+		double y = Math.random() * (GameLib.HEIGHT - 2 * yLimite + yLimite) / 2;
 
 		this.x = x;
 		this.y = y;

@@ -12,37 +12,11 @@ public abstract class Arma {
 		this.nome = nome;
 	}
 	
-	//Cada "nave" deverá implementar seu próprio tipo de disparo
+	//Cada "nave" devera implementar seu proprio tipo de disparo
 	public abstract List<Projetil> disparar(double x, double y, double angle);
 	
 	public String getNome(){
 		return nome;
 	}
-/*
-	@Override
-	public int hashCode() { //baseado no nome
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) { //baseado no nome
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Arma other = (Arma) obj;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		return true;
-	}
-	*/
 
 }

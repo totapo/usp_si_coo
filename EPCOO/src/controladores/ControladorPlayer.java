@@ -43,8 +43,8 @@ public class ControladorPlayer extends ControladorNave{
 				1,						//layer 1 - assumindo HUD no 0
 				0.25,					// velocidade no eixo x
 				0.25,					// velocidade no eixo y
-				Estado.ACTIVE,
-				timer,
+				Estado.ACTIVE,			//estado
+				timer,					//referencia pro Timer
 				12.0,					//raio
 				hp);
 		Arma a = new ArmaPlayer("gun",100,timer);
@@ -71,7 +71,7 @@ public class ControladorPlayer extends ControladorNave{
 			e.mover(); 
 		}
 		for(Destrutivel e :powerUpsAtivos){
-			if(e instanceof ElementoMutavel) ((ElementoMutavel)e).mover(); //TODO POOOOG ALERT
+			if(e instanceof ElementoMutavel) ((ElementoMutavel)e).mover(); 
 		}
 	}
 
@@ -118,10 +118,9 @@ public class ControladorPlayer extends ControladorNave{
 		super.notify(s);
 		if(s instanceof Player){
 			Player p = (Player)s;
-			//this.removerPowerUpsAtivos.addAll(this.powerUpsAtivos); Não ha perdao na rua
 			if(p.getEstado() == Estado.INACTIVE){
 				notifyObservers();
-			} else if(p.getEstado() == Estado.FLASHING){
+			} else if(p.getEstado() == Estado.FLASHING){ //se tomar tiro perde os powerups, no caso so a bolinha que orbita
 				this.removerPowerUpsAtivos.addAll(this.getPowerUpsAtivos());
 			}
 		} if(s instanceof TimerElemento){

@@ -26,11 +26,8 @@ public class Boss1 extends Boss implements TemHp {
 			double velocidade, double xLimite, double yLimite) {
 		super(x, y, layer, estado, timer, raio, hp, flashTime, flashCoolDown, xLimite, yLimite);
 		this.velocidade = velocidade;
-		this.movingStart = timer.getCurrentTime();// Inicio do movimento atual
-													// do boss
-		this.movingTime = 2000;// Tempo que o boss mantém o movimento na mesma
-								// direção
-								// Deve ser passado por parâmetro
+		this.movingStart = timer.getCurrentTime();// Inicio do movimento atual do boss
+		this.movingTime = 2000;// Tempo que o boss mantém o movimento na mesma direcao
 		this.addArma(new ArmaBoss1("Arma Boss 1", 3000, timer));
 		geraMovimento();
 	}
@@ -78,7 +75,7 @@ public class Boss1 extends Boss implements TemHp {
 
 	}
 
-	private void geraMovimento() {// Não é um bom nome
+	private void geraMovimento() {
 		Random rd = new Random();
 		if (this.x - xLimite <= 0) {
 			direcaoX = 1;

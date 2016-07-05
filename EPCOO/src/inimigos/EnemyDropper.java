@@ -7,15 +7,16 @@ import java.util.Random;
 import arquivo.TimerElemento;
 import main.Timer;
 import model.Elemento;
+import model.Nave;
 import interfaces.ElementsDropper;
 
 public class EnemyDropper implements ElementsDropper {
 
 	private long lastDrop;
 	private long dropCoolDown;
-	private int maxInimigosDrop;// Quantidade máxima de inimigos que podem ser
+	private int maxInimigosDrop;// Quantidade maxima de inimigos que podem ser
 								// dropados
-	private int minInimigosDrop;// Quantidade mínima de inimigos que podem ser
+	private int minInimigosDrop;// Quantidade minima de inimigos que podem ser
 								// dropados
 	private Timer timer;
 	private double dropRange;
@@ -40,7 +41,7 @@ public class EnemyDropper implements ElementsDropper {
 			for (double i = -dropRange; i <= this.dropRange; i += 2 * dropRange / qtdInimigos) {
 
 				TimerElemento te = new TimerElemento(0, true, false, 1, x + i, y, 0);
-				Inimigo inimigo = (Inimigo) Factory.instanciarInimigo(te, timer);
+				Nave inimigo = (Nave) Factory.instanciarInimigo(te, timer);
 				inimigos.add(inimigo);
 				lastDrop = timer.getCurrentTime();
 			}

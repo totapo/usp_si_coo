@@ -46,14 +46,12 @@ public class PowerUp extends ElementoMutavel implements Destrutivel{
 	}
 
 	@Override
-	public void draw() {//TODO pensar num desenho pros powerups
+	public void draw() {
 		GameLib.setColor((tipo==1)?new Color(180, 230, 240):new Color(70,205,255));
 		
 		GameLib.drawCircle(x, y, raio);
 		GameLib.drawCircle(x, y, raio-0.5);
 		GameLib.drawCircle(x, y, raio-0.75);
-		//GameLib.drawCircle(x, y, raio+1);
-		//GameLib.drawCircle(x, y, raio+2);
 	}
 
 	@Override
@@ -61,8 +59,6 @@ public class PowerUp extends ElementoMutavel implements Destrutivel{
 		Estado estado = this.getEstado();
 		if(estado == Estado.ACTIVE){
 			
-			/* verificando se projétil saiu da tela TODO
-			 * nos outros tiros isso tem que ser diferente*/
 			if(y < 0 || y > GameLib.HEIGHT) {
 				
 				this.setEstado(Estado.INACTIVE);

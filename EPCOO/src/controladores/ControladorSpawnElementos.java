@@ -6,10 +6,11 @@ import java.util.PriorityQueue;
 
 import arquivo.TimerElemento;
 import main.Timer;
+import interfaces.Controlador;
 import interfaces.Observer;
 import interfaces.Subject;
 
-public class ControladorSpawnElementos extends Controlador implements Subject {
+public class ControladorSpawnElementos implements Subject,Controlador {
 	private Timer timer;
 	private PriorityQueue<TimerElemento> elems;
 	private List<Observer> observers;

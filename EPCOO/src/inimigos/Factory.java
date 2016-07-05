@@ -27,7 +27,7 @@ public class Factory {
 						50,				//FlashCoolDownTime
 						0.1,			//velocidade
 						10,				//xLimite
-						50);				//yLimite
+						50);			//yLimite
 						
 				Arma arma = new ArmaBoss1("Avenger", 1000, timer);
 				n.addArma(arma);

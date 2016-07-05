@@ -7,15 +7,16 @@ import projeteis.Projetil;
 import main.Timer;
 import model.Estado;
 import model.GameLib;
+import model.Nave;
 
-public class Inimigo2 extends Inimigo{
+public class Inimigo2 extends Nave{
 
 	double angulo, velocidade, velocidadeRotacao;
 	boolean shootNow;
 	
 	public Inimigo2(double x, double y, int layer, double raio, Estado estado,
 			Timer timer, double angulo,double velocidade, double velocidadeRotacao) {
-		super(x, y, layer, raio, estado, timer);
+		super(x, y, layer, estado, timer,raio);
 		this.velocidadeRotacao = velocidadeRotacao;
 		this.velocidade = velocidade;
 		this.angulo = angulo;

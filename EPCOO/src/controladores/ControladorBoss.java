@@ -13,7 +13,6 @@ import arquivo.TimerElemento;
 import elementos.LifeBar;
 import inimigos.Boss;
 import inimigos.Factory;
-import inimigos.Inimigo;
 import main.Timer;
 import model.Elemento;
 import model.Estado;
@@ -38,7 +37,7 @@ public class ControladorBoss extends ControladorNave {
 			List<Elemento> inimigos = boss.dropEnemies();
 			if (inimigos != null) {
 				for (Elemento i : inimigos) {
-					naves.add((Inimigo) i);
+					naves.add((Nave) i);
 				}
 			}
 			Set<Projetil> projeteis = disparos;

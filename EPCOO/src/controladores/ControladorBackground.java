@@ -1,5 +1,7 @@
 package controladores;
 
+import interfaces.Controlador;
+
 import java.awt.Color;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -8,7 +10,7 @@ import java.util.List;
 import elementos.Estrela;
 import main.Timer;
 
-public class ControladorBackground extends Controlador {
+public class ControladorBackground implements Controlador {
 	private Timer timer;
 	private List<Estrela> estrelas;
 	

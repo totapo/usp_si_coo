@@ -13,7 +13,7 @@ public class PowerUpFactory {
 		Destrutivel n = null;
 		if(t.getTipo()==1){ //instanciar bolinha que gira
 			n = new BolinhaOp(1,Estado.ACTIVE,p,timer,t.getTipo());
-		} else if(t.getTipo()==2){
+		} else if(t.getTipo()==2){ //instanciar Shiled
 			n = new Shield(1,Estado.ACTIVE,p,t.getTipo());
 		}
 		return n;
