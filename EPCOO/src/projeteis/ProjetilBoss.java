@@ -29,10 +29,6 @@ public class ProjetilBoss extends Projetil {
 		this.pDropper = pDropper;
 	}
 
-	@Override
-	public void mover() {
-		
-	}
 
 	public List<ProjetilInimigo> explodir() {
 		if (timer.getCurrentTime() - dropTime > coolDownTime && this.getEstado() == Estado.ACTIVE) {
