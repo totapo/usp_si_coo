@@ -37,7 +37,7 @@ public class Boss1 extends Boss implements TemHp {
 				|| this.getEstado() == Estado.FLASHING) {
 			hpAtual--;
 			flash();
-			notifyObservers();
+			notifyObservers(); //para notificar a barra de vida
 
 			if (hpAtual == 0)
 				explodir();

@@ -108,7 +108,7 @@ public class Player extends NaveComVida {
 	public void hit() {
 		if(this.getEstado() == Estado.ACTIVE || this.getEstado() == Estado.FLASHING){
 			hp-=1;
-			notifyObservers(); 
+			notifyObservers(); //para avisar a barra de vida que o hp mudou
 			
 			flash();
 			

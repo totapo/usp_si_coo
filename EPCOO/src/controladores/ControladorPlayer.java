@@ -186,28 +186,6 @@ public class ControladorPlayer extends ControladorNave{
 	}
 
 	public void checarColisoes(Collection<? extends Destrutivel> objetos, boolean hit){
-		if(this.getNaves().size()>0){
-			Nave player = this.getNaves().get(0);
-			if(player.getEstado() == Estado.ACTIVE){
-				Iterator<? extends Destrutivel> it = objetos.iterator();
-				Destrutivel i;
-				while(it.hasNext()){
-					i= it.next();
-					if(i instanceof Nave){
-						if(((Nave) i).getEstado()!=Estado.ACTIVE ||((Nave) i).getEstado()==Estado.FLASHING) continue;
-					}
-					double dx = i.getX() - player.getX();
-					double dy = i.getY() - player.getY();
-					double dist = Math.sqrt(dx * dx + dy * dy);
-					
-					if(dist < (player.getRaioColisao() + i.getRaioColisao()) * 0.8){
-						if(hit)player.hit();
-						i.hit();
-						break;
-					}
-				}
-			}
-		}
 		if(hit)
 			for(Destrutivel a: powerUpsAtivos){
 				if(a.getEstado() == Estado.ACTIVE){
@@ -231,6 +209,28 @@ public class ControladorPlayer extends ControladorNave{
 						}
 					}
 				}
+			}
+		if(this.getNaves().size()>0){
+			Nave player = this.getNaves().get(0);
+			if(player.getEstado() == Estado.ACTIVE || player.getEstado() == Estado.FLASHING){
+				Iterator<? extends Destrutivel> it = objetos.iterator();
+				Destrutivel i;
+				while(it.hasNext()){
+					i= it.next();
+					if(i instanceof Nave){
+						if(((Nave) i).getEstado()!=Estado.ACTIVE ||((Nave) i).getEstado()==Estado.FLASHING) continue;
+					}
+					double dx = i.getX() - player.getX();
+					double dy = i.getY() - player.getY();
+					double dist = Math.sqrt(dx * dx + dy * dy);
+					
+					if(dist < (player.getRaioColisao() + i.getRaioColisao()) * 0.8){
+						if(hit)player.hit();
+						i.hit();
+						break;
+					}
+				}
+			}
 		}
 	}
 

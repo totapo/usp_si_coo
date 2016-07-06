@@ -1,6 +1,6 @@
 package armas;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import model.Estado;
@@ -15,7 +15,7 @@ public class ArmaInimigo2 extends Arma{
 	}
 	@Override
 	public List<Projetil> disparar(double x, double y,double angulo) {
-		List<Projetil> resp = new ArrayList<Projetil>();
+		List<Projetil> resp = new LinkedList<Projetil>();
 		ProjetilInimigo aux;
 		double [] angles = { Math.PI/2 + Math.PI/8, Math.PI/2, Math.PI/2 - Math.PI/8 };
 

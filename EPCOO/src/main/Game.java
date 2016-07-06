@@ -113,9 +113,9 @@ public class Game implements Runnable, Observer {
 		controladorBoss.checarProjeteis(controladorPlayer.getNaves());
 
 		/* colisões player - inimigos */
+		controladorPlayer.checarColisoes(controladorPlayer.getPowerUps(),false);
 		controladorPlayer.checarColisoes(controladoresInimigos.getNaves(),true);
 		controladorPlayer.checarColisoes(controladorBoss.getNaves(), true);
-		controladorPlayer.checarColisoes(controladorPlayer.getPowerUps(),false);
 		
 
 		/* colisões projeteis (player) - inimigos */
