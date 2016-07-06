@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.util.List;
 
 import projeteis.Projetil;
+import main.GameLib;
 import main.Timer;
 import model.Estado;
-import model.GameLib;
 import model.Nave;
 
 public class Inimigo2 extends Nave{

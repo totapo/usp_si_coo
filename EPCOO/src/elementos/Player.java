@@ -4,9 +4,9 @@ package elementos;
 import java.awt.Color;
 import java.util.*;
 
+import main.GameLib;
 import main.Timer;
 import model.Estado;
-import model.GameLib;
 import model.NaveComVida;
 import projeteis.Projetil;
 

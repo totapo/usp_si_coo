@@ -16,6 +16,7 @@ import elementos.Shield;
 import armas.Arma;
 import armas.ArmaPlayer;
 import arquivo.TimerElemento;
+import main.GameLib;
 import main.Timer;
 import model.*;
 import powerups.PowerUp;

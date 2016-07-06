@@ -3,10 +3,10 @@ package elementos;
 import java.awt.Color;
 
 import interfaces.Destrutivel;
+import main.GameLib;
 import main.Timer;
 import model.ElementoMutavel;
 import model.Estado;
-import model.GameLib;
 
 public class BolinhaOp extends ElementoMutavel implements Destrutivel{
 	//Classe que representa o powerup que eh a bolinha que orbita a nave do player

@@ -2,10 +2,10 @@ package powerups;
 
 import java.awt.Color;
 
+import main.GameLib;
 import main.Timer;
 import model.ElementoMutavel;
 import model.Estado;
-import model.GameLib;
 import interfaces.Destrutivel;
 
 public class PowerUp extends ElementoMutavel implements Destrutivel{

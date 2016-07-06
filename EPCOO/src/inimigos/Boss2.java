@@ -5,9 +5,9 @@ import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
+import main.GameLib;
 import main.Timer;
 import model.Estado;
-import model.GameLib;
 import projeteis.Projetil;
 
 public class Boss2 extends Boss{

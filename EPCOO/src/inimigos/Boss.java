@@ -2,10 +2,10 @@ package inimigos;
 
 import java.util.List;
 
+import main.GameLib;
 import main.Timer;
 import model.Elemento;
 import model.Estado;
-import model.GameLib;
 import model.NaveComVida;
 
 public abstract class Boss extends NaveComVida {

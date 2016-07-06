@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Random;
 
 import armas.ArmaBoss1;
+import main.GameLib;
 import main.Timer;
 import model.Estado;
-import model.GameLib;
 import projeteis.Projetil;
 
 public class Boss1 extends Boss implements TemHp {

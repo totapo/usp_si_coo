@@ -4,9 +4,9 @@ import java.awt.Color;
 
 import interfaces.Destrutivel;
 import interfaces.TemHp;
+import main.GameLib;
 import model.ElementoMutavel;
 import model.Estado;
-import model.GameLib;
 
 public class Shield extends ElementoMutavel implements TemHp, Destrutivel{
 	//Classe que representa um escudo centralizado no player

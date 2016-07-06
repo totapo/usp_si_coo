@@ -5,11 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import interfaces.Destrutivel;
+import main.GameLib;
 import main.Timer;
 import model.Elemento;
 import model.ElementoMutavel;
 import model.Estado;
-import model.GameLib;
 
 
 public abstract class Projetil extends ElementoMutavel{

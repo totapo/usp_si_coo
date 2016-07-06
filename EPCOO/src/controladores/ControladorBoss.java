@@ -12,10 +12,10 @@ import arquivo.TimerElemento;
 import elementos.LifeBar;
 import inimigos.Boss;
 import inimigos.Factory;
+import main.GameLib;
 import main.Timer;
 import model.Elemento;
 import model.Estado;
-import model.GameLib;
 import model.Nave;
 
 public class ControladorBoss extends ControladorNave {

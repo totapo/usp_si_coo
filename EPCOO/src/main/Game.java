@@ -4,7 +4,6 @@ import interfaces.Observer;
 
 import java.util.List;
 
-import model.GameLib;
 import arquivo.Fase;
 import arquivo.LeitorConfiguracoes;
 import controladores.ControladorBackground;
