@@ -56,8 +56,11 @@ public class Game implements Runnable, Observer {
 			faseAtual = fases.remove(0);
 			timer.marcarIniFase();
 			setControllers();
-		} else {
+		} else if(fases!=null){
 			System.out.println("Congratulations!");
+			System.exit(0);
+		} else {
+			System.out.println("Fases inexistentes!");
 			System.exit(0);
 		}
 	}
