@@ -14,9 +14,9 @@ public class BolinhaOp extends ElementoMutavel implements Destrutivel{
 	private Timer timer;
 	private Player p;
 	private int tipo;
-	public BolinhaOp(Estado estado, Player p,Timer timer, int tipo) {
+	public BolinhaOp(Estado estado, Player p, int tipo) {
 		super(4*p.getRaio(), p.getY(), estado);
-		this.timer = timer;
+		this.timer = Timer.getInstance();
 		this.p = p;
 		raio = p.getRaio();
 		distancia = p.getRaio() * 4;

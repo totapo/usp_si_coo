@@ -66,14 +66,14 @@ public class Game implements Runnable, Observer {
 	
 	private void setControllers(){
 		if(controladoresInimigos==null){
-			controladoresInimigos = new ControladorInimigo(timer);
+			controladoresInimigos = new ControladorInimigo();
 		}
 		if(controladorBoss == null){
-			controladorBoss = new ControladorBoss(timer);
+			controladorBoss = new ControladorBoss();
 			controladorBoss.addObserver(this);
 		}
 		if(controladorPlayer==null){
-			controladorPlayer = new ControladorPlayer(timer, faseAtual.getPlayerHp());
+			controladorPlayer = new ControladorPlayer(faseAtual.getPlayerHp());
 			controladorPlayer.addObserver(this);
 		}else 
 			controladorPlayer.resetLife();

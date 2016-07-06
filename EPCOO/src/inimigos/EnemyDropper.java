@@ -21,9 +21,9 @@ public class EnemyDropper implements ElementsDropper {
 	private Timer timer;
 	private double dropRange;
 
-	public EnemyDropper(Timer timer, int maxInimigosDrop, int minInimigosDrop,
+	public EnemyDropper( int maxInimigosDrop, int minInimigosDrop,
 			long dropCoolDown, double dropRange) {
-		this.timer = timer;
+		this.timer = Timer.getInstance();
 		this.maxInimigosDrop = maxInimigosDrop;
 		this.minInimigosDrop = minInimigosDrop;
 		this.dropCoolDown = dropCoolDown;
@@ -41,7 +41,7 @@ public class EnemyDropper implements ElementsDropper {
 			for (double i = -dropRange; i <= this.dropRange; i += 2 * dropRange / qtdInimigos) {
 
 				TimerElemento te = new TimerElemento(0, true, false, 1, x + i, y, 0);
-				Nave inimigo = (Nave) Factory.instanciarInimigo(te, timer);
+				Nave inimigo = (Nave) Factory.instanciarInimigo(te);
 				inimigos.add(inimigo);
 				lastDrop = timer.getCurrentTime();
 			}

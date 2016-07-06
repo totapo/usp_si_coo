@@ -12,10 +12,10 @@ public class ArmaInimigo extends Arma {
 	protected double cooldown,lastShot;
 	protected Timer timer;
 	
-	public ArmaInimigo(String nome, double cooldown, Timer timer) {
+	public ArmaInimigo(String nome, double cooldown) {
 		super(nome);
 		this.cooldown = cooldown;
-		this.timer = timer;
+		this.timer = Timer.getInstance();
 		this.lastShot = timer.getCurrentTime();
 	}
 

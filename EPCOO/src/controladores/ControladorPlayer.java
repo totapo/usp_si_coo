@@ -17,7 +17,6 @@ import armas.Arma;
 import armas.ArmaPlayer;
 import arquivo.TimerElemento;
 import main.GameLib;
-import main.Timer;
 import model.*;
 import powerups.PowerUp;
 import powerups.PowerUpFactory;
@@ -34,8 +33,8 @@ public class ControladorPlayer extends ControladorNave{
 	private List<Destrutivel> removerPowerUpsAtivos;
 	
 	//quando instanciado cria um Player com o hp recebido como parametro e ja cria a LifeBar correspondente
-	public ControladorPlayer(Timer timer, int hp) {
-		super(timer);
+	public ControladorPlayer(int hp) {
+		super();
 		hud = new LinkedList<Elemento>();
 		removerHud = new ArrayList<Elemento>();
 		powerUps = new LinkedList<PowerUp>();
@@ -48,10 +47,9 @@ public class ControladorPlayer extends ControladorNave{
 				0.25,					// velocidade no eixo x
 				0.25,					// velocidade no eixo y
 				Estado.ACTIVE,			//estado
-				timer,					//referencia pro Timer
 				12.0,					//raio
 				hp);
-		Arma a = new ArmaPlayer("gun",100,timer);
+		Arma a = new ArmaPlayer("gun",100);
 		player.addArma(a);
 		player.selecionaArma(a);
 		player.addObserver(this);
@@ -131,7 +129,7 @@ public class ControladorPlayer extends ControladorNave{
 		} if(s instanceof TimerElemento){ //se tiver que instanciar um PowerUp, o faz
 			TimerElemento a = (TimerElemento) s;
 			if(!a.isEnemy()){
-				PowerUp p = PowerUpFactory.instanciarPowerUp(a,timer);
+				PowerUp p = PowerUpFactory.instanciarPowerUp(a);
 				p.addObserver(this);
 				this.powerUps.add(p);
 			}
@@ -139,7 +137,7 @@ public class ControladorPlayer extends ControladorNave{
 			if(((PowerUp)s).getEstado()==Estado.INACTIVE){
 				removerPowerUps.add((PowerUp)s); //adiciona ele na lista de remocao de powerUps
 				if(((PowerUp) s).wasHit()){ //se ele ficou inativo por que algo encostou nele
-					Destrutivel b = PowerUpFactory.ativarPoder((PowerUp)s, timer, (Player)this.getNaves().get(0));  //ativa o power up
+					Destrutivel b = PowerUpFactory.ativarPoder((PowerUp)s, (Player)this.getNaves().get(0));  //ativa o power up
 					int i = this.powerUpsAtivos.indexOf(b);
 					if(i!=-1){ //se ja estiver na lista de powerups ativos
 						if(b instanceof Shield){ //somente se for um shield reseta a vida do shield

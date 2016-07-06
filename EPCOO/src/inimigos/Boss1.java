@@ -8,7 +8,6 @@ import java.util.Random;
 
 import armas.ArmaBoss1;
 import main.GameLib;
-import main.Timer;
 import model.Estado;
 import projeteis.Projetil;
 
@@ -21,14 +20,14 @@ public class Boss1 extends Boss implements TemHp {
 	private long movingTime;
 	
 
-	public Boss1(double x, double y, Estado estado, Timer timer,
+	public Boss1(double x, double y, Estado estado,
 			double raio, int hp, long flashTime, long flashCoolDown,
 			double velocidade, double xLimite, double yLimite) {
-		super(x, y, estado, timer, raio, hp, flashTime, flashCoolDown, xLimite, yLimite);
+		super(x, y, estado, raio, hp, flashTime, flashCoolDown, xLimite, yLimite);
 		this.velocidade = velocidade;
 		this.movingStart = timer.getCurrentTime();// Inicio do movimento atual do boss
 		this.movingTime = 2000;// Tempo que o boss mantém o movimento na mesma direcao
-		this.addArma(new ArmaBoss1("Arma Boss 1", 3000, timer));
+		this.addArma(new ArmaBoss1("Arma Boss 1", 3000));
 		geraMovimento();
 	}
 

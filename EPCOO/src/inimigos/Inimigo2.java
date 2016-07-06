@@ -5,7 +5,6 @@ import java.util.List;
 
 import projeteis.Projetil;
 import main.GameLib;
-import main.Timer;
 import model.Estado;
 import model.Nave;
 
@@ -14,9 +13,8 @@ public class Inimigo2 extends Nave{
 	double angulo, velocidade, velocidadeRotacao;
 	boolean shootNow;
 	
-	public Inimigo2(double x, double y, double raio, Estado estado,
-			Timer timer, double angulo,double velocidade, double velocidadeRotacao) {
-		super(x, y, estado, timer,raio);
+	public Inimigo2(double x, double y, double raio, Estado estado, double angulo,double velocidade, double velocidadeRotacao) {
+		super(x, y, estado,raio);
 		this.velocidadeRotacao = velocidadeRotacao;
 		this.velocidade = velocidade;
 		this.angulo = angulo;

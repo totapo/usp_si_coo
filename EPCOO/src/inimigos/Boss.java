@@ -3,7 +3,6 @@ package inimigos;
 import java.util.List;
 
 import main.GameLib;
-import main.Timer;
 import model.Elemento;
 import model.Estado;
 import model.NaveComVida;
@@ -19,10 +18,10 @@ public abstract class Boss extends NaveComVida {
 	protected EnemyDropper eDropper = null;
 
 
-	public Boss(double x, double y, Estado estado, Timer timer,
+	public Boss(double x, double y, Estado estado,
 			double raio, int hpTotal, long flashTime, long flashCoolDown,
 			double xLimite, double yLimite) {
-		super(x, y, estado, timer, raio, flashTime, flashCoolDown);
+		super(x, y, estado, raio, flashTime, flashCoolDown);
 		this.hpTotal = hpTotal;
 		this.hpAtual = hpTotal;
 		this.flashCoolDown = flashCoolDown;

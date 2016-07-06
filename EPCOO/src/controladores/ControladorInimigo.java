@@ -2,7 +2,6 @@ package controladores;
 
 import arquivo.TimerElemento;
 import inimigos.Factory;
-import main.Timer;
 import model.Nave;
 
 public class ControladorInimigo extends ControladorNave {
@@ -10,8 +9,8 @@ public class ControladorInimigo extends ControladorNave {
 	//tambem eh responsavel por instanciar os inimigos quando o ControladorSpawnElementos o notifica que 
 	//um inimigo deve ser criado
 	
-	public ControladorInimigo(Timer timer) {
-		super(timer);
+	public ControladorInimigo() {
+		super();
 	}
 	
 	@Override
@@ -27,7 +26,7 @@ public class ControladorInimigo extends ControladorNave {
 			TimerElemento a = (TimerElemento)s;
 			if(a.isEnemy() && !a.isBoss()){
 				Nave aux;
-				aux = Factory.instanciarInimigo(a, timer);
+				aux = Factory.instanciarInimigo(a);
 				aux.addObserver(this);
 				this.getNaves().add(aux);
 			} 

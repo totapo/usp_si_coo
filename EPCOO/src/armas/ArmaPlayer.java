@@ -12,10 +12,10 @@ public class ArmaPlayer extends Arma {
 	private double cooldown,lastShot;
 	private Timer timer;
 	
-	public ArmaPlayer(String nome,double cooldown, Timer timer){
+	public ArmaPlayer(String nome,double cooldown){
 		super(nome);
 		this.cooldown = cooldown;
-		this.timer = timer;
+		this.timer = Timer.getInstance();
 	}
 	
 	@Override

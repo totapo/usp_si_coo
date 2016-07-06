@@ -2,7 +2,6 @@ package model;
 
 
 import interfaces.TemHp;
-import main.Timer;
 
 public abstract class NaveComVida extends Nave implements TemHp{
 	
@@ -14,9 +13,8 @@ public abstract class NaveComVida extends Nave implements TemHp{
 	protected long flashLastChange;
 	protected boolean flash;//determina se o objeto está branco (flash) ou com sua cor normal
 
-	public NaveComVida(double x, double y, Estado estado,
-			Timer timer, double raio, long flashTime, long flashCoolDown) {
-		super(x, y, estado, timer, raio);
+	public NaveComVida(double x, double y, Estado estado, double raio, long flashTime, long flashCoolDown) {
+		super(x, y, estado, raio);
 		this.flashTime = flashTime;
 		this.flashCoolDown = flashCoolDown;
 	}

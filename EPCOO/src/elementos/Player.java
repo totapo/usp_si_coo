@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.util.*;
 
 import main.GameLib;
-import main.Timer;
 import model.Estado;
 import model.NaveComVida;
 import projeteis.Projetil;
@@ -22,8 +21,8 @@ public class Player extends NaveComVida {
 	private boolean flash; //indica em qual cor o flash esta
 	private long flashCoolDown; //representa o cooldown do flash
 	
-	public Player(double x, double y, double vX, double vY, Estado estado, Timer timer, double raio, int hp){
-		super(x,y,estado,timer,raio,500,50);
+	public Player(double x, double y, double vX, double vY, Estado estado, double raio, int hp){
+		super(x,y,estado,raio,500,50);
 		
 		this.velocidadeX = vX;
 		this.velocidadeY = vY;

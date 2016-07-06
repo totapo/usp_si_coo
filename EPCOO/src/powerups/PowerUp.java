@@ -17,13 +17,13 @@ public class PowerUp extends ElementoMutavel implements Destrutivel{
 	private Timer timer;
 	private boolean hit;
 
-	public PowerUp(Timer timer,double x, double y, int tipo, double raio, Estado estado) {
+	public PowerUp(double x, double y, int tipo, double raio, Estado estado) {
 		super(x, y, estado);
 		this.raio = raio;
 		this.tipo = tipo;
 		velocidadeX = 0;
 		velocidadeY = 0.40;
-		this.timer = timer;
+		this.timer = Timer.getInstance();
 	}
 	
 	public int getTipo(){

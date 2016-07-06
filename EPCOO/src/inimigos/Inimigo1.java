@@ -5,7 +5,6 @@ import java.util.List;
 
 import projeteis.Projetil;
 import main.GameLib;
-import main.Timer;
 import model.Estado;
 import model.Nave;
 
@@ -13,9 +12,8 @@ public class Inimigo1 extends Nave{
 	//classe que representa um inimigo do tipo 1
 	private double velocidadeRotacao, velocidade, angulo;
 	
-	public Inimigo1(double x, double y, double raio, Estado estado,
-			Timer timer, double angulo,double velocidade, double velocidadeRotacao) {
-		super(x, y, estado, timer,raio);
+	public Inimigo1(double x, double y, double raio, Estado estado, double angulo,double velocidade, double velocidadeRotacao) {
+		super(x, y, estado,raio);
 		this.velocidadeRotacao = velocidadeRotacao;
 		this.velocidade = velocidade;
 		this.angulo = angulo;

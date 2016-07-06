@@ -12,9 +12,9 @@ public class ArmaInimigo2 extends Arma{
 	//arma utilizada pelos inimigos tipo 2 (losangos) Tiro spread
 	private Timer timer;
 	
-	public ArmaInimigo2(String nome, Timer timer) {
+	public ArmaInimigo2(String nome) {
 		super(nome);
-		this.timer = timer;
+		this.timer = Timer.getInstance();
 	}
 	@Override
 	public List<Projetil> disparar(double x, double y,double angulo) {

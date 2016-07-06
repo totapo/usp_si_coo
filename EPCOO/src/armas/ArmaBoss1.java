@@ -14,10 +14,10 @@ public class ArmaBoss1 extends Arma {
 	private long cooldown;
 	private long lastShot;
 
-	public ArmaBoss1(String nome, long cooldown, Timer timer) {
+	public ArmaBoss1(String nome, long cooldown) {
 		super(nome);
 		this.cooldown = cooldown;
-		this.timer = timer;
+		this.timer = Timer.getInstance();
 	}
 
 	@Override

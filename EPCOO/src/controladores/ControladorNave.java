@@ -3,7 +3,6 @@ package controladores;
 import java.util.*;
 
 import projeteis.Projetil;
-import main.Timer;
 import model.Estado;
 import model.Nave;
 import interfaces.Controlador;
@@ -21,19 +20,17 @@ public abstract class ControladorNave implements Observer,
 	
 	protected List<Nave> naves; //lista de naves sendo controladas
 	protected List<Projetil> disparos; //conjunto de disparos feitos pelas naves controladas
-	protected Timer timer; //referencia ao timer global
 
 	protected List<Observer> obs;
 
 	private List<Nave> remover; //utilizada para limpar a lista de naves controladas quando algumas ficam inativas
 	private List<Projetil> removerP; //idem para os disparos
 
-	public ControladorNave(Timer timer) {
+	public ControladorNave() {
 		naves = new LinkedList<Nave>();
 		disparos = new LinkedList<Projetil>();
 		this.remover = new LinkedList<Nave>();
 		this.removerP = new LinkedList<Projetil>();
-		this.timer = timer;
 		obs = new LinkedList<Observer>();
 	}
 

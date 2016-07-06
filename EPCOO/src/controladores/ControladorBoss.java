@@ -13,7 +13,6 @@ import elementos.LifeBar;
 import inimigos.Boss;
 import inimigos.Factory;
 import main.GameLib;
-import main.Timer;
 import model.Elemento;
 import model.Estado;
 import model.Nave;
@@ -24,8 +23,8 @@ public class ControladorBoss extends ControladorNave {
 	protected List<Elemento> hud;
 	protected List<ProjetilInimigo> adicionaP;
 
-	public ControladorBoss(Timer timer) {
-		super(timer);
+	public ControladorBoss() {
+		super();
 		hud = new LinkedList<Elemento>();
 		adicionaP = new LinkedList<ProjetilInimigo>();
 	}
@@ -66,7 +65,7 @@ public class ControladorBoss extends ControladorNave {
 			TimerElemento a = (TimerElemento) s;
 			if (a.isBoss()) {
 				Nave aux;
-				aux = Factory.instanciarInimigo(a, timer);
+				aux = Factory.instanciarInimigo(a);
 				aux.addObserver(this);
 				Boss b = (Boss) aux;
 				hud.add(new LifeBar(GameLib.WIDTH / 2, 30, b,

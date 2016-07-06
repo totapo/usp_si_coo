@@ -3,15 +3,14 @@ package armas;
 import java.util.LinkedList;
 import java.util.List;
 
-import main.Timer;
 import model.Estado;
 import projeteis.Projetil;
 import projeteis.ProjetilInimigo;
 
 public class ArmaBoss2 extends ArmaInimigo{
 
-	public ArmaBoss2(String nome, double cooldown, Timer timer) {
-		super(nome, cooldown, timer);
+	public ArmaBoss2(String nome, double cooldown) {
+		super(nome, cooldown);
 	}
 
 	@Override
