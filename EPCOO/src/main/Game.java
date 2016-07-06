@@ -52,7 +52,7 @@ public class Game implements Runnable, Observer {
 	}
 	
 	private void proximaFase(){
-		if(fases.size()>0){
+		if(fases!=null && fases.size()>0){
 			faseAtual = fases.remove(0);
 			timer.marcarIniFase();
 			setControllers();
