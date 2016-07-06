@@ -3,7 +3,6 @@ package projeteis;
 import java.util.LinkedList;
 import java.util.List;
 
-import main.Timer;
 import model.Elemento;
 import model.Estado;
 import interfaces.ElementsDropper;
@@ -12,11 +11,9 @@ import interfaces.ElementsDropper;
 public class ProjetilDropper implements ElementsDropper{
 	
 	private double velocidadeProjeteis;
-	private Timer timer;
 	
-	public ProjetilDropper(double velocidadeProjeteis, Timer timer){
+	public ProjetilDropper(double velocidadeProjeteis){
 		this.velocidadeProjeteis = velocidadeProjeteis;
-		this.timer = timer;
 	}
 
 	@Override
@@ -27,25 +24,25 @@ public class ProjetilDropper implements ElementsDropper{
 		for (vx = -1; vx < 1; vx += 1.0 / (n/4)) {
 			vy = 1;
 			projetil = new ProjetilInimigo(x, y, vx*velocidadeProjeteis, vy*velocidadeProjeteis, 2.0, 
-					Estado.ACTIVE, timer);
+					Estado.ACTIVE);
 			projeteis.add(projetil);
 		}
 		for (vx = -1; vx < 1; vx += 1.0 / (n/4)) {
 			vy = -1;
 			projetil = new ProjetilInimigo(x, y, vx*velocidadeProjeteis, vy*velocidadeProjeteis, 2.0, 
-					Estado.ACTIVE, timer);
+					Estado.ACTIVE);
 			projeteis.add(projetil);
 		}
 		for (vy = -1; vy < 1; vy += 1.0 / (n/4)) {
 			vx = 1;
 			projetil = new ProjetilInimigo(x, y, vx*velocidadeProjeteis, vy*velocidadeProjeteis, 2.0, 
-					Estado.ACTIVE, timer);
+					Estado.ACTIVE);
 			projeteis.add(projetil);
 		}
 		for (vy = -1; vy < 1; vy += 1.0 / (n/4)) {
 			vx = -1;
 			projetil = new ProjetilInimigo(x, y, vx*velocidadeProjeteis, vy*velocidadeProjeteis, 2.0, 
-					Estado.ACTIVE, timer);
+					Estado.ACTIVE);
 			projeteis.add(projetil);
 		}
 		return projeteis;

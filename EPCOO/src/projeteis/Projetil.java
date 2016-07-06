@@ -18,11 +18,11 @@ public abstract class Projetil extends ElementoMutavel{
 	protected ProjetilDropper pDropper = null;
 	protected double raio;
 
-	public Projetil(double x, double y, double vX, double vY, Estado estado, Timer timer, double raio) {
+	public Projetil(double x, double y, double vX, double vY, Estado estado, double raio) {
 		super(x, y,estado);
 		this.velocidadeX = vX;
 		this.velocidadeY = vY;
-		this.timer = timer;
+		this.timer = Timer.getInstance();
 		this.raio = raio;
 	}
 	

@@ -3,7 +3,7 @@ package main;
 public class Timer {
 	//Classe que disponibiliza o delta e o currentTime para todas as outras
 	//util para desenhar os objetos na tela principalmente
-	//Implementa o padrão SINGLETON, já que o timer deve ser unico para todos os elementos do jogo.
+	//Implementa o padrão SINGLETON, ja que o timer deve ser unico para todos os elementos do jogo.
 	private static Timer instance;
 	
 	static {

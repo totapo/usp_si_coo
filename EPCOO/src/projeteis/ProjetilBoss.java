@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import main.GameLib;
-import main.Timer;
 import model.Elemento;
 import model.Estado;
 
@@ -19,9 +18,9 @@ public class ProjetilBoss extends Projetil {
 	private int qtdProjeteis;
 
 	public ProjetilBoss(double x, double y, double raio,
-			long coolDownTime, int qtdProjeteis, Estado estado, Timer timer,
+			long coolDownTime, int qtdProjeteis, Estado estado,
 			ProjetilDropper pDropper) {
-		super(x, y, 0, 0, estado, timer,raio);
+		super(x, y, 0, 0, estado,raio);
 		this.coolDownTime = coolDownTime;
 		this.dropTime = timer.getCurrentTime();
 		explodiu = false;

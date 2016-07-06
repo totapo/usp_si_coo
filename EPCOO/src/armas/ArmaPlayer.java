@@ -26,8 +26,7 @@ public class ArmaPlayer extends Arma {
 			resp.add(new ProjetilPlayer(
 					x,y,
 					0.0,-1.0,
-					Estado.ACTIVE,
-					timer
+					Estado.ACTIVE
 					));
 			lastShot = timer.getCurrentTime();
 		}

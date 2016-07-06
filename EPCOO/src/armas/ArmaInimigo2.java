@@ -3,18 +3,15 @@ package armas;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.Timer;
 import model.Estado;
 import projeteis.ProjetilInimigo;
 import projeteis.Projetil;
 
 public class ArmaInimigo2 extends Arma{
 	//arma utilizada pelos inimigos tipo 2 (losangos) Tiro spread
-	private Timer timer;
 	
 	public ArmaInimigo2(String nome) {
 		super(nome);
-		this.timer = Timer.getInstance();
 	}
 	@Override
 	public List<Projetil> disparar(double x, double y,double angulo) {
@@ -26,7 +23,7 @@ public class ArmaInimigo2 extends Arma{
 			double a = d + Math.random() * Math.PI/6 - Math.PI/12;
 			double vx = Math.cos(a);
 			double vy = Math.sin(a);
-			aux = new ProjetilInimigo(x,y,vx*0.30,vy*0.30,2.0,Estado.ACTIVE,timer);
+			aux = new ProjetilInimigo(x,y,vx*0.30,vy*0.30,2.0,Estado.ACTIVE);
 			resp.add(aux);
 		}
 			

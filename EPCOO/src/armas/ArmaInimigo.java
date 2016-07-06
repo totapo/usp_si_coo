@@ -30,8 +30,7 @@ public class ArmaInimigo extends Arma {
 					Math.cos(angulo) * 0.45, //vx
 					Math.sin(angulo) * 0.45 * (-1.0), //vy
 					2.0, //raio
-					Estado.ACTIVE,
-					timer
+					Estado.ACTIVE
 					));
 			lastShot = timer.getCurrentTime();
 		}

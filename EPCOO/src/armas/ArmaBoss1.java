@@ -28,7 +28,7 @@ public class ArmaBoss1 extends Arma {
 			lastShot = timer.getCurrentTime();
 			retorno = new LinkedList<Projetil>();
 			Projetil projetil = new ProjetilBoss(x, y, 2.0, 2000, 28,
-					Estado.ACTIVE, timer, new ProjetilDropper(0.2, timer));
+					Estado.ACTIVE, new ProjetilDropper(0.2));
 			retorno.add(projetil);
 		}
 		return retorno;

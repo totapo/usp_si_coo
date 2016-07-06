@@ -5,14 +5,13 @@ import interfaces.Destrutivel;
 import java.awt.Color;
 
 import main.GameLib;
-import main.Timer;
 import model.Estado;
 
 public class ProjetilPlayer extends Projetil {
 
 	public ProjetilPlayer(double x, double y, double vX, double vY,
-			Estado estado, Timer timer) {
-		super(x, y, vX, vY, estado, timer,0.0);
+			Estado estado) {
+		super(x, y, vX, vY, estado,0.0);
 	}
 	
 	@Override
