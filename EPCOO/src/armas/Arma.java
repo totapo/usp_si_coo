@@ -13,7 +13,7 @@ public abstract class Arma {
 		this.nome = nome;
 	}
 	
-	//Cada "arma" devera implementar seu proprio tipo de disparo
+	//Cada arma devera implementar seu proprio tipo de disparo
 	//retorna uma lista pois as armas podem atirar apenas um projetil como varios de uma vez
 	public abstract List<Projetil> disparar(double x, double y, double angle);
 	
