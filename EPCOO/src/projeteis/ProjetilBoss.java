@@ -18,10 +18,10 @@ public class ProjetilBoss extends Projetil {
 	private boolean explodiu;
 	private int qtdProjeteis;
 
-	public ProjetilBoss(double x, double y, double raio, int layer,
+	public ProjetilBoss(double x, double y, double raio,
 			long coolDownTime, int qtdProjeteis, Estado estado, Timer timer,
 			ProjetilDropper pDropper) {
-		super(x, y, 0, 0, layer, estado, timer,raio);
+		super(x, y, 0, 0, estado, timer,raio);
 		this.coolDownTime = coolDownTime;
 		this.dropTime = timer.getCurrentTime();
 		explodiu = false;
@@ -29,14 +29,10 @@ public class ProjetilBoss extends Projetil {
 		this.pDropper = pDropper;
 	}
 
-	@Override
-	public void mover() {
-		
-	}
 
 	public List<ProjetilInimigo> explodir() {
 		if (timer.getCurrentTime() - dropTime > coolDownTime && this.getEstado() == Estado.ACTIVE) {
-			List<Elemento> elementos = dropProjeteis(qtdProjeteis, x, y, layer);
+			List<Elemento> elementos = dropProjeteis(qtdProjeteis, x, y);
 			List<ProjetilInimigo> projeteis = new LinkedList<ProjetilInimigo>();
 			for (Elemento e : elementos) {
 				projeteis.add((ProjetilInimigo) e);
