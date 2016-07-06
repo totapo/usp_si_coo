@@ -1,4 +1,0 @@
-100
-2
-./fases/f1.txt
-./fases/f2.txt

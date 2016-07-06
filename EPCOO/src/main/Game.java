@@ -31,6 +31,7 @@ public class Game implements Runnable, Observer {
 			Thread.yield();
 	}
 
+	//metodo reponsavel por instanciar o leitor do arquivo de configuracoes e popular a lista de fases
 	private void prepareResources() {
 		/* Indica que o jogo está em execução */
 		running = true;
@@ -50,6 +51,7 @@ public class Game implements Runnable, Observer {
 		GameLib.initGraphics();
 	}
 	
+	//metodo responsavel por encerrar o jogo caso não hajam mais fases ou por passar para a proxima caso um boss tenha sido derrotado
 	private void proximaFase(){
 		if(fases!=null && fases.size()>0){
 			faseAtual = fases.remove(0);
@@ -64,6 +66,7 @@ public class Game implements Runnable, Observer {
 		}
 	}
 	
+	//inicializa os controladores ou, caso ja estejam criados, reseta suas variaveis caso necessario
 	private void setControllers(){
 		if(controladoresInimigos==null){
 			controladoresInimigos = new ControladorInimigo();
@@ -78,7 +81,7 @@ public class Game implements Runnable, Observer {
 		}else 
 			controladorPlayer.resetLife();
 		
-		
+		//controlador responsavel pela lista de elementos que devem aparecer durante a fase
 		if(controladorSpawnElementos==null){
 			controladorSpawnElementos = new ControladorSpawnElementos(timer, faseAtual.getEnemies());
 			controladorSpawnElementos.addObserver(controladorPlayer);
@@ -139,7 +142,7 @@ public class Game implements Runnable, Observer {
 		/* desenhando plano fundo */
 		controladorBg.desenharObjetos();
 		
-		//senenhando naves e projeteis
+		//desenhando naves e projeteis
 		controladoresInimigos.desenharObjetos();
 
 		controladorBoss.desenharObjetos();
