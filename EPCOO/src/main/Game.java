@@ -53,16 +53,18 @@ public class Game implements Runnable, Observer {
 	
 	private void proximaFase(){
 		if(fases.size()>0){
-			faseAtual = fases.remove(0); //TODO isso é meio feio mas por enquanto...
+			faseAtual = fases.remove(0);
 			timer.marcarIniFase();
 			setControllers();
+		} else {
+			System.out.println("Congratulations!");
+			System.exit(0);
 		}
 	}
 	
 	private void setControllers(){
 		if(controladoresInimigos==null){
 			controladoresInimigos = new ControladorInimigo(timer);
-			controladoresInimigos.addObserver(this);
 		}
 		if(controladorBoss == null){
 			controladorBoss = new ControladorBoss(timer);
@@ -123,9 +125,9 @@ public class Game implements Runnable, Observer {
 	private void updateStates() {
 		controladorSpawnElementos.execute();
 		controladoresInimigos.execute();
+		controladorBoss.execute();
 		controladorPlayer.execute();
 		controladorBg.execute();
-		controladorBoss.execute();
 
 		if (GameLib.iskeyPressed(GameLib.KEY_ESCAPE))
 			running = false;
@@ -133,25 +135,19 @@ public class Game implements Runnable, Observer {
 
 	private void drawScene() {
 		/* desenhando plano fundo */
-		//System.out.println("1 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
-		
 		controladorBg.desenharObjetos();
-		//System.out.println("2 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
 		
+		//senenhando naves e projeteis
 		controladoresInimigos.desenharObjetos();
-		//System.out.println("3 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
+
+		controladorBoss.desenharObjetos();
 		
 		controladorPlayer.desenharObjetos();
-		//System.out.println("4 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
-		
-		controladorBoss.desenharObjetos();
 		
 		//desenhando HUD
 		controladorBoss.drawHud();
-		//System.out.println("5 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
 		
 		controladorPlayer.drawHud();
-		//System.out.println("6 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
 		
 
 		/*
@@ -160,7 +156,6 @@ public class Game implements Runnable, Observer {
 		 */
 
 		GameLib.display();
-		//System.out.println("7 - "+(System.currentTimeMillis() - timer.getCurrentTime()));
 		
 	}
 
@@ -244,9 +239,9 @@ public class Game implements Runnable, Observer {
 
 	@Override
 	public void notify(Object s) {
-		if(s instanceof ControladorBoss){
+		if(s instanceof ControladorBoss){ //significa que o player derrotou o Boss
 			proximaFase();
-		} else if(s instanceof ControladorPlayer){
+		} else if(s instanceof ControladorPlayer){ //significa que o player morreu
 			System.out.println("Game over");
 			System.exit(0);
 		}

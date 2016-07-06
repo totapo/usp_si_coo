@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class LeitorConfiguracoes {
+	//classe responsavel por ler o arquivo de configuracoes passado como paramtro no construtor
 	private List<Fase> fases;
 	private File src;
 	

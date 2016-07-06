@@ -1,9 +1,12 @@
 package arquivo;
 
 public class TimerElemento implements Comparable<TimerElemento>{
-	private int spawn;
-	private boolean isEnemy;
-	private boolean isBoss;
+	//classe que representa quando determinado elemento deve aparecer na tela, pode ser tanto um inimigo como um powerup
+	//implementa Comparable<TimerElemento> para que possa ser inserida em uma PriorityQueue
+	
+	private int spawn; //tempo em ms a partir do inicio da fase em que o elemento deve aparecer
+	private boolean isEnemy; //true se eh inimigo 
+	private boolean isBoss; //true se eh boss
 	private int tipo,hp;
 	private double x,y;
 	

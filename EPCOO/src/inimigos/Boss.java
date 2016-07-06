@@ -19,10 +19,10 @@ public abstract class Boss extends NaveComVida {
 	protected EnemyDropper eDropper = null;
 
 
-	public Boss(double x, double y, int layer, Estado estado, Timer timer,
+	public Boss(double x, double y, Estado estado, Timer timer,
 			double raio, int hpTotal, long flashTime, long flashCoolDown,
 			double xLimite, double yLimite) {
-		super(x, y, layer, estado, timer, raio, flashTime, flashCoolDown);
+		super(x, y, estado, timer, raio, flashTime, flashCoolDown);
 		this.hpTotal = hpTotal;
 		this.hpAtual = hpTotal;
 		this.flashCoolDown = flashCoolDown;
@@ -58,7 +58,7 @@ public abstract class Boss extends NaveComVida {
 	
 	public List<Elemento> dropEnemies(){
 		if(eDropper != null) 
-			return eDropper.drop(0, this.x, this.y, this.layer);
+			return eDropper.drop(0, this.x, this.y);
 		return null;
 	}
 

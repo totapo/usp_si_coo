@@ -14,9 +14,9 @@ public abstract class NaveComVida extends Nave implements TemHp{
 	protected long flashLastChange;
 	protected boolean flash;//determina se o objeto está branco (flash) ou com sua cor normal
 
-	public NaveComVida(double x, double y, int layer, Estado estado,
+	public NaveComVida(double x, double y, Estado estado,
 			Timer timer, double raio, long flashTime, long flashCoolDown) {
-		super(x, y, layer, estado, timer, raio);
+		super(x, y, estado, timer, raio);
 		this.flashTime = flashTime;
 		this.flashCoolDown = flashCoolDown;
 	}

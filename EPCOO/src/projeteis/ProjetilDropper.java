@@ -20,31 +20,31 @@ public class ProjetilDropper implements ElementsDropper{
 	}
 
 	@Override
-	public List<Elemento> drop(int n, double x, double y, int layer) {
+	public List<Elemento> drop(int n, double x, double y) {
 		List<Elemento> projeteis = new LinkedList<Elemento>();
 		double vx, vy;
 		ProjetilInimigo projetil;
 		for (vx = -1; vx < 1; vx += 1.0 / (n/4)) {
 			vy = 1;
-			projetil = new ProjetilInimigo(x, y, vx*velocidadeProjeteis, vy*velocidadeProjeteis, 2.0, 1,
+			projetil = new ProjetilInimigo(x, y, vx*velocidadeProjeteis, vy*velocidadeProjeteis, 2.0, 
 					Estado.ACTIVE, timer);
 			projeteis.add(projetil);
 		}
 		for (vx = -1; vx < 1; vx += 1.0 / (n/4)) {
 			vy = -1;
-			projetil = new ProjetilInimigo(x, y, vx*velocidadeProjeteis, vy*velocidadeProjeteis, 2.0, 1,
+			projetil = new ProjetilInimigo(x, y, vx*velocidadeProjeteis, vy*velocidadeProjeteis, 2.0, 
 					Estado.ACTIVE, timer);
 			projeteis.add(projetil);
 		}
 		for (vy = -1; vy < 1; vy += 1.0 / (n/4)) {
 			vx = 1;
-			projetil = new ProjetilInimigo(x, y, vx*velocidadeProjeteis, vy*velocidadeProjeteis, 2.0, 1,
+			projetil = new ProjetilInimigo(x, y, vx*velocidadeProjeteis, vy*velocidadeProjeteis, 2.0, 
 					Estado.ACTIVE, timer);
 			projeteis.add(projetil);
 		}
 		for (vy = -1; vy < 1; vy += 1.0 / (n/4)) {
 			vx = -1;
-			projetil = new ProjetilInimigo(x, y, vx*velocidadeProjeteis, vy*velocidadeProjeteis, 2.0, 1,
+			projetil = new ProjetilInimigo(x, y, vx*velocidadeProjeteis, vy*velocidadeProjeteis, 2.0, 
 					Estado.ACTIVE, timer);
 			projeteis.add(projetil);
 		}

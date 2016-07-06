@@ -8,13 +8,14 @@ import model.Estado;
 import model.GameLib;
 
 public class Estrela extends ElementoMutavel{
+	//classe que representa uma estrela
 	private double size;
 	private Color cor;
 	private double vel;
 	private Timer t;
 	
-	public Estrela(double vel, int layer, double size, Color cor, Timer t) {
-		super(0, 0, layer,Estado.ACTIVE);
+	public Estrela(double vel, double size, Color cor, Timer t) {
+		super(0, 0,Estado.ACTIVE);
 		x = Math.random() * GameLib.WIDTH;
 		y = Math.random() * GameLib.HEIGHT;
 		this.size = size;

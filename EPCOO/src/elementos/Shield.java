@@ -9,12 +9,13 @@ import model.Estado;
 import model.GameLib;
 
 public class Shield extends ElementoMutavel implements TemHp, Destrutivel{
+	//Classe que representa um escudo centralizado no player
 	private Player p;
 	private int maxHp,hpAtual,tipo;
 	private double raio;
 	
-	public Shield(int layer, Estado estado, Player p, int tipo) {
-		super(p.getX(), p.getY(), layer, estado);
+	public Shield(Estado estado, Player p, int tipo) {
+		super(p.getX(), p.getY(), estado);
 		this.p = p;
 		hpAtual = maxHp = 10;
 		raio = 2*p.getRaio();

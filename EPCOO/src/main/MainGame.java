@@ -1,12 +1,12 @@
 package main;
 
-//Classe de Teste para a classe Game
+//Classe de que contem o metodo main
 
 public class MainGame {
 
 	public static void main(String[] args) {
 		Thread game = new Thread( new Game());
-		game.run();
+		game.start();
 	}
 
 }

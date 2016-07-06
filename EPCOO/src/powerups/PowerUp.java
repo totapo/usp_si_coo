@@ -17,8 +17,8 @@ public class PowerUp extends ElementoMutavel implements Destrutivel{
 	private Timer timer;
 	private boolean hit;
 
-	public PowerUp(Timer timer,double x, double y, int layer, int tipo, double raio, Estado estado) {
-		super(x, y, layer, estado);
+	public PowerUp(Timer timer,double x, double y, int tipo, double raio, Estado estado) {
+		super(x, y, estado);
 		this.raio = raio;
 		this.tipo = tipo;
 		velocidadeX = 0;

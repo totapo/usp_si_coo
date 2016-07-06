@@ -16,11 +16,11 @@ public class Boss2 extends Boss{
 	private long teleportCoolDown;
 	private long lastTeleport;
 
-	public Boss2(double x, double y, int layer, Estado estado, Timer timer,
+	public Boss2(double x, double y, Estado estado, Timer timer,
 			double raio, int hpTotal, long flashTime, long flashCoolDown,
 			double xLimite, double yLimite, long teleportCoolDown,
 			EnemyDropper eDropper) {
-		super(x, y, layer, estado, timer, raio, hpTotal, flashTime,
+		super(x, y, estado, timer, raio, hpTotal, flashTime,
 				flashCoolDown, xLimite, yLimite);
 		lastTeleport = timer.getCurrentTime();
 		this.teleportCoolDown = teleportCoolDown;

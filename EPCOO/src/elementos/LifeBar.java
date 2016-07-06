@@ -10,13 +10,13 @@ import model.Elemento;
 import model.GameLib;
 
 public class LifeBar extends Elemento implements Observer{
-	
+	//classe que representa uma barra de vida, observa o elemento cuja vida deve representar
 	private TemHp objeto;
 	private double comprimento, compAtual, altura;
 	private Color vida, fundo;
 	
-	public LifeBar(double x, double y, int layer, TemHp obj, double comprimento, double altura, Color vida, Color fundo) {
-		super(x, y, layer);
+	public LifeBar(double x, double y, TemHp obj, double comprimento, double altura, Color vida, Color fundo) {
+		super(x, y);
 		this.objeto = obj;
 		compAtual = this.comprimento = comprimento;
 		this.altura = altura;

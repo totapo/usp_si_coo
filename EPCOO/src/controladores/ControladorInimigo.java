@@ -2,12 +2,13 @@ package controladores;
 
 import arquivo.TimerElemento;
 import inimigos.Factory;
-import interfaces.Observer;
-import interfaces.Subject;
 import main.Timer;
 import model.Nave;
 
-public class ControladorInimigo extends ControladorNave implements Subject{
+public class ControladorInimigo extends ControladorNave {
+	//controla todos os inimigos que aparecem na tela, exceto os Boss
+	//tambem eh responsavel por instanciar os inimigos quando o ControladorSpawnElementos o notifica que 
+	//um inimigo deve ser criado
 	
 	public ControladorInimigo(Timer timer) {
 		super(timer);
@@ -17,13 +18,6 @@ public class ControladorInimigo extends ControladorNave implements Subject{
 	public void limparMemoria() {
 		this.disparos.clear();
 		this.getNaves().clear();
-	}
-
-	@Override
-	public void notifyObservers() {
-		for(Observer o : obs){
-			o.notify(this);
-		}
 	}
 
 	@Override

@@ -24,7 +24,6 @@ public class ArmaBoss2 extends ArmaInimigo{
 					Math.cos(angulo) * 0.45, //vx
 					Math.sin(angulo) * 0.45 * (-1.0), //vy
 					60.0, //raio
-					1,
 					Estado.ACTIVE,
 					timer
 					));

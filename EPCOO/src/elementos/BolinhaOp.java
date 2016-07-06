@@ -9,12 +9,13 @@ import model.Estado;
 import model.GameLib;
 
 public class BolinhaOp extends ElementoMutavel implements Destrutivel{
+	//Classe que representa o powerup que eh a bolinha que orbita a nave do player
 	private double angulo,raio,distancia;
 	private Timer timer;
 	private Player p;
 	private int tipo;
-	public BolinhaOp(int layer, Estado estado, Player p,Timer timer, int tipo) {
-		super(4*p.getRaio(), p.getY(), layer, estado);
+	public BolinhaOp(Estado estado, Player p,Timer timer, int tipo) {
+		super(4*p.getRaio(), p.getY(), estado);
 		this.timer = timer;
 		this.p = p;
 		raio = p.getRaio();

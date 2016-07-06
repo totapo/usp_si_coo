@@ -9,8 +9,8 @@ import java.util.List;
 
 public abstract class ElementoMutavel extends Elemento implements Subject {
 	List<Observer> observers;
-	public ElementoMutavel(double x, double y, int layer, Estado estado) {
-		super(x, y, layer);
+	public ElementoMutavel(double x, double y, Estado estado) {
+		super(x, y);
 		this.estado = estado;
 		observers = new ArrayList<Observer>();
 	}

@@ -12,15 +12,15 @@ public class PowerUpFactory {
 	public static Destrutivel ativarPoder(PowerUp t, Timer timer, Player p){
 		Destrutivel n = null;
 		if(t.getTipo()==1){ //instanciar bolinha que gira
-			n = new BolinhaOp(1,Estado.ACTIVE,p,timer,t.getTipo());
+			n = new BolinhaOp(Estado.ACTIVE,p,timer,t.getTipo());
 		} else if(t.getTipo()==2){ //instanciar Shiled
-			n = new Shield(1,Estado.ACTIVE,p,t.getTipo());
+			n = new Shield(Estado.ACTIVE,p,t.getTipo());
 		}
 		return n;
 	}
 	
 	public static PowerUp instanciarPowerUp(TimerElemento t, Timer timer){
-		PowerUp n = new PowerUp(timer,t.getX(), t.getY(),1,t.getTipo(),7.0,Estado.ACTIVE);
+		PowerUp n = new PowerUp(timer,t.getX(), t.getY(),t.getTipo(),7.0,Estado.ACTIVE);
 		return n;
 	}
 }

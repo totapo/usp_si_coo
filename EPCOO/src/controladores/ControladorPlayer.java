@@ -22,6 +22,9 @@ import powerups.PowerUp;
 import powerups.PowerUpFactory;
 
 public class ControladorPlayer extends ControladorNave{
+	//controlador do Player
+	//a diferenca basica eh que possui alguns elementos de HUD (Heads Up Display) e tambem controla 
+	//os PowerUps que aparecem na tela
 	private List<Elemento> hud;
 	private List<Elemento> removerHud;
 	private List<PowerUp> powerUps;
@@ -29,6 +32,7 @@ public class ControladorPlayer extends ControladorNave{
 	private List<Destrutivel> powerUpsAtivos;
 	private List<Destrutivel> removerPowerUpsAtivos;
 	
+	//quando instanciado cria um Player com o hp recebido como parametro e ja cria a LifeBar correspondente
 	public ControladorPlayer(Timer timer, int hp) {
 		super(timer);
 		hud = new LinkedList<Elemento>();
@@ -40,7 +44,6 @@ public class ControladorPlayer extends ControladorNave{
 		Player player = new Player(
 				GameLib.WIDTH / 2, 		//x
 				GameLib.HEIGHT * 0.90, 	//y
-				1,						//layer 1 - assumindo HUD no 0
 				0.25,					// velocidade no eixo x
 				0.25,					// velocidade no eixo y
 				Estado.ACTIVE,			//estado
@@ -52,10 +55,10 @@ public class ControladorPlayer extends ControladorNave{
 		player.selecionaArma(a);
 		player.addObserver(this);
 		this.getNaves().add(player);
-		hud.add(new LifeBar(
+		
+		hud.add(new LifeBar( //criacao da LifeBar do player
 				GameLib.WIDTH/2,
 				GameLib.HEIGHT-30,
-				0,
 				player,
 				GameLib.WIDTH*0.9,
 				GameLib.HEIGHT*0.01,
@@ -74,7 +77,7 @@ public class ControladorPlayer extends ControladorNave{
 			if(e instanceof ElementoMutavel) ((ElementoMutavel)e).mover(); 
 		}
 	}
-
+	//maximiza a vida do player, utilizado quando ha troca de fases
 	public void resetLife(){
 		if(this.getNaves().size()>0){
 			Player player = (Player) this.getNaves().get(0);
@@ -82,6 +85,7 @@ public class ControladorPlayer extends ControladorNave{
 		}
 	}
 	
+	//desenha os elementos do HUD (lifebar)
 	public void drawHud(){
 		for(Elemento e : hud){
 			e.draw();
@@ -118,37 +122,36 @@ public class ControladorPlayer extends ControladorNave{
 		super.notify(s);
 		if(s instanceof Player){
 			Player p = (Player)s;
-			if(p.getEstado() == Estado.INACTIVE){
+			if(p.getEstado() == Estado.INACTIVE){ //se o Player ficou inativo notifica o Game
 				notifyObservers();
 			} else if(p.getEstado() == Estado.FLASHING){ //se tomar tiro perde os powerups, no caso so a bolinha que orbita
 				this.removerPowerUpsAtivos.addAll(this.getPowerUpsAtivos());
 			}
-		} if(s instanceof TimerElemento){
+		} if(s instanceof TimerElemento){ //se tiver que instanciar um PowerUp, o faz
 			TimerElemento a = (TimerElemento) s;
 			if(!a.isEnemy()){
 				PowerUp p = PowerUpFactory.instanciarPowerUp(a,timer);
 				p.addObserver(this);
 				this.powerUps.add(p);
 			}
-		} if(s instanceof PowerUp ){
+		} if(s instanceof PowerUp ){ //se um PowerUp ficou inativo
 			if(((PowerUp)s).getEstado()==Estado.INACTIVE){
-				removerPowerUps.add((PowerUp)s);
-				if(((PowerUp) s).wasHit()){
-					Destrutivel b = PowerUpFactory.ativarPoder((PowerUp)s, timer, (Player)this.getNaves().get(0)); 
+				removerPowerUps.add((PowerUp)s); //adiciona ele na lista de remocao de powerUps
+				if(((PowerUp) s).wasHit()){ //se ele ficou inativo por que algo encostou nele
+					Destrutivel b = PowerUpFactory.ativarPoder((PowerUp)s, timer, (Player)this.getNaves().get(0));  //ativa o power up
 					int i = this.powerUpsAtivos.indexOf(b);
-					if(i!=-1){
-						if(b instanceof Shield){
+					if(i!=-1){ //se ja estiver na lista de powerups ativos
+						if(b instanceof Shield){ //somente se for um shield reseta a vida do shield
 							((Shield)this.powerUpsAtivos.get(i)).setHp(((Shield)this.powerUpsAtivos.get(i)).getTotalHp());
 						} 
-					} else if(b instanceof BolinhaOp){
+					} else if(b instanceof BolinhaOp){ //se nao estiver nos powerups ativos e for uma BolinhaOp adiciona ela na lista
 						this.powerUpsAtivos.add(b);
 						((BolinhaOp) b).addObserver(this);
-					} else if(b instanceof Shield){
+					} else if(b instanceof Shield){ //se nao estiver na lista e for um shield
 						this.powerUpsAtivos.add(b);//adiciona o novo shield
-						this.hud.add(new LifeBar(
+						this.hud.add(new LifeBar( //cria a lifebar dos shields
 								GameLib.WIDTH/2,
 								GameLib.HEIGHT-40,
-								0,
 								(Shield)b,
 								GameLib.WIDTH*0.9,
 								GameLib.HEIGHT*0.01,
@@ -158,14 +161,16 @@ public class ControladorPlayer extends ControladorNave{
 					} 
 				} 
 			}
-		}else if(s instanceof Shield){
+		}else if(s instanceof Shield){ //se um shield ficou inativo
 			Shield c = (Shield) s;
 			if(c.getEstado() == Estado.INACTIVE){
-				removerPowerUpsAtivos.add(c);
+				removerPowerUpsAtivos.add(c); //adiciona o shield na lista de powerups para remocao
 				this.removerHud.add(this.hud.get(this.hud.size()-1)); //remove a lifebar do shield 
 			}
-		} else if(s instanceof BolinhaOp){
-			removerPowerUpsAtivos.add((BolinhaOp)s);
+		} else if(s instanceof BolinhaOp){ //se uma BolinhaOp ficou inativa
+			BolinhaOp c = (BolinhaOp) s;
+			if(c.getEstado() == Estado.INACTIVE)
+				removerPowerUpsAtivos.add((BolinhaOp)s); //adiciona a bolinha na lista para remocao
 		}
 	}
 	

@@ -11,6 +11,8 @@ import elementos.Estrela;
 import main.Timer;
 
 public class ControladorBackground implements Controlador {
+	//responsavel por controlar a lista de estrelas que aparece no background do jogo
+	
 	private Timer timer;
 	private List<Estrela> estrelas;
 	
@@ -22,14 +24,12 @@ public class ControladorBackground implements Controlador {
 		for(i=0; i<qtdEstrelas2; i++){
 			estrelas.add(new Estrela(
 					0.045,
-					3,
 					2, Color.DARK_GRAY,this.timer
 					));
 		}
 		for(i=0; i<qtdEstrelas1; i++){
 			estrelas.add(new Estrela(
 					0.070,
-					2,
 					3, Color.gray,this.timer
 					));
 		}

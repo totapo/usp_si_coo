@@ -18,8 +18,8 @@ public abstract class Projetil extends ElementoMutavel{
 	protected ProjetilDropper pDropper = null;
 	protected double raio;
 
-	public Projetil(double x, double y, double vX, double vY, int layer, Estado estado, Timer timer, double raio) {
-		super(x, y, layer,estado);
+	public Projetil(double x, double y, double vX, double vY, Estado estado, Timer timer, double raio) {
+		super(x, y,estado);
 		this.velocidadeX = vX;
 		this.velocidadeY = vY;
 		this.timer = timer;
@@ -30,9 +30,9 @@ public abstract class Projetil extends ElementoMutavel{
 		this.pDropper = pDropper;
 	}
 
-	public List<Elemento> dropProjeteis(int n, double x, double y, int layer){
+	public List<Elemento> dropProjeteis(int n, double x, double y){
 		if(pDropper != null)
-			return pDropper.drop(n, x, y, layer);
+			return pDropper.drop(n, x, y);
 		return null;
 	}
 	

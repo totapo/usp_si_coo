@@ -9,9 +9,9 @@ import model.Estado;
 import model.GameLib;
 
 public class ProjetilInimigo extends Projetil {
-	public ProjetilInimigo(double x, double y, double vX, double vY, double raio, int layer,
+	public ProjetilInimigo(double x, double y, double vX, double vY, double raio,
 			Estado estado, Timer timer) {
-		super(x, y, vX, vY, layer, estado, timer,raio);
+		super(x, y, vX, vY, estado, timer,raio);
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import projeteis.ProjetilPlayer;
 import projeteis.Projetil;
 
 public class ArmaPlayer extends Arma {
+	//representa a arma utilizada pelo player, que também depende de um cooldown
 	private double cooldown,lastShot;
 	private Timer timer;
 	
@@ -24,7 +25,7 @@ public class ArmaPlayer extends Arma {
 			resp = new LinkedList<Projetil>();
 			resp.add(new ProjetilPlayer(
 					x,y,
-					0.0,-1.0,1,
+					0.0,-1.0,
 					Estado.ACTIVE,
 					timer
 					));

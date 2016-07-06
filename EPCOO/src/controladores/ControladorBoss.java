@@ -1,10 +1,9 @@
 package controladores;
 
 import java.awt.Color;
-import java.util.HashSet;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import projeteis.Projetil;
 import projeteis.ProjetilBoss;
@@ -23,12 +22,12 @@ public class ControladorBoss extends ControladorNave {
 
 	private Boss boss;
 	protected List<Elemento> hud;
-	protected Set<ProjetilInimigo> adicionaP;
+	protected List<ProjetilInimigo> adicionaP;
 
 	public ControladorBoss(Timer timer) {
 		super(timer);
 		hud = new LinkedList<Elemento>();
-		adicionaP = new HashSet<ProjetilInimigo>();
+		adicionaP = new LinkedList<ProjetilInimigo>();
 	}
 
 	@Override
@@ -40,25 +39,24 @@ public class ControladorBoss extends ControladorNave {
 					naves.add((Nave) i);
 				}
 			}
-			Set<Projetil> projeteis = disparos;
-			if (projeteis != null) {
-				for (Projetil p : projeteis) {
-					if (p instanceof ProjetilBoss) {
-						List<ProjetilInimigo> explosao = ((ProjetilBoss) p)
-								.explodir();
-						if (explosao != null) {
-							for(ProjetilInimigo pi:explosao){
-								pi.addObserver(this);
-								adicionaP.add(pi);
-							}
+		}
+		Collection<Projetil> projeteis = disparos;
+		if (projeteis != null) {
+			for (Projetil p : projeteis) {
+				if (p instanceof ProjetilBoss) {
+					List<ProjetilInimigo> explosao = ((ProjetilBoss) p)
+							.explodir();
+					if (explosao != null) {
+						for(ProjetilInimigo pi:explosao){
+							pi.addObserver(this);
+							adicionaP.add(pi);
 						}
 					}
 				}
 			}
-			disparos.addAll(adicionaP);
-			adicionaP.clear();
 		}
-
+		disparos.addAll(adicionaP);
+		adicionaP.clear();
 		super.execute();
 	}
 
@@ -71,7 +69,7 @@ public class ControladorBoss extends ControladorNave {
 				aux = Factory.instanciarInimigo(a, timer);
 				aux.addObserver(this);
 				Boss b = (Boss) aux;
-				hud.add(new LifeBar(GameLib.WIDTH / 2, 30, 0, b,
+				hud.add(new LifeBar(GameLib.WIDTH / 2, 30, b,
 						GameLib.WIDTH * 0.9, GameLib.HEIGHT * 0.01, Color.RED,
 						Color.DARK_GRAY));
 				this.getNaves().add(aux);

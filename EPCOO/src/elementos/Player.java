@@ -11,18 +11,19 @@ import model.NaveComVida;
 import projeteis.Projetil;
 
 public class Player extends NaveComVida {
-
+	//classe que representa a nave do jogador
+	
 	double velocidadeX, velocidadeY;
 	private int hp,hpMax;
-	private long flashStart;
-	private long flashEnd;
-	private long flashTime;
-	private long flashLastChange;
-	private boolean flash;
-	private long flashCoolDown;
+	private long flashStart; //hora de inicio do flash
+	private long flashEnd; //hora de termino do flash
+	private long flashTime; //periodo de duracao do flash
+	private long flashLastChange; //tempo da ultima mudanca de cor
+	private boolean flash; //indica em qual cor o flash esta
+	private long flashCoolDown; //representa o cooldown do flash
 	
-	public Player(double x, double y, int layer, double vX, double vY, Estado estado, Timer timer, double raio, int hp){
-		super(x,y,layer,estado,timer,raio,500,50);
+	public Player(double x, double y, double vX, double vY, Estado estado, Timer timer, double raio, int hp){
+		super(x,y,estado,timer,raio,500,50);
 		
 		this.velocidadeX = vX;
 		this.velocidadeY = vY;

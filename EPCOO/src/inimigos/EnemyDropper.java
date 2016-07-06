@@ -31,7 +31,7 @@ public class EnemyDropper implements ElementsDropper {
 	}
 
 	@Override
-	public List<Elemento> drop(int n, double x, double y, int layer) {
+	public List<Elemento> drop(int n, double x, double y) {
 		List<Elemento> inimigos = new LinkedList<Elemento>();
 		if (timer.getCurrentTime() - lastDrop > dropCoolDown) {
 			

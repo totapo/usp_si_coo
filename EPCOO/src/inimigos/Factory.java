@@ -11,14 +11,13 @@ import model.Estado;
 import model.Nave;
 
 public class Factory {
-
+	//Classe responsavel por instanciar todo os inimigos
 	public static Nave instanciarInimigo(TimerElemento t, Timer timer){
 		Nave n = null;
 		if(t.isBoss()){
 			if(t.getTipo()==1){
 				n = new Boss1(t.getX(),	//x
 						t.getY(),		//y
-						1,				//layer
 						Estado.ACTIVE,	//Estado
 						timer,			//timer
 						12.0,			//Raio
@@ -36,7 +35,6 @@ public class Factory {
 				n = new Boss2(
 						t.getX(),//x
 						t.getY(),//y
-						1,//layer
 						Estado.ACTIVE,//estado
 						timer,//timer
 						80.0,//raio
@@ -56,7 +54,6 @@ public class Factory {
 				n = new Inimigo1(
 						t.getX(), //x
 						t.getY(), //y
-						1, //layer
 						9.0, //raio
 						Estado.ACTIVE, //estado
 						timer, //timer
@@ -71,7 +68,6 @@ public class Factory {
 				n = new Inimigo2(
 						t.getX(), //x
 						t.getY(), //y
-						1, //layer
 						12.0, //raio
 						Estado.ACTIVE, //estado
 						timer, //timer

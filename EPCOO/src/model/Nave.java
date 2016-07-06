@@ -15,8 +15,8 @@ public abstract class Nave extends ElementoMutavel implements Destrutivel{
 	protected Timer timer;
 	protected double explosionStart, explosionEnd;
 	
-	public Nave(double x, double y, int layer, Estado estado,Timer timer, double raio){
-		super(x,y,layer,estado);
+	public Nave(double x, double y, Estado estado,Timer timer, double raio){
+		super(x,y,estado);
 		this.timer = timer;
 		this.raio = raio;
 		armas = new HashMap<String, Arma>();

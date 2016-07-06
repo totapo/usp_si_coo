@@ -10,9 +10,9 @@ import model.GameLib;
 
 public class ProjetilPlayer extends Projetil {
 
-	public ProjetilPlayer(double x, double y, double vX, double vY, int layer,
+	public ProjetilPlayer(double x, double y, double vX, double vY,
 			Estado estado, Timer timer) {
-		super(x, y, vX, vY, layer, estado, timer,0.0);
+		super(x, y, vX, vY, estado, timer,0.0);
 	}
 	
 	@Override
